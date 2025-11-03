@@ -1,5 +1,6 @@
 import { Computer } from "lucide-react";
 import { useState } from "react";
+import {StartComponent} from "../components/StartComponent"
 // text-xs sm:text-sm md:text-base lg:text-lg
 export const MainLayout = ({children}) => {
 
@@ -26,12 +27,12 @@ export const MainLayout = ({children}) => {
           </div>
           {isVisible && (
             <div
-              className={`h-[100px] w-[100px] absolute bottom-[55px] left-0 rounded-lg shadow-lg bg-background outline-1 ${isVisible ? 'animate-rise-up' : 'animate-go-down'}`}
+              className={`h-[100px] w-[100px] absolute bottom-[55px] left-0 rounded-lg bg-background overflow-hidden border border-muted-border ${isVisible ? 'animate-rise-up' : 'animate-go-down'}`}
               onAnimationEnd={() => {
                 if (!isVisible) setIsVisible(false);
               }}
             >
-              <div>hi</div>
+              <StartComponent/>
             </div>
           )}
         </div>
