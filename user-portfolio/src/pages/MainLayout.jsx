@@ -13,7 +13,9 @@ export const MainLayout = ({children}) => {
         {children}
       </main>
       <footer className="w-full h-[50px] flex flex-row items-center border-t-2 border-muted-border p-2 sm:p-2 md:p-4 lg:p-6 bg-foreground">
-        <Computer></Computer>
+        <div className="flex justify-center items-center h-[35px] w-[35px] bg-foreground hover:bg-foreground-highlight rounded cursor-pointer">
+          <Computer></Computer>
+        </div>
         <div className="grow"></div>
         <div className="flex flex-col items-center justify-center h-full">
           <time className="text-xs sm:text-sm">{now}</time>
