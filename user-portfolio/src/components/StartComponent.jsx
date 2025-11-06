@@ -1,4 +1,5 @@
 import {Power,User,Phone} from "lucide-react";
+import ProfilePic from "../assets/img/profile-pic.webp";
 
 export const StartComponent=()=>{
     return(
@@ -25,8 +26,8 @@ export const StartComponent=()=>{
 
             </div>
             <div className="w-full h-[45px] bg-foreground flex flex-row items-center border-t border-muted-border p-4 gap-2">
-                <div className="w-[30px] h-[30px] rounded-2xl bg-background border border-muted-border">
-                    {/* User Avatar Placeholder */}
+                <div className="w-[30px] h-[30px] rounded-2xl bg-background border border-muted-border overflow-hidden">
+                    <img src={ProfilePic}/>
                 </div>
                 <p className="text-accent-text">
                     Ethan
