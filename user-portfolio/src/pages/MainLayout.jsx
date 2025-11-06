@@ -27,7 +27,7 @@ export const MainLayout = ({children}) => {
           </div>
           {isVisible && (
             <div
-              className={`h-[200px] w-[180px] sm:w-[230px] md:w-[260px] transition-all duration-300 ease-in-out absolute bottom-[55px] left-0 rounded-lg bg-background overflow-hidden border border-muted-border ${isVisible ? 'animate-rise-up' : 'animate-go-down'}`}
+              className={`h-auto w-[180px] sm:w-[230px] md:w-[260px] transition-all duration-300 ease-in-out absolute bottom-[55px] left-0 rounded-lg bg-background overflow-hidden border border-muted-border ${isVisible ? 'animate-rise-up' : 'animate-go-down'}`}
               onAnimationEnd={() => {
                 if (!isVisible) setIsVisible(false);
               }}
