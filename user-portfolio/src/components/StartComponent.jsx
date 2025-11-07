@@ -9,22 +9,28 @@ export const StartComponent=()=>{
             </h1>
             <div className="grow grid grid-cols-3 gap-1 p-3 items-start">
                 <div className="flex flex-col justify-center items-center">
-                    <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
-                        <Github className="!w-[35px] !h-[35px] text-accent-text"/>
-                    </div>
-                    <p className="text-xs mt-1 text-center text-accent-text">Github</p>
+                    <a href="https://github.com/ram6000mhz">
+                        <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
+                            <Github className="!w-[35px] !h-[35px] text-accent-text"/>
+                        </div>
+                        <p className="text-xs mt-1 text-center text-accent-text">Github</p>
+                    </a>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
-                        <Linkedin className="!w-[35px] !h-[35px] text-accent-text"/>
-                    </div>
-                    <p className="text-xs mt-1 text-center text-accent-text">LinkedIn</p>
+                    <a href="">
+                        <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
+                            <Linkedin className="!w-[35px] !h-[35px] text-accent-text"/>
+                        </div>
+                        <p className="text-xs mt-1 text-center text-accent-text">LinkedIn</p>
+                    </a>
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
-                        <Mail className="!w-[35px] !h-[35px] text-accent-text"/>
-                    </div>
-                    <p className="text-xs mt-1 text-center text-accent-text">Email</p>
+                    <a href="mailto:esyworkpro@gmail.com">
+                        <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
+                            <Mail className="!w-[35px] !h-[35px] text-accent-text"/>
+                        </div>
+                        <p className="text-xs mt-1 text-center text-accent-text">Email</p>
+                    </a>
                 </div>
 
             </div>
