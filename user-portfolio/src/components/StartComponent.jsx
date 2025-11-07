@@ -37,7 +37,7 @@ export const StartComponent=()=>{
                 </p>
                 <div className="grow"></div>
                 <div className="w-[25px] h-[25px] p-1 hover:bg-foreground-highlight flex items-center justify-center rounded-2xl cursor-pointer">
-                    <Power className="!w-[20px] !h-[20px] text-accent-text"/>
+                    <Power className="!w-[20px] !h-[20px] text-accent-icon"/>
                 </div>
             </div>
         </div>
