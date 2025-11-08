@@ -13,6 +13,7 @@
     "lucide-react": "^0.552.0",
     "preact": "^10.27.2",
     "preact-iso": "^2.11.0",
+    "react-rnd": "^10.5.2",
     "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
