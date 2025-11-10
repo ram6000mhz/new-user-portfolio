@@ -5,7 +5,7 @@ export const StartComponent=()=>{
     return(
         <div className="flex flex-col w-full h-full">
             <h1 className="text-xs font-medium text-muted-text mb-2 px-4 pt-3 items-center flex justify-start">
-                Pinned
+                Pinned Contacts
             </h1>
             <div className="grow grid grid-cols-3 gap-1 p-3 items-start">
                 <div className="flex flex-col justify-center items-center">
@@ -13,26 +13,25 @@ export const StartComponent=()=>{
                         <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
                             <Github className="!w-[35px] !h-[35px] text-accent-text"/>
                         </div>
-                        <p className="text-xs mt-1 text-center text-accent-text">Github</p>
                     </a>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                    <a href="">
-                        <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
-                            <Linkedin className="!w-[35px] !h-[35px] text-accent-text"/>
-                        </div>
-                        <p className="text-xs mt-1 text-center text-accent-text">LinkedIn</p>
-                    </a>
+                    <p className="text-xs mt-1 text-center text-accent-text">Github</p>
                 </div>
                 <div className="flex flex-col justify-center items-center">
                     <a href="mailto:esyworkpro@gmail.com">
                         <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
                             <Mail className="!w-[35px] !h-[35px] text-accent-text"/>
                         </div>
-                        <p className="text-xs mt-1 text-center text-accent-text">Email</p>
                     </a>
+                    <p className="text-xs mt-1 text-center text-accent-text">Email</p>
                 </div>
-
+                <div className="flex flex-col justify-center items-center">
+                    <a href="">
+                        <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
+                            <Linkedin className="!w-[35px] !h-[35px] text-accent-text"/>
+                        </div>
+                    </a>
+                    <p className="text-xs mt-1 text-center text-accent-text">LinkedIn</p>
+                </div>
             </div>
             <div className="w-full h-[50px] bg-foreground flex flex-row items-center border-t border-muted-border p-4 gap-2">
                 <div className="w-[35px] h-[35px] rounded-3xl bg-background border border-muted-border overflow-hidden">
