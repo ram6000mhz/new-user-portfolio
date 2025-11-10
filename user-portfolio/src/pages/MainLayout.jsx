@@ -36,6 +36,7 @@ export const MainLayout = ({children}) => {
             </div>
           )}
         </div>
+        {/* add a listener for active app icons for taskman */}
         <div className="grow"></div>
         <div className="flex flex-col items-center justify-center h-full">
           <time className="text-xs sm:text-sm">{now}</time>
