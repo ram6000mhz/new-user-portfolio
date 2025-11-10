@@ -1,26 +1,22 @@
 import { Rnd } from "react-rnd";
 import { IconComponent } from "../apps/IconComponent";
 import { apps } from "../apps/Applist";
+import { useState, useEffect } from "react";
 
 export const Machineviewport=()=>{
+    const [isDragging, setIsDragging] = useState(false);
+    
     return(
         <div className="w-full h-full bg-background flex flex-col relative">
             
                 {apps.map((app, index) => (
                     <Rnd 
-                        onDragStart={(e, data) => {
-                            // Called when drag starts
-                            console.log('Drag started at:', data.x, data.y);
+                        onDragStart={() => {
+                            setIsDragging(true);
                         }}
                         
-                        onDrag={(e, data) => {
-                            // Called continuously while dragging
-                            console.log('Dragging at:', data.x, data.y);
-                        }}
-                        
-                        onDragStop={(e, data) => {
-                            // Called when drag ends
-                            console.log('Drag stopped at:', data.x, data.y);
+                        onDragStop={() => {
+                            setIsDragging(false);
                         }}
                         
                         key={index}
@@ -28,10 +24,10 @@ export const Machineviewport=()=>{
                         enableResizing={false}
                         default={{
                             x: 0,
-                            y: index * 50,
+                            y: index * 60,
                         }}
                     >
-                        <IconComponent Children={app.icon} Title={app.title}/>
+                        <IconComponent Children={app.icon} Title={app.title} isDragging={ isDragging }/>
                     </Rnd>
                 ))}
             
