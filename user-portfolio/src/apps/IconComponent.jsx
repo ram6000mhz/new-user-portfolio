@@ -53,9 +53,15 @@ export const IconComponent = ({Children, Title, isDragging}) => {
                     )}
                     {isWindowed &&(
                         <Rnd 
+                            default={{
+                                x: (window.innerWidth - 300) / 2,
+                                y: (window.innerHeight - 200) / 2,
+                                width: 300,
+                                height: 200,
+                            }}
                             enableResizing={true}
                         >
-                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-background border-2 border-muted-border h-[200px] w-[300px]">
+                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-background border-2 border-muted-border h-full w-full">
                                 <WindowComponent 
                                     title={Title}
                                     terminationcallback={killProcess}
