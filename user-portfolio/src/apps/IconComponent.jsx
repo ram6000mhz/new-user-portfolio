@@ -18,7 +18,6 @@ export const IconComponent = ({Children, Title, isDragging}) => {
         setIsOpen(false);
         setIsFullscreen(false);
         setIsWindowed(false);
-
     }
 
     const FullscreenMode = () => {
@@ -29,6 +28,10 @@ export const IconComponent = ({Children, Title, isDragging}) => {
     const WindowMode = () => {
         setIsFullscreen(!isFullscreen);
         setIsWindowed(!isWindowed);
+    }
+
+    const MinimizeMode = () => {
+        
     }
 
     return (
@@ -59,9 +62,12 @@ export const IconComponent = ({Children, Title, isDragging}) => {
                                 width: 300,
                                 height: 200,
                             }}
+                            minWidth={200}
+                            minHeight={100}
+                            bounds="window"
                             enableResizing={true}
                         >
-                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-background border-2 border-muted-border h-full w-full">
+                            <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden rounded-xl bg-background border-2 border-muted-border h-full w-full">
                                 <WindowComponent 
                                     title={Title}
                                     terminationcallback={killProcess}
@@ -71,7 +77,6 @@ export const IconComponent = ({Children, Title, isDragging}) => {
                             </div>
                         </Rnd>
                     )}
-
                 </>,
                 document.body
             )}
