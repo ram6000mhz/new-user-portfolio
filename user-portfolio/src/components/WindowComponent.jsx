@@ -1,18 +1,10 @@
 import {X, Square, Minimize2} from "lucide-react";
-export const WindowComponent=({title, children, onClose, onFullscreen, onWindow, onMinimize})=>{
+export const WindowComponent=({title, children, terminationcallback,fullscreencallback, windowcallback})=>{
     const Terminate=()=>{
-        onClose(false);
+        terminationcallback();
     }
-
-    const Fullscreen=()=>{
-        console.log("fullscreen");
-        onFullscreen(true);
-    }
-
     const Window=()=>{
-        console.log("windowed");
-        onFullscreen(false);
-        onWindow(true);
+        windowcallback();
     }
     return(
         <div className="w-full h-full bg-background border border-muted-border flex flex-col">
@@ -31,7 +23,7 @@ export const WindowComponent=({title, children, onClose, onFullscreen, onWindow,
                     <X/>
                 </div>
             </div>
-            {children}
+            <div className="bg-amber-300 h-full w-full"></div>
         </div>
     )
 }
