@@ -7,19 +7,19 @@ export const WindowComponent=({title, children, terminationcallback,fullscreenca
         windowcallback();
     }
     return(
-        <div className="w-full h-full bg-background border border-muted-border flex flex-col">
+        <div className="w-full h-full bg-background flex flex-col">
             <div className="flex flex-row items-center justify-center bg-foreground w-full h-[40px] p-2 gap-2">
                 <h1>    
                     {title}
                 </h1>
                 <div className="grow"/>
-                <div>
+                <div className="cursor-pointer flex items-center justify-center hover:bg-foreground-highlight rounded h-full w-[25px]">
                     <Minimize2/>
                 </div>
-                <div className="cursor-pointer flex items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Window}>
+                <div className="cursor-pointer flex items-center justify-center hover:bg-foreground-highlight rounded h-full w-[25px]" onClick={Window}>
                     <Square/>
                 </div>
-                <div className="cursor-pointer flex items-center justify-center hover:bg-red-300 rounded h-full w-[30px]" onClick={Terminate}>
+                <div className="cursor-pointer flex items-center justify-center hover:bg-red-300 rounded h-full w-[25px]" onClick={Terminate}>
                     <X/>
                 </div>
             </div>
