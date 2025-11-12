@@ -2,8 +2,10 @@ import { useState } from "react";
 import { WindowComponent } from "../components/WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
+import { useTaskman } from "../taskman/taskman";
 
-export const IconComponent = ({Children, Title, isDragging}) => {
+export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
+    const { taskman, addTask, TerminateProcess} = useTaskman();
     const [isOpen, setIsOpen] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isWindowed, setIsWindowed] = useState(false);
@@ -12,12 +14,15 @@ export const IconComponent = ({Children, Title, isDragging}) => {
     const handleClick = () => {
         setIsFullscreen(true);
         setIsOpen(true);
+        addTask(appIndex);
+        console.log(taskman);
     };
 
     const killProcess = () => {
         setIsOpen(false);
         setIsFullscreen(false);
         setIsWindowed(false);
+        TerminateProcess(appIndex);
     }
 
     const WindowMode = () => {
@@ -26,7 +31,7 @@ export const IconComponent = ({Children, Title, isDragging}) => {
     }
 
     const MinimizeMode = () => {
-        
+        console.log("Minimize");
     }
 
     return (
@@ -46,6 +51,7 @@ export const IconComponent = ({Children, Title, isDragging}) => {
                                 isFullscreen={isFullscreen}
                                 terminationcallback={killProcess}
                                 windowcallback={WindowMode}
+                                appIndex={appIndex}
                             />
                         </div>
                     )}
@@ -68,6 +74,7 @@ export const IconComponent = ({Children, Title, isDragging}) => {
                                     isFullscreen={isFullscreen}
                                     terminationcallback={killProcess}
                                     windowcallback={WindowMode}
+                                    appIndex={appIndex}
                                 />
                             </div>
                         </Rnd>
