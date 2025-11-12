@@ -11,7 +11,7 @@ export const TaskmanProvider = ( {children} ) => {
     }
 
     const TerminateProcess = (taskIndex) => {
-        setTaskman((prevTasks) => prevTasks.filter((task => task.id !== taskIndex)))
+        setTaskman((prevTasks) => prevTasks.filter((task => task !== taskIndex)))
     }
 
     return(
