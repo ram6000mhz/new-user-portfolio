@@ -27,7 +27,7 @@ export const Machineviewport=()=>{
                             y: index * 60,
                         }}
                     >
-                        <IconComponent Children={app.icon} Title={app.title} isDragging={ isDragging }/>
+                        <IconComponent Children={app.icon} Title={app.title} isDragging={ isDragging } appIndex={index}/>
                     </Rnd>
                 ))}
             
