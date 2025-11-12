@@ -20,11 +20,6 @@ export const IconComponent = ({Children, Title, isDragging}) => {
         setIsWindowed(false);
     }
 
-    const FullscreenMode = () => {
-        setIsFullscreen(!isFullscreen);
-        setIsWindowed(false);
-    }
-
     const WindowMode = () => {
         setIsFullscreen(!isFullscreen);
         setIsWindowed(!isWindowed);
@@ -48,8 +43,8 @@ export const IconComponent = ({Children, Title, isDragging}) => {
                         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background h-screen w-screen">
                             <WindowComponent 
                                 title={Title}
+                                isFullscreen={isFullscreen}
                                 terminationcallback={killProcess}
-                                fullscreencallback={FullscreenMode}
                                 windowcallback={WindowMode}
                             />
                         </div>
@@ -70,8 +65,8 @@ export const IconComponent = ({Children, Title, isDragging}) => {
                             <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden rounded-xl bg-background border-2 border-muted-border h-full w-full">
                                 <WindowComponent 
                                     title={Title}
+                                    isFullscreen={isFullscreen}
                                     terminationcallback={killProcess}
-                                    fullscreencallback={FullscreenMode}
                                     windowcallback={WindowMode}
                                 />
                             </div>
