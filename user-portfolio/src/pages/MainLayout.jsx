@@ -2,7 +2,14 @@ import { Computer } from "lucide-react";
 import { useState } from "react";
 import {StartComponent} from "../components/StartComponent"
 // text-xs sm:text-sm md:text-base lg:text-lg
+import { apps } from "../apps/Applist";
+import { IconComponent } from "../apps/IconComponent";
+import { useTaskman } from "../taskman/taskman";
+import { cloneElement } from "react";
+
 export const MainLayout = ({children}) => {
+
+  const { taskman } = useTaskman();
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -11,7 +18,10 @@ export const MainLayout = ({children}) => {
     minute: "2-digit",
     hour12: true,
   });
+
   const date = new Date().toLocaleDateString();
+
+  const activeApps = taskman.map(task =>({...task,...apps[task.id]}));
 
   return (
     <div className="w-full h-full flex flex-col gap-1">
@@ -36,7 +46,11 @@ export const MainLayout = ({children}) => {
             </div>
           )}
         </div>
-        {/* add a listener for active app icons for taskman */}
+        {activeApps.map((app, index) => (
+          <div key={index} className="flex items-center justify-center h-[45px] w-[45px] hover:bg-foreground-highlight">
+            {cloneElement(app.icon, { className: "!h-[25px] !w-[25px]" })}
+          </div>
+        ))}
         <div className="grow"></div>
         <div className="flex flex-col items-center justify-center h-full">
           <time className="text-xs sm:text-sm">{now}</time>
