@@ -6,6 +6,7 @@ import { apps } from "../apps/Applist";
 import { IconComponent } from "../apps/IconComponent";
 import { useTaskman } from "../taskman/taskman";
 import { cloneElement } from "react";
+import { Minus,X, Square, PictureInPicture2} from "lucide-react";
 
 export const MainLayout = ({children}) => {
 
@@ -21,7 +22,7 @@ export const MainLayout = ({children}) => {
 
   const date = new Date().toLocaleDateString();
 
-  const activeApps = taskman.map(task =>({...task,...apps[task.id]}));
+  const activeApps = apps.filter((app, index)=>taskman.includes(index));
 
   return (
     <div className="w-full h-full flex flex-col gap-1">
@@ -47,8 +48,8 @@ export const MainLayout = ({children}) => {
           )}
         </div>
         {activeApps.map((app, index) => (
-          <div key={index} className="flex items-center justify-center h-[45px] w-[45px] hover:bg-foreground-highlight">
-            {cloneElement(app.icon, { className: "!h-[25px] !w-[25px]" })}
+          <div className="flex items-center justify-center h-[45px] w-[45px] hover:bg-foreground-highlight rounded cursor-pointer">
+            {app.icon}
           </div>
         ))}
         <div className="grow"></div>
