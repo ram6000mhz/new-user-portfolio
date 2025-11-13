@@ -32,6 +32,9 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
 
     const MinimizeMode = () => {
         console.log("Minimize");
+        setIsOpen(!isOpen);
+        setIsFullscreen(!isFullscreen);
+        setIsWindowed(!isWindowed);
     }
 
     return (
@@ -51,6 +54,7 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                                 isFullscreen={isFullscreen}
                                 terminationcallback={killProcess}
                                 windowcallback={WindowMode}
+                                minimizecallback={MinimizeMode}
                                 appIndex={appIndex}
                             />
                         </div>
@@ -74,6 +78,7 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                                     isFullscreen={isFullscreen}
                                     terminationcallback={killProcess}
                                     windowcallback={WindowMode}
+                                    minimizecallback={MinimizeMode}
                                     appIndex={appIndex}
                                 />
                             </div>
