@@ -1,5 +1,5 @@
 import { Minus,X, Square, PictureInPicture2} from "lucide-react";
-export const WindowComponent=({title, children, isFullscreen, terminationcallback, windowcallback, appIndex})=>{
+export const WindowComponent=({title, children, isFullscreen, terminationcallback, windowcallback, minimizecallback, appIndex})=>{
 
     const Terminate=()=>{
         terminationcallback();
@@ -9,6 +9,10 @@ export const WindowComponent=({title, children, isFullscreen, terminationcallbac
         windowcallback();
     }
 
+    const Minimize=()=>{
+        minimizecallback();
+    }
+
     return(
         <div className="w-full h-full bg-background flex flex-col">
             <div className="flex flex-row items-center justify-center bg-foreground border-b-2 border-muted-border w-full h-[40px] p-2 gap-1 @container">
@@ -16,7 +20,7 @@ export const WindowComponent=({title, children, isFullscreen, terminationcallbac
                     {title} {appIndex}
                 </h1>
                 <div className="grow"/>
-                <div className="cursor-pointer flex flex-col items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]">
+                <div className="cursor-pointer flex flex-col items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Minimize}>
                     <Minus className="!h-[15px] !w-[15px]"/>
                 </div>
                 <div className="cursor-pointer flex items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Window}>
