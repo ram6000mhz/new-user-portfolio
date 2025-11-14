@@ -3,7 +3,7 @@ import { MainLayout } from './pages/MainLayout';
 import { Machineviewport } from './pages/Machineviewport';
 import { OtherLayout } from './pages/OtherLayout';
 import { OtherViewport } from './pages/OtherViewport';
-import { TaskmanProvider } from './taskman/taskman';
+import { TaskmanProvider } from './taskman/Taskman';
 import { IconFun } from './apps/IconFun';
 
 function HomePage() {
