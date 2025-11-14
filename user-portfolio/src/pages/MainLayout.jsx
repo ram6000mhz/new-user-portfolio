@@ -27,7 +27,7 @@ export const MainLayout = ({children}) => {
 
   const reOpenWindow = (appIndex) => {
     console.log("Reopen window:", appIndex);
-    MinimizeMode();
+    MinimizeMode(appIndex);
   }
 
   return (
@@ -54,7 +54,7 @@ export const MainLayout = ({children}) => {
           )}
         </div>
         {activeApps.map((app, index) => (
-          <div className="flex items-center justify-center h-[35px] w-[35px] hover:bg-foreground-highlight rounded cursor-pointer" onClick={reOpenWindow}>
+          <div className="flex items-center justify-center h-[35px] w-[35px] hover:bg-foreground-highlight rounded cursor-pointer" onClick={()=>reOpenWindow(index)}>
             {app.icon}
           </div>
         ))}
