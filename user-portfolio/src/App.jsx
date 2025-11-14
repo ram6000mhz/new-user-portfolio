@@ -4,6 +4,7 @@ import { Machineviewport } from './pages/Machineviewport';
 import { OtherLayout } from './pages/OtherLayout';
 import { OtherViewport } from './pages/OtherViewport';
 import { TaskmanProvider } from './taskman/taskman';
+import { IconFun } from './apps/IconFun';
 
 function HomePage() {
   return (
@@ -32,15 +33,17 @@ function OtherPage() {
 export function App() {
   return (
     <TaskmanProvider>
-      <div className='w-screen h-screen'>
-        <LocationProvider>
-          <Router>
-            <HomePage path="/" />
-            <OtherPage path="/other" />
-            <Testpage path="/test"/>
-          </Router>
-        </LocationProvider>
-      </div>
+      <IconFun>
+        <div className='w-screen h-screen'>
+          <LocationProvider>
+            <Router>
+              <HomePage path="/" />
+              <OtherPage path="/other" />
+              <Testpage path="/test"/>
+            </Router>
+          </LocationProvider>
+        </div>
+      </IconFun>
     </TaskmanProvider>
   )
 }
