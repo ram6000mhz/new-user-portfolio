@@ -6,8 +6,10 @@ import { useTaskman } from "../taskman/taskman";
 import { IconComponentProvider } from "./IconFun";
 
 export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
-    const { taskman, addTask, TerminateProcess} = useTaskman();
-    const {isOpen, isFullscreen, isWindowed, isMinimized, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
+
+    const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
+
+    const { isOpen, isFullscreen, isWindowed } = getAppState(appIndex);
 
     return (
         <>
@@ -25,8 +27,8 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                                 title={Title}
                                 isFullscreen={isFullscreen}
                                 terminationcallback={() => killProcess(appIndex)}
-                                windowcallback={WindowMode}
-                                minimizecallback={MinimizeMode}
+                                windowcallback={() => WindowMode(appIndex)}
+                                minimizecallback={() => MinimizeMode(appIndex)}
                                 appIndex={appIndex}
                             />
                         </div>
@@ -49,8 +51,8 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                                     title={Title}
                                     isFullscreen={isFullscreen}
                                     terminationcallback={() => killProcess(appIndex)}
-                                    windowcallback={WindowMode}
-                                    minimizecallback={MinimizeMode}
+                                    windowcallback={() => WindowMode(appIndex)}
+                                    minimizecallback={() => MinimizeMode(appIndex)}
                                     appIndex={appIndex}
                                 />
                             </div>
