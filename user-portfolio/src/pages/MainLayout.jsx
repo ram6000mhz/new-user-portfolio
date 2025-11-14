@@ -3,9 +3,7 @@ import { useState } from "react";
 import {StartComponent} from "../components/StartComponent"
 // text-xs sm:text-sm md:text-base lg:text-lg
 import { apps } from "../apps/Applist";
-import { IconComponent } from "../apps/IconComponent";
-import { useTaskman } from "../taskman/taskman";
-import { Minus,X, Square, PictureInPicture2} from "lucide-react";
+import { useTaskman } from "../taskman/Taskman";
 import { IconComponentProvider } from "../apps/IconFun";
 
 export const MainLayout = ({children}) => {
