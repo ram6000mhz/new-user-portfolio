@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { useTaskman } from "../taskman/taskman";
+import { useTaskman } from "../taskman/Taskman"
 const AppContext = createContext();
 
 export const IconFun = ({children}) => {
