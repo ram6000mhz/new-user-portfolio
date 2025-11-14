@@ -4,41 +4,65 @@ const AppContext = createContext();
 
 export const IconFun = ({children}) => {
     const { taskman, addTask, TerminateProcess} = useTaskman();
-    const [isOpen, setIsOpen] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
-    const [isWindowed, setIsWindowed] = useState(false);
-    const [isMinimized, setIsMinimized] = useState(false);
+    const [appStates, setAppStates] = useState({});
+    
+    const getAppState = (appIndex) => {
+        return appStates[appIndex] || {
+            isOpen: false,
+            isFullscreen: false,
+            isWindowed: false,
+            isMinimized: false,
+        };
+    };
+
+    const updateAppState = (appIndex, updates) =>{
+        setAppStates(prevStates => ({
+            ...prevStates,
+            [appIndex]: {
+                ...getAppState(appIndex),
+                ...updates,
+            },
+        }));
+    }
 
     const handleClick = (appIndex) => {
-        setIsFullscreen(true);
-        setIsOpen(true);
+        updateAppState(appIndex, {
+            isFullscreen: true,
+            isOpen: true
+        });
         console.log("Add to taskman:", appIndex);
         addTask(appIndex);
         console.log(taskman);
     };
 
     const killProcess = (appIndex) => {
-        setIsOpen(false);
-        setIsFullscreen(false);
-        setIsWindowed(false);
+        updateAppState(appIndex, {
+            isOpen: false,
+            isFullscreen: false,
+            isWindowed: false
+        });
         TerminateProcess(appIndex);
     }
 
-    const WindowMode = () => {
-        setIsFullscreen(!isFullscreen);
-        setIsWindowed(!isWindowed);
+    const WindowMode = (appIndex) => {
+        const currentState = getAppState(appIndex);
+        updateAppState(appIndex, {
+            isFullscreen: !currentState.isFullscreen,
+            isWindowed: !currentState.isWindowed
+        });
     }
 
-    const MinimizeMode = () => {
-        console.log("Minimize");
-        setIsOpen(!isOpen);
-        setIsFullscreen(!isFullscreen);
-        setIsWindowed(!isWindowed);
+    const MinimizeMode = (appIndex) => {
+        const currentState = getAppState(appIndex);
+        updateAppState(appIndex, {
+            isOpen: !currentState.isOpen,
+            isFullscreen: !currentState.isFullscreen,
+            isWindowed: !currentState.isWindowed
+        });
     }
-
 
     return (
-        <AppContext.Provider value={{isOpen, isFullscreen, isWindowed, isMinimized, handleClick, killProcess, WindowMode, MinimizeMode}}>
+        <AppContext.Provider value={{isOpen, isFullscreen, isWindowed, isMinimized, getAppState, handleClick, killProcess, WindowMode, MinimizeMode}}>
             {children}
         </AppContext.Provider>
     );
