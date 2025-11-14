@@ -62,7 +62,7 @@ export const IconFun = ({children}) => {
     }
 
     return (
-        <AppContext.Provider value={{isOpen, isFullscreen, isWindowed, isMinimized, getAppState, handleClick, killProcess, WindowMode, MinimizeMode}}>
+        <AppContext.Provider value={{ getAppState, handleClick, killProcess, WindowMode, MinimizeMode}}>
             {children}
         </AppContext.Provider>
     );
