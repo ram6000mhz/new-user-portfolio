@@ -6,10 +6,12 @@ import { apps } from "../apps/Applist";
 import { IconComponent } from "../apps/IconComponent";
 import { useTaskman } from "../taskman/taskman";
 import { Minus,X, Square, PictureInPicture2} from "lucide-react";
+import { IconComponentProvider } from "../apps/IconFun";
 
 export const MainLayout = ({children}) => {
 
   const { taskman } = useTaskman();
+  const { MinimizeMode } = IconComponentProvider();
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -25,6 +27,7 @@ export const MainLayout = ({children}) => {
 
   const reOpenWindow = (appIndex) => {
     console.log("Reopen window:", appIndex);
+    MinimizeMode();
   }
 
   return (
