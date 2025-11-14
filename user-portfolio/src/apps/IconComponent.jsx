@@ -3,44 +3,16 @@ import { WindowComponent } from "../components/WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
 import { useTaskman } from "../taskman/taskman";
+import { IconComponentProvider } from "./IconFun";
 
 export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
     const { taskman, addTask, TerminateProcess} = useTaskman();
-    const [isOpen, setIsOpen] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
-    const [isWindowed, setIsWindowed] = useState(false);
-    const [isMinimized, setIsMinimized] = useState(false);
-
-    const handleClick = () => {
-        setIsFullscreen(true);
-        setIsOpen(true);
-        addTask(appIndex);
-        console.log(taskman);
-    };
-
-    const killProcess = () => {
-        setIsOpen(false);
-        setIsFullscreen(false);
-        setIsWindowed(false);
-        TerminateProcess(appIndex);
-    }
-
-    const WindowMode = () => {
-        setIsFullscreen(!isFullscreen);
-        setIsWindowed(!isWindowed);
-    }
-
-    const MinimizeMode = () => {
-        console.log("Minimize");
-        setIsOpen(!isOpen);
-        setIsFullscreen(!isFullscreen);
-        setIsWindowed(!isWindowed);
-    }
+    const {isOpen, isFullscreen, isWindowed, isMinimized, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
 
     return (
         <>
             <div className={`flex flex-col items-center justify-center h-[60px] w-[75px] p-1 rounded-md ${isDragging ? '' : 'hover:bg-foreground-highlight'}`}>
-                <div className="flex w-full h-full cursor-pointer items-center justify-center" onDoubleClick={handleClick}>
+                <div className="flex w-full h-full cursor-pointer items-center justify-center" onDoubleClick={()=>handleClick(appIndex)}>
                     {Children}
                 </div>  
                 <p className="text-center text-xs text-accent-text cursor-pointer">{Title}</p>
@@ -52,7 +24,7 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                             <WindowComponent 
                                 title={Title}
                                 isFullscreen={isFullscreen}
-                                terminationcallback={killProcess}
+                                terminationcallback={() => killProcess(appIndex)}
                                 windowcallback={WindowMode}
                                 minimizecallback={MinimizeMode}
                                 appIndex={appIndex}
@@ -76,7 +48,7 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                                 <WindowComponent 
                                     title={Title}
                                     isFullscreen={isFullscreen}
-                                    terminationcallback={killProcess}
+                                    terminationcallback={() => killProcess(appIndex)}
                                     windowcallback={WindowMode}
                                     minimizecallback={MinimizeMode}
                                     appIndex={appIndex}
