@@ -1,15 +1,18 @@
 
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const TaskmanContext = createContext();
 
 export const TaskmanProvider = ( {children} ) => {
     const [taskman, setTaskman] = useState([]);
+    useEffect(() => {
+        console.log("Taskman updated:", taskman);
+    }, [taskman]);
 
     const addTask = (taskIndex) => {
         setTaskman((prevTasks) => [...prevTasks, taskIndex]);
     }
-
+    
     const TerminateProcess = (taskIndex) => {
         setTaskman((prevTasks) => prevTasks.filter((task => task !== taskIndex)))
     }
