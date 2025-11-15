@@ -21,7 +21,7 @@ export const MainLayout = ({children}) => {
 
   const date = new Date().toLocaleDateString();
 
-  const activeApps = apps.filter((app, index)=>taskman.includes(index));
+  const activeApps = apps.filter(app => taskman.includes(app.appid));
 
   const reOpenWindow = (appIndex) => {
     console.log("Reopen window:", appIndex);
@@ -52,7 +52,7 @@ export const MainLayout = ({children}) => {
           )}
         </div>
         {activeApps.map((app, index) => (
-          <div className="flex items-center justify-center h-[35px] w-[35px] hover:bg-foreground-highlight rounded cursor-pointer" onClick={()=>reOpenWindow(index)}>
+          <div className="flex items-center justify-center h-[35px] w-[35px] hover:bg-foreground-highlight rounded cursor-pointer" onClick={()=>reOpenWindow(app.appid)}>
             {app.icon}
           </div>
         ))}
