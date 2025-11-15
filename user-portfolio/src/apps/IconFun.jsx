@@ -6,8 +6,14 @@ export const IconFun = ({children}) => {
     const { taskman, addTask, TerminateProcess} = useTaskman();
     const [appStates, setAppStates] = useState({});
     
+    const initialAppState = (appIndex) => {
+        if (!appStates[appIndex]) {
+            updateAppState(appIndex, { ...initialAppState });
+        }
+    };
+
     const getAppState = (appIndex) => {
-        return appStates[appIndex] || {
+        return appStates[appIndex]||{
             isOpen: false,
             isFullscreen: false,
             isWindowed: false,
@@ -31,6 +37,7 @@ export const IconFun = ({children}) => {
 
     const handleClick = (appIndex) => {
         console.log("Icon double clicked:", appIndex);
+        initialAppState(appIndex);
         updateAppState(appIndex, {
             isOpen: true,
             isFullscreen: true,
