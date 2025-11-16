@@ -33,7 +33,7 @@ export const MainLayout = ({children}) => {
       <main className="flex-1 overflow-auto">
         {children}
       </main>
-      <footer className="w-full h-[50px] flex flex-row items-center border-t-2 border-muted-border p-2 sm:p-2 md:p-4 lg:p-6 bg-foreground">
+      <footer className="w-full h-[50px] flex flex-row items-center border-t-2 border-muted-border p-2 sm:p-2 md:p-4 lg:p-6 bg-foreground z-50">
         <div className="relative">
           <div className="flex justify-center items-center h-[35px] w-[35px] bg-foreground hover:bg-foreground-highlight rounded cursor-pointer"
             onClick={() => setIsVisible(!isVisible)}
