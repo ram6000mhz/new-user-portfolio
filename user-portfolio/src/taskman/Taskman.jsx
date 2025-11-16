@@ -5,9 +5,6 @@ const TaskmanContext = createContext();
 
 export const TaskmanProvider = ( {children} ) => {
     const [taskman, setTaskman] = useState([]);
-    useEffect(() => {
-        console.log("Taskman updated:", taskman);
-    }, [taskman]);
 
     const addTask = (taskIndex) => {
         setTaskman((prevTasks) => [...prevTasks, taskIndex]);
