@@ -1,8 +1,6 @@
 import { Router, Route, lazy, prerender, LocationProvider } from 'preact-iso';
 import { MainLayout } from './pages/MainLayout';
 import { Machineviewport } from './pages/Machineviewport';
-import { OtherLayout } from './pages/OtherLayout';
-import { OtherViewport } from './pages/OtherViewport';
 import { TaskmanProvider } from './taskman/Taskman';
 import { IconFun } from './apps/IconFun';
 
@@ -14,21 +12,6 @@ function HomePage() {
   );
 }
 
-function Testpage() {
-  return(
-    <MainLayout>
-      <OtherViewport/>
-    </MainLayout>
-  );
-}
-
-function OtherPage() {
-  return (
-    <OtherLayout>
-      <OtherViewport />
-    </OtherLayout>
-  );
-}
 
 export function App() {
   return (
@@ -38,8 +21,6 @@ export function App() {
           <LocationProvider>
             <Router>
               <HomePage path="/" />
-              <OtherPage path="/other" />
-              <Testpage path="/test"/>
             </Router>
           </LocationProvider>
         </div>
