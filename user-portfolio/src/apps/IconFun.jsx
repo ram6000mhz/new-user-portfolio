@@ -31,13 +31,11 @@ export const IconFun = ({children}) => {
                     ...updates,
                 },
             };
-            console.log("Updated app:", appIndex, newStates[appIndex]);
             return newStates;
         });
     }
 
     const handleClick = (appIndex) => {
-        console.log("Icon double clicked:", appIndex);
         initialAppState(appIndex);
         updateAppState(appIndex, {
             isOpen: true,
@@ -45,14 +43,10 @@ export const IconFun = ({children}) => {
             isWindowed: false,
             isMinimized: false,
         });
-        console.log("initial")
-        console.log("Add to taskman:", appIndex);
         addTask(appIndex);
-        console.log(taskman);
     };
 
     const killProcess = (appIndex) => {
-        console.log("Kill process:", appIndex);
         updateAppState(appIndex, {
             isOpen: false,
             isFullscreen: false,
@@ -63,7 +57,6 @@ export const IconFun = ({children}) => {
     }
 
     const WindowMode = (appIndex) => {
-        console.log("Window clicked");
         const currentState = getAppState(appIndex);
         
         updateAppState(appIndex, {
@@ -75,7 +68,6 @@ export const IconFun = ({children}) => {
     }
 
     const MinimizeMode = (appIndex) => {
-        console.log("Minimize clicked");
         const currentState = getAppState(appIndex);
         updateAppState(appIndex, {
             isOpen: !currentState.isOpen,
