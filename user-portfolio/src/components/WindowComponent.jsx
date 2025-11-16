@@ -20,13 +20,13 @@ export const WindowComponent=({title, children, isFullscreen, terminationcallbac
                     {title} {appIndex}
                 </h1>
                 <div className="grow"/>
-                <div className="cursor-pointer flex flex-col items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Minimize}>
+                <div className="cursor-pointer flex flex-col items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Minimize} onTouchEnd={(e)=>{e.preventDefault();Minimize();}}>
                     <Minus className="!h-[15px] !w-[15px]"/>
                 </div>
-                <div className="cursor-pointer flex items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Window}>
+                <div className="cursor-pointer flex items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Window} onTouchEnd={(e)=>{e.preventDefault();Window();}}>
                     {isFullscreen ? <PictureInPicture2 className="!h-[15px] !w-[15px] rotate-180 scale-y-[-1]"/>: <Square className="!h-[15px] !w-[15px]"/>}
                 </div>
-                <div className="cursor-pointer flex items-center justify-center hover:bg-red-300 rounded h-full w-[30px]" onClick={Terminate}>
+                <div className="cursor-pointer flex items-center justify-center hover:bg-red-300 rounded h-full w-[30px]" onClick={Terminate} onTouchEnd={(e)=>{e.preventDefault();Terminate();}}>
                     <X className="!h-[15px] !w-[15px]"/>
                 </div>
             </div>
