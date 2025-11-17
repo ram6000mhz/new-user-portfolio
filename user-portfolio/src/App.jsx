@@ -3,7 +3,7 @@ import { MainLayout } from './pages/MainLayout';
 import { Machineviewport } from './pages/Machineviewport';
 import { TaskmanProvider } from './taskman/Taskman';
 import { IconFun } from './apps/IconFun';
-
+import { ZIndexShufflerProvider } from './providers/ZIndexShuffler';
 function HomePage() {
   return (
     <MainLayout>
@@ -16,15 +16,17 @@ function HomePage() {
 export function App() {
   return (
     <TaskmanProvider>
-      <IconFun>
-        <div className='w-screen h-screen'>
-          <LocationProvider>
-            <Router>
-              <HomePage path="/" />
-            </Router>
-          </LocationProvider>
-        </div>
-      </IconFun>
+      <ZIndexShufflerProvider>
+        <IconFun>
+          <div className='w-screen h-screen'>
+            <LocationProvider>
+              <Router>
+                <HomePage path="/" />
+              </Router>
+            </LocationProvider>
+          </div>
+        </IconFun>
+      </ZIndexShufflerProvider>
     </TaskmanProvider>
   )
 }

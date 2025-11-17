@@ -3,12 +3,15 @@ import { WindowComponent } from "../components/WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
 import { IconComponentProvider } from "./IconFun";
+import { useZIndexShuffler } from "../providers/ZIndexShuffler";
 
 export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
 
     const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
 
     const { isOpen, isFullscreen, isWindowed } = getAppState(appIndex);
+
+    const { zMap, bringToFront } = useZIndexShuffler();
 
     return (
         <>
@@ -21,7 +24,7 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
             {isOpen && createPortal(
                 <>
                     {isFullscreen && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background h-screen w-screen">
+                        <div className="fixed inset-0 z-0 flex items-center justify-center bg-background h-screen w-screen">
                             <WindowComponent 
                                 title={Title}
                                 isFullscreen={isFullscreen}
@@ -44,8 +47,12 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                             minHeight={100}
                             bounds="window"
                             enableResizing={true}
+                            onDragStart={()=>{
+                                bringToFront(appIndex);
+                            }}
+                            style={{zIndex: zMap[appIndex] || 0}}
                         >
-                            <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden rounded-xl bg-background border-2 border-muted-border h-full w-full">
+                            <div className="fixed inset-0 flex items-center justify-center overflow-hidden rounded-xl bg-background border-2 border-muted-border h-full w-full">
                                 <WindowComponent 
                                     title={Title}
                                     isFullscreen={isFullscreen}

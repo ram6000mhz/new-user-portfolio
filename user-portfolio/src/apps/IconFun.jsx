@@ -1,17 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import { useTaskman } from "../taskman/Taskman";
 
-const AppContext = createContext();
+const IconComponentContext = createContext();
 
 export const IconFun = ({children}) => {
     const { taskman, addTask, TerminateProcess} = useTaskman();
     const [appStates, setAppStates] = useState({});
-    
-    const initialAppState = (appIndex) => {
-        if (!appStates[appIndex]) {
-            updateAppState(appIndex, { ...initialAppState });
-        }
-    };
 
     const getAppState = (appIndex) => {
         return appStates[appIndex]||{
@@ -36,7 +30,6 @@ export const IconFun = ({children}) => {
     }
 
     const handleClick = (appIndex) => {
-        initialAppState(appIndex);
         updateAppState(appIndex, {
             isOpen: true,
             isFullscreen: true,
@@ -78,10 +71,12 @@ export const IconFun = ({children}) => {
     }
 
     return (
-        <AppContext.Provider value={{ getAppState, handleClick, killProcess, WindowMode, MinimizeMode}}>
+        <IconComponentContext.Provider value={{ getAppState, handleClick, killProcess, WindowMode, MinimizeMode}}>
             {children}
-        </AppContext.Provider>
+        </IconComponentContext.Provider>
     );
 };
 
-export const IconComponentProvider = () => useContext(AppContext);
+export const IconComponentProvider = () => {
+    return useContext(IconComponentContext);
+};
