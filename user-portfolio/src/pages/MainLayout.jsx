@@ -24,7 +24,6 @@ export const MainLayout = ({children}) => {
   const activeApps = apps.filter(app => taskman.includes(app.appid));
 
   const reOpenWindow = (appIndex) => {
-    console.log("Reopen window:", appIndex);
     MinimizeMode(appIndex);
   }
 
