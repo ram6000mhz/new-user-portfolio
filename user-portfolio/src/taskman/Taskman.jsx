@@ -22,9 +22,5 @@ export const TaskmanProvider = ( {children} ) => {
 }
 
 export const useTaskman = () =>{
-    const context = useContext(TaskmanContext);
-    if(!context){
-        throw new Error("useTaskman must be used within a TaskmanProvider");
-    }
-    return context;
+    return useContext(TaskmanContext);
 }
