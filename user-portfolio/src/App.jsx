@@ -4,6 +4,7 @@ import { Machineviewport } from './pages/Machineviewport';
 import { TaskmanProvider } from './taskman/Taskman';
 import { IconFun } from './apps/IconFun';
 import { ZIndexShufflerProvider } from './providers/ZIndexShuffler';
+
 function HomePage() {
   return (
     <MainLayout>
@@ -11,7 +12,6 @@ function HomePage() {
     </MainLayout>
   );
 }
-
 
 export function App() {
   return (

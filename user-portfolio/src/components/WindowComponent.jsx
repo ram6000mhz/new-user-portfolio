@@ -30,7 +30,8 @@ export const WindowComponent=({title, children, isFullscreen, terminationcallbac
                     <X className="!h-[15px] !w-[15px]"/>
                 </div>
             </div>
-            <div className="bg-amber-300 h-full w-full"></div>
+            <div className="bg-amber-300 h-full w-full">
+            </div>
         </div>
     )
 }

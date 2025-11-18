@@ -24,7 +24,7 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
             {isOpen && createPortal(
                 <>
                     {isFullscreen && (
-                        <div className="fixed inset-0 z-0 flex items-center justify-center bg-background h-screen w-screen">
+                        <div className="fixed inset-0 flex items-center justify-center bg-background h-screen w-screen" onClick={()=>{bringToFront(appIndex)}} style={{zIndex: zMap[appIndex] || 0}}>
                             <WindowComponent 
                                 title={Title}
                                 isFullscreen={isFullscreen}
