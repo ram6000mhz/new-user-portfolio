@@ -9,7 +9,7 @@ import { IconComponentProvider } from "../apps/IconFun";
 export const MainLayout = ({children}) => {
 
   const { taskman } = useTaskman();
-  const { MinimizeMode } = IconComponentProvider();
+  const { taskBarOpenClose } = IconComponentProvider();
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -24,7 +24,7 @@ export const MainLayout = ({children}) => {
   const activeApps = apps.filter(app => taskman.includes(app.appid));
 
   const reOpenWindow = (appIndex) => {
-    MinimizeMode(appIndex);
+    taskBarOpenClose(appIndex);
   }
 
   return (
