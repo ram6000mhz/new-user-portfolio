@@ -1,11 +1,12 @@
 import { createContext, useContext, useState } from "react";
 import { useTaskman } from "../taskman/Taskman";
-
+import { useZIndexShuffler } from "../providers/ZIndexShuffler";
 const IconComponentContext = createContext();
 
 export const IconFun = ({children}) => {
     const { taskman, addTask, TerminateProcess} = useTaskman();
     const [appStates, setAppStates] = useState({});
+    const {bringToFront} = useZIndexShuffler();
 
     const getAppState = (appIndex) => {
         return appStates[appIndex]||{
@@ -27,6 +28,10 @@ export const IconFun = ({children}) => {
             };
             return newStates;
         });
+    }
+    
+    const CreateInstance = (appIndex) => {
+        // create new app instance when reopened again
     }
 
     const handleClick = (appIndex) => {
@@ -70,8 +75,23 @@ export const IconFun = ({children}) => {
         });
     }
 
+    const taskBarOpenClose = (appIndex) => {
+        const currentState = getAppState(appIndex);
+        if (currentState.isOpen) {
+            updateAppState(appIndex, {
+                isOpen: currentState.isOpen,
+                isFullscreen: currentState.isFullscreen,
+                isWindowed: currentState.isWindowed,
+                isMinimized: currentState.isMinimized
+            });
+            bringToFront(appIndex);
+        } else {
+            MinimizeMode(appIndex);
+        }
+    }
+
     return (
-        <IconComponentContext.Provider value={{ getAppState, handleClick, killProcess, WindowMode, MinimizeMode}}>
+        <IconComponentContext.Provider value={{ getAppState, handleClick, killProcess, WindowMode, MinimizeMode, taskBarOpenClose}}>
             {children}
         </IconComponentContext.Provider>
     );
