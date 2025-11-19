@@ -31,7 +31,7 @@ export const IconFun = ({children}) => {
     }
     
     const CreateInstance = (appIndex) => {
-        // create new app instance when reopened again
+        // create new app instance when opened from desktop icon
     }
 
     const handleClick = (appIndex) => {
