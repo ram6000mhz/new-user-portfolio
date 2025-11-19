@@ -5,7 +5,7 @@ import { Rnd } from "react-rnd";
 import { IconComponentProvider } from "./IconFun";
 import { useZIndexShuffler } from "../providers/ZIndexShuffler";
 
-export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
+export const IconComponent = ({Children, Title, appContent, isDragging, appIndex}) => {
 
     const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
 
@@ -32,6 +32,7 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                                 windowcallback={() => WindowMode(appIndex)}
                                 minimizecallback={() => MinimizeMode(appIndex)}
                                 appIndex={appIndex}
+                                content={appContent}
                             />
                         </div>
                     )}
@@ -60,6 +61,7 @@ export const IconComponent = ({Children, Title, isDragging, appIndex}) => {
                                     windowcallback={() => WindowMode(appIndex)}
                                     minimizecallback={() => MinimizeMode(appIndex)}
                                     appIndex={appIndex}
+                                    content={appContent}
                                 />
                             </div>
                         </Rnd>
