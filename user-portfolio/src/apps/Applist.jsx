@@ -16,7 +16,7 @@ export const apps = [
         title: "Opti-Face" ,
         content: 
         <div className="">
-            
+            A lightweight facial recognition application built by using scrfd, mediapipe's FaceMesh, and Edgeface that is still accurate and fast.
         </div>
     },
     { 
@@ -25,7 +25,7 @@ export const apps = [
         title: "Bake, Brew and Cook" ,
         content: 
         <div className="">
-            
+            A small recipe application that contains a variety of Filipino recipes for baking, brewing, and cooking.
         </div>
     },
     { 
@@ -34,7 +34,7 @@ export const apps = [
         title: "Math Solve" ,
         content: 
         <div className="">
-            
+            A game that generates a random -+/x problem to solve within a time limit.
         </div>
     },
     { 
@@ -43,7 +43,7 @@ export const apps = [
         title: "Magic C Transport" ,
         content: 
         <div className="">
-            
+            A transportation booking application for Magic C Transport Services.
         </div>
     },
     { 
@@ -52,7 +52,7 @@ export const apps = [
         title: "T.I.P.A.I" ,
         content: 
         <div className="">
-            
+            A simple AI chatbot that responds to user's queries about the technological institute of the philippines.
         </div>
     },
 ];

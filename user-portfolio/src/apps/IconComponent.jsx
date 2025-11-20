@@ -39,13 +39,13 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                     {isWindowed &&(
                         <Rnd 
                             default={{
-                                x: (window.innerWidth - 300) / 2,
-                                y: (window.innerHeight - 200) / 2,
-                                width: 300,
-                                height: 200,
+                                x: (window.innerWidth - window.innerWidth * 0.85) / 2,
+                                y: (window.innerHeight - window.innerHeight * 0.75) / 4,
+                                width: window.innerWidth * 0.85,
+                                height: window.innerHeight * 0.75,
                             }}
-                            minWidth={200}
-                            minHeight={100}
+                            minWidth={150}
+                            minHeight={200}
                             bounds="window"
                             enableResizing={true}
                             onDragStart={()=>{
