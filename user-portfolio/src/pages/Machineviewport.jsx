@@ -2,12 +2,13 @@ import { Rnd } from "react-rnd";
 import { IconComponent } from "../apps/IconComponent";
 import { apps } from "../apps/Applist";
 import { useState, useEffect } from "react";
+import DesktopBg from "../assets/img/desktop-bg.webp"
 
 export const Machineviewport=()=>{
     const [isDragging, setIsDragging] = useState(false);
     
     return(
-        <div className="w-full h-full bg-background flex flex-col relative">
+        <div className="w-full h-full bg-cover flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
             
                 {apps.map((app, index) => (
                     <Rnd 

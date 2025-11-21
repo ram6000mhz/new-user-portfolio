@@ -28,7 +28,7 @@ export const MainLayout = ({children}) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col gap-1">
+    <div className="w-full h-full flex flex-col">
       <main className="flex-1 overflow-auto">
         {children}
       </main>
@@ -37,7 +37,7 @@ export const MainLayout = ({children}) => {
           <div className="flex justify-center items-center h-[35px] w-[35px] bg-foreground hover:bg-foreground-highlight rounded cursor-pointer"
             onClick={() => setIsVisible(!isVisible)}
           >
-            <Computer/>
+            <Computer className="text-accent-icon"/>
           </div>
           {isVisible && (
             <div
@@ -57,8 +57,8 @@ export const MainLayout = ({children}) => {
         ))}
         <div className="grow"></div>
         <div className="flex flex-col items-center justify-center h-full">
-          <time className="text-xs sm:text-sm">{now}</time>
-          <time className="text-xs sm:text-sm">{date}</time>
+          <time className="text-xs sm:text-sm text-accent-text">{now}</time>
+          <time className="text-xs sm:text-sm text-accent-text">{date}</time>
         </div>
       </footer>
     </div>
