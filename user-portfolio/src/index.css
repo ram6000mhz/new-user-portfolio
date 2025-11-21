@@ -3,17 +3,17 @@
 
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(28.846% 0.03214 272.755);
   --background-highlight: oklch(0.95 0.001 250);
-  --foreground: oklch(97.043% 0.00143 285.221);
+  --foreground: oklch(21.77% 0.03214 272.755);
   --foreground-highlight: oklch(0.9 0.002 250 / 0.4);
   --accent: oklch(.8 0.05 0);
-  --icon-accent: oklch(0% 0 0);
-  --accent-text: oklch(0 0 0);
-  --muted-text: oklch(0.5 0 0);
+  --icon-accent: oklch(1 0 0);
+  --accent-text: oklch(1 0 0);
+  --muted-text: oklch(72.193% 0.00008 271.152);
   --accent-border: oklch(0 0 0);
-  --muted-border: oklch(0.92 0.001 250);
-}
+  --muted-border: oklch(34.77% 0.03214 272.755);
+} 
 
 @theme {
     --color-background: var(--background);
