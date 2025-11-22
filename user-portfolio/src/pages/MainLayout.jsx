@@ -1,4 +1,4 @@
-import { Computer } from "lucide-react";
+import { Monitor } from "lucide-react";
 import { useState } from "react";
 import {StartComponent} from "../components/StartComponent"
 // text-xs sm:text-sm md:text-base lg:text-lg
@@ -37,7 +37,7 @@ export const MainLayout = ({children}) => {
           <div className="flex justify-center items-center h-[35px] w-[35px] bg-foreground hover:bg-foreground-highlight rounded cursor-pointer"
             onClick={() => setIsVisible(!isVisible)}
           >
-            <Computer className="text-accent-icon"/>
+            <Monitor className="text-accent-icon"/>
           </div>
           {isVisible && (
             <div
