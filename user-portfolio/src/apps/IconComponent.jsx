@@ -38,6 +38,7 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                     )}
                     {isWindowed &&(
                         <Rnd 
+                            cancel=".deadzone"
                             default={{
                                 x: (window.innerWidth - window.innerWidth * 0.85) / 2,
                                 y: (window.innerHeight - window.innerHeight * 0.75) / 4,
