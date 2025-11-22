@@ -30,7 +30,9 @@ export const WindowComponent=({title, isFullscreen, terminationcallback, windowc
                     <X className="!h-[15px] !w-[15px] text-accent-icon"/>
                 </div>
             </div>
-            {content}
+            <div className="deadzone w-full h-full">
+                {content}
+            </div>
         </div>
     )
 }
