@@ -1,5 +1,8 @@
 import { Minus,X, Square, PictureInPicture2} from "lucide-react";
+import { useZIndexShuffler } from "../providers/ZIndexShuffler";
 export const WindowComponent=({title, isFullscreen, terminationcallback, windowcallback, minimizecallback, appIndex, content})=>{
+    
+    const {bringToFront} = useZIndexShuffler();
 
     const Terminate=()=>{
         terminationcallback();
@@ -30,7 +33,7 @@ export const WindowComponent=({title, isFullscreen, terminationcallback, windowc
                     <X className="!h-[15px] !w-[15px] text-accent-icon"/>
                 </div>
             </div>
-            <div className="deadzone w-full h-full">
+            <div className="deadzone w-full h-full" onClick={()=>{bringToFront(appIndex)}}onTouchEnd={(e)=>{e.preventDefault();bringToFront(appIndex);}}>
                 {content}
             </div>
         </div>
