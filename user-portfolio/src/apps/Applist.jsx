@@ -5,7 +5,6 @@ import BakeBrewCook from "../assets/data/bbc.png"
 import MathSolve from "../assets/data/mathsolve.png"
 import Tipai from "../assets/data/tipai.png"
 import { Rubric } from "../projects3d/Rubric";
-import ProfileBg from "../assets/img/desktop-bg.webp"
 
 export const apps = [
     { 
@@ -13,15 +12,11 @@ export const apps = [
         icon: <User className="!h-[25px] !w-[25px] text-accent-icon"/>, 
         title: "About Me" ,
         content: 
-        <div className="flex flex-col justify-items-center w-full h-full bg-red-400 relative">
-            <div className="flex-2 w-full h-full bg-cover" style={{ backgroundImage: `url(${ProfileBg})` ,backgroundSize: "contain"}}>
-            </div>
-            <div className="flex-4 w-full px-72 overflow-visible  border-t-4 border-muted-border" >
-                <img
-                    src={Me}
-                    className="!h-[150px] !w-[150px] rounded-full -mt-[60px] border-4 border-muted-border"
-                />
-            </div>
+        <div className="flex flex-col items-center w-full h-full bg-red-400 relative">
+            <img
+                src={Me}
+                className="!h-[150px] !w-[150px] rounded-full border-4 border-muted-border"
+            />
         </div>
     },
     { 
