@@ -45,7 +45,7 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                                 width: window.innerWidth * 0.85,
                                 height: window.innerHeight * 0.75,
                             }}
-                            minWidth={150}
+                            minWidth={180}
                             minHeight={200}
                             bounds="window"
                             enableResizing={true}
