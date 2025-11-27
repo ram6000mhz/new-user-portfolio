@@ -8,7 +8,7 @@ export const Machineviewport=()=>{
     const [isDragging, setIsDragging] = useState(false);
     
     return(
-        <div className="w-full h-full bg-cover flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
+        <div className="w-full h-full bg-cover bg-center flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
             
                 {apps.map((app, index) => (
                     <Rnd 
