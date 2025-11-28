@@ -23,17 +23,17 @@ export const WindowComponent=({title, isFullscreen, terminationcallback, windowc
                     {title}
                 </h1>
                 <div className="grow"/>
-                <div className="cursor-pointer flex flex-col items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Minimize} onTouchEnd={(e)=>{e.preventDefault();Minimize();}}>
+                <div className="cursor-pointer flex flex-col items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Minimize} onTouch={(e)=>{e.preventDefault();Minimize();}}>
                     <Minus className="!h-[15px] !w-[15px] text-accent-icon"/>
                 </div>
-                <div className="cursor-pointer flex items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Window} onTouchEnd={(e)=>{e.preventDefault();Window();}}>
+                <div className="cursor-pointer flex items-center justify-center hover:bg-foreground-highlight rounded h-full w-[30px]" onClick={Window} onTouch={(e)=>{e.preventDefault();Window();}}>
                     {isFullscreen ? <PictureInPicture2 className="!h-[15px] !w-[15px] rotate-180 scale-y-[-1] text-accent-icon"/>: <Square className="!h-[15px] !w-[15px] text-accent-icon"/>}
                 </div>
-                <div className="cursor-pointer flex items-center justify-center hover:bg-red-300 rounded h-full w-[30px]" onClick={Terminate} onTouchEnd={(e)=>{e.preventDefault();Terminate();}}>
+                <div className="cursor-pointer flex items-center justify-center hover:bg-red-300 rounded h-full w-[30px]" onClick={Terminate} onTouch={(e)=>{e.preventDefault();Terminate();}}>
                     <X className="!h-[15px] !w-[15px] text-accent-icon"/>
                 </div>
             </div>
-            <div className="deadzone w-full h-full" onClick={()=>{bringToFront(appIndex)}}onTouchEnd={(e)=>{e.preventDefault();bringToFront(appIndex);}}>
+            <div className="deadzone w-full h-full" onClick={()=>{bringToFront(appIndex)}}onTouch={(e)=>{e.preventDefault();bringToFront(appIndex);}}>
                 {content}
             </div>
         </div>

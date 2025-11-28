@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
 import { IconComponentProvider } from "./IconFun";
 import { useZIndexShuffler } from "../providers/ZIndexShuffler";
+import { AnimatePresence, motion } from "motion/react";
 
 export const IconComponent = ({Children, Title, appContent, isDragging, appIndex}) => {
 
@@ -13,48 +14,32 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
 
     const { zMap, bringToFront } = useZIndexShuffler();
 
+    const width = window.innerWidth * 0.85;
+    const height = window.innerHeight * 0.75;
+    const x = (window.innerWidth - width) / 2;
+    const y = (window.innerHeight - height) / 2;
+
     return (
         <>
             <div className={`flex flex-col items-center justify-center h-[60px] w-[75px] p-1 rounded-md ${isDragging ? '' : 'hover:bg-foreground-highlight'}`}>
-                <div className="flex w-full h-full cursor-pointer items-center justify-center" onDoubleClick={()=>handleClick(appIndex)} onTouchEnd={(e)=>{e.preventDefault();handleClick(appIndex);}}>
+                <div className="flex w-full h-full cursor-pointer items-center justify-center" onDoubleClick={()=>handleClick(appIndex)} onTouch={(e)=>{e.preventDefault();handleClick(appIndex);}}>
                     {Children}
                 </div>  
                 <p className="text-center text-xs text-accent-text cursor-pointer">{Title}</p>
             </div>
-            {isOpen && createPortal(
-                <>
-                    {isFullscreen && (
-                        <div className="fixed inset-0 flex items-center justify-center bg-background h-screen w-screen" onClick={()=>{bringToFront(appIndex)}} style={{zIndex: zMap[appIndex] || 0}}>
-                            <WindowComponent 
-                                title={Title}
-                                isFullscreen={isFullscreen}
-                                terminationcallback={() => killProcess(appIndex)}
-                                windowcallback={() => WindowMode(appIndex)}
-                                minimizecallback={() => MinimizeMode(appIndex)}
-                                appIndex={appIndex}
-                                content={appContent}
-                            />
-                        </div>
-                    )}
-                    {isWindowed &&(
-                        <Rnd 
-                            cancel=".deadzone"
-                            default={{
-                                x: (window.innerWidth - window.innerWidth * 0.85) / 2,
-                                y: (window.innerHeight - window.innerHeight * 0.75) / 4,
-                                width: window.innerWidth * 0.85,
-                                height: window.innerHeight * 0.75,
-                            }}
-                            minWidth={180}
-                            minHeight={200}
-                            bounds="window"
-                            enableResizing={true}
-                            onDragStart={()=>{
-                                bringToFront(appIndex);
-                            }}
-                            style={{zIndex: zMap[appIndex] || 0}}
-                        >
-                            <div className="fixed inset-0 flex items-center justify-center overflow-hidden rounded-xl bg-background border-2 border-muted-border h-full w-full">
+            <AnimatePresence>
+                {isOpen && createPortal(
+                    <>
+                        {isFullscreen && (
+                            <motion.div
+                                initial={{opacity:0.1, scale:0.8}}
+                                animate={{opacity:1, scale:1}}
+                                exit={{opacity:0.1, scale:0.1}}
+                                transition={{duration:0.15}}
+                                className="fixed inset-0 flex items-center justify-center bg-background h-screen w-screen" 
+                                onClick={()=>{bringToFront(appIndex)}} 
+                                style={{zIndex: zMap[appIndex] || 0}}
+                            >
                                 <WindowComponent 
                                     title={Title}
                                     isFullscreen={isFullscreen}
@@ -64,12 +49,47 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                                     appIndex={appIndex}
                                     content={appContent}
                                 />
-                            </div>
-                        </Rnd>
-                    )}
-                </>,
-                document.body
-            )}
+                            </motion.div>
+                        )}
+                        {isWindowed &&(
+                            <Rnd
+                                cancel=".deadzone"
+                                default={{
+                                    x,
+                                    y,
+                                    width,
+                                    height
+                                }}
+                                minWidth={180}
+                                minHeight={200}
+                                bounds="window"
+                                enableResizing={true}
+                                onDragStart={() => bringToFront(appIndex)}
+                                style={{zIndex: zMap[appIndex] || 0}}
+                            >
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 1.2 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.1 }}
+                                    transition={{ duration: 0.15 }}
+                                    className="w-full h-full overflow-hidden rounded-xl bg-background border-2 border-muted-border flex items-center justify-center"
+                                >
+                                    <WindowComponent
+                                        title={Title}
+                                        isFullscreen={isFullscreen}
+                                        terminationcallback={() => killProcess(appIndex)}
+                                        windowcallback={() => WindowMode(appIndex)}
+                                        minimizecallback={() => MinimizeMode(appIndex)}
+                                        appIndex={appIndex}
+                                        content={appContent}
+                                    />
+                                </motion.div>
+                            </Rnd>
+                        )}
+                    </>,
+                    document.body
+                )}
+            </AnimatePresence>
         </>
     )
 };
