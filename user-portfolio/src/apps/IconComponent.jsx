@@ -22,7 +22,7 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
     return (
         <>
             <div className={`flex flex-col items-center justify-center h-[60px] w-[75px] p-1 rounded-md ${isDragging ? '' : 'hover:bg-foreground-highlight'}`}>
-                <div className="flex w-full h-full cursor-pointer items-center justify-center" onDoubleClick={()=>handleClick(appIndex)} onTouch={(e)=>{e.preventDefault();handleClick(appIndex);}}>
+                <div className="flex w-full h-full cursor-pointer items-center justify-center" onDoubleClick={()=>handleClick(appIndex)} onTouchEnd={(e)=>{e.preventDefault();handleClick(appIndex);}}>
                     {Children}
                 </div>  
                 <p className="text-center text-xs text-accent-text cursor-pointer">{Title}</p>
