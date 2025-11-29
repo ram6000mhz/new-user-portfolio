@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 export const IconComponent = ({Children, Title, appContent, isDragging, appIndex}) => {
 
-    const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
+    const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode, wasFullscreen} = IconComponentProvider();
 
     const { isOpen, isFullscreen, isWindowed } = getAppState(appIndex);
 
@@ -32,9 +32,9 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                     <>
                         {isFullscreen && (
                             <motion.div
-                                initial={{opacity:0.1, scale:0.8}}
+                                initial={{opacity:0, scale:0.8}}
                                 animate={{opacity:1, scale:1}}
-                                exit={{opacity:0.1, scale:0.1}}
+                                exit={{opacity:0, scale:0}}
                                 transition={{duration:0.15}}
                                 className="fixed inset-0 flex items-center justify-center bg-background h-screen w-screen" 
                                 onClick={()=>{bringToFront(appIndex)}} 
@@ -68,9 +68,9 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                                 style={{zIndex: zMap[appIndex] || 0}}
                             >
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 1.2 }}
+                                    initial={wasFullscreen.current?({ opacity: 0, scale: 1.2 }):{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.1 }}
+                                    exit={{ opacity: 0, scale: 0}}
                                     transition={{ duration: 0.15 }}
                                     className="w-full h-full overflow-hidden rounded-xl bg-background border-2 border-muted-border flex items-center justify-center"
                                 >
