@@ -71,7 +71,7 @@ export const IconFun = ({children}) => {
             isOpen: !currentState.isOpen,
             isFullscreen: currentState.isFullscreen,
             isWindowed: currentState.isWindowed,
-            isMinimized: currentState.isMinimized
+            isMinimized: !currentState.isMinimized
         });
     }
 
