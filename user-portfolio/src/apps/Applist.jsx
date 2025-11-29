@@ -24,7 +24,7 @@ export const apps = [
         icon: <ScanFace className="!h-[25px] !w-[25px] text-accent-icon"/>, 
         title: "Opti-Face" ,
         content: 
-        <div className="">
+        <div className="flex flex-col items-center">
             A lightweight facial recognition application built by using scrfd, mediapipe's FaceMesh, and Edgeface that is still accurate and fast.
         </div>
     },
