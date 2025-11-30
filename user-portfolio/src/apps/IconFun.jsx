@@ -4,7 +4,7 @@ import { useZIndexShuffler } from "../providers/ZIndexShuffler";
 const IconComponentContext = createContext();
 
 export const IconFun = ({children}) => {
-    const { taskman, addTask, TerminateProcess} = useTaskman();
+    const { addTask, TerminateProcess} = useTaskman();
     const [appStates, setAppStates] = useState({});
     const {bringToFront} = useZIndexShuffler();
     const wasFullscreen = useRef(false);
@@ -29,10 +29,6 @@ export const IconFun = ({children}) => {
             };
             return newStates;
         });
-    }
-    
-    const CreateInstance = (appIndex) => {
-        // create new app instance when opened from desktop icon
     }
 
     const handleClick = (appIndex) => {
