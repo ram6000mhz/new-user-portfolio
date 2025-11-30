@@ -1,9 +1,9 @@
 import { Folder, User, ScanFace, Soup, Gamepad2, BusFront, BotMessageSquare } from "lucide-react";
 import  Me  from "../assets/img/profile-pic.webp"
-import Optiface from "../assets/data/optiface.png"
-import BakeBrewCook from "../assets/data/bbc.png"
-import MathSolve from "../assets/data/mathsolve.png"
-import Tipai from "../assets/data/tipai.png"
+import Optiface from "../assets/data/optiface.webp"
+import BakeBrewCook from "../assets/data/bbc.webp"
+import MathSolve from "../assets/data/mathsolve.webp"
+import Tipai from "../assets/data/tipai.webp"
 import { Rubric } from "../projects3d/Rubric";
 
 export const apps = [
