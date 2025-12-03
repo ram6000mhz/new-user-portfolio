@@ -7,8 +7,6 @@ export const ZIndexShufflerProvider = ( {children} ) => {
     const [maxZ, setMaxZ] = useState(0);
 
     useEffect(() => {
-        console.log("zMap:", zMap);
-        console.log("maxZ:", maxZ);
     }, [zMap, maxZ]);
 
     const bringToFront = (appIndex) => {
