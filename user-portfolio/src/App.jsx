@@ -20,9 +20,7 @@ export function App() {
         <IconFun>
           <div className='w-screen h-screen'>
             <LocationProvider>
-              <Router>
                 <HomePage path="/" />
-              </Router>
             </LocationProvider>
           </div>
         </IconFun>
