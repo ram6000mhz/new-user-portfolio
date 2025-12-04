@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WindowComponent } from "../components/WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
@@ -14,10 +14,27 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
 
     const { zMap, bringToFront } = useZIndexShuffler();
 
-    const width = window.innerWidth * 0.85;
-    const height = window.innerHeight * 0.75;
-    const x = (window.innerWidth - width) / 2;
-    const y = (window.innerHeight - height) / 2;
+    const fullscreenPreset = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        x: 0,
+        y: 0
+    };
+
+    const windowedPreset = {
+        width: window.innerWidth * 0.85,
+        height: window.innerHeight * 0.75,
+        x: (window.innerWidth - window.innerWidth * 0.85) / 2,
+        y: (window.innerHeight - window.innerHeight * 0.75) / 2
+    };
+
+    const [rndPreset, setRndPreset] = useState(isDragging ? (fullscreenPreset) : (windowedPreset));
+
+    useEffect(() => {
+        setRndPreset(isFullscreen ? (fullscreenPreset) : (windowedPreset));
+        console.log("Preset updated");
+
+    } ,[isFullscreen]);
 
     return (
         <>
@@ -30,17 +47,38 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
             <AnimatePresence>
                 {isOpen && createPortal(
                     <>
-                        {isFullscreen && (
+                        <Rnd
+                            cancel=".deadzone"
+                            size = {{width: rndPreset.width, height: rndPreset.height}}
+                            position = {{x: rndPreset.x, y: rndPreset.y}}
+                            minWidth={180}
+                            minHeight={200}
+                            bounds="window"
+                            enableResizing={isFullscreen ? false : true}
+                            disableDragging={isFullscreen ? true : false}
+                            onDragStart={() => bringToFront(appIndex)}
+                            onDragStop={(e, d) => setRndPreset(p => ({...p, x: d.x, y: d.y}))}
+                            onResizeStop={(e, dir, ref, delta, pos) =>
+                                setRndPreset({
+                                    width: ref.offsetWidth,
+                                    height: ref.offsetHeight,
+                                    x: pos.x,
+                                    y: pos.y
+                                })
+                            }
+                            style={{zIndex: zMap[appIndex] || 0}}
+                        >
                             <motion.div
-                                initial={{opacity:0, scale:0.8}}
-                                animate={{opacity:1, scale:1}}
-                                exit={{opacity:0, scale:0}}
-                                transition={{duration:0.15}}
-                                className="fixed inset-0 flex items-center justify-center bg-background h-screen w-screen" 
-                                onClick={()=>{bringToFront(appIndex)}} 
-                                style={{zIndex: zMap[appIndex] || 0}}
+                                initial={wasFullscreen.current?({ opacity: 0, scale: 1.2 }):{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0}}
+                                transition={{ duration: 0.15 }}
+                                className={`w-full h-full overflow-hidden bg-background border-2 
+                                border-muted-border flex items-center justify-center
+                                ${isFullscreen ? 'rounded-none' : 'rounded-xl'}
+                                `}
                             >
-                                <WindowComponent 
+                                <WindowComponent
                                     title={Title}
                                     isFullscreen={isFullscreen}
                                     terminationcallback={() => killProcess(appIndex)}
@@ -50,42 +88,7 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                                     content={appContent}
                                 />
                             </motion.div>
-                        )}
-                        {isWindowed &&(
-                            <Rnd
-                                cancel=".deadzone"
-                                default={{
-                                    x,
-                                    y,
-                                    width,
-                                    height
-                                }}
-                                minWidth={180}
-                                minHeight={200}
-                                bounds="window"
-                                enableResizing={true}
-                                onDragStart={() => bringToFront(appIndex)}
-                                style={{zIndex: zMap[appIndex] || 0}}
-                            >
-                                <motion.div
-                                    initial={wasFullscreen.current?({ opacity: 0, scale: 1.2 }):{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0}}
-                                    transition={{ duration: 0.15 }}
-                                    className="w-full h-full overflow-hidden rounded-xl bg-background border-2 border-muted-border flex items-center justify-center"
-                                >
-                                    <WindowComponent
-                                        title={Title}
-                                        isFullscreen={isFullscreen}
-                                        terminationcallback={() => killProcess(appIndex)}
-                                        windowcallback={() => WindowMode(appIndex)}
-                                        minimizecallback={() => MinimizeMode(appIndex)}
-                                        appIndex={appIndex}
-                                        content={appContent}
-                                    />
-                                </motion.div>
-                            </Rnd>
-                        )}
+                        </Rnd>
                     </>,
                     document.body
                 )}
