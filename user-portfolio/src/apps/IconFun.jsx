@@ -7,7 +7,7 @@ export const IconFun = ({children}) => {
     const { addTask, TerminateProcess} = useTaskman();
     const [appStates, setAppStates] = useState({});
     const {bringToFront} = useZIndexShuffler();
-    const wasFullscreen = useRef(false);
+
     const getAppState = (appIndex) => {
         return appStates[appIndex]||{
             isOpen: false,
@@ -19,7 +19,6 @@ export const IconFun = ({children}) => {
 
     const updateAppState = (appIndex, updates) =>{
         setAppStates(prevStates => {
-            wasFullscreen.current = prevStates[appIndex]?.isFullscreen || false;
             const newStates = {
                 ...prevStates,
                 [appIndex]: {
@@ -88,7 +87,7 @@ export const IconFun = ({children}) => {
     }
 
     return (
-        <IconComponentContext.Provider value={{ getAppState, handleClick, killProcess, WindowMode, MinimizeMode, taskBarOpenClose , wasFullscreen}}>
+        <IconComponentContext.Provider value={{ getAppState, handleClick, killProcess, WindowMode, MinimizeMode, taskBarOpenClose}}>
             {children}
         </IconComponentContext.Provider>
     );

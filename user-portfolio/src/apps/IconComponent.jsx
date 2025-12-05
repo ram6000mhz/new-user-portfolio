@@ -8,9 +8,9 @@ import { AnimatePresence, motion } from "motion/react";
 
 export const IconComponent = ({Children, Title, appContent, isDragging, appIndex}) => {
 
-    const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode, wasFullscreen} = IconComponentProvider();
+    const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
 
-    const { isOpen, isFullscreen, isWindowed } = getAppState(appIndex);
+    const { isOpen, isFullscreen} = getAppState(appIndex);
 
     const { zMap, bringToFront } = useZIndexShuffler();
 
@@ -30,11 +30,30 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
 
     const [rndPreset, setRndPreset] = useState(isDragging ? (fullscreenPreset) : (windowedPreset));
 
-    useEffect(() => {
-        setRndPreset(isFullscreen ? (fullscreenPreset) : (windowedPreset));
-        console.log("Preset updated");
+    const animateTo = (target) => {
+        const start = rndPreset
+        const dur = 50
+        const t0 = performance.now()
 
-    } ,[isFullscreen]);
+        const step = (now) => {
+            const k = Math.min((now - t0) / dur, 1)
+            const lerp = (a,b)=>a+(b-a)*k
+
+            setRndPreset({
+            width:  lerp(start.width,  target.width),
+            height: lerp(start.height, target.height),
+            x:      lerp(start.x,      target.x),
+            y:      lerp(start.y,      target.y)
+            })
+
+            if (k < 1) requestAnimationFrame(step)
+        }
+        requestAnimationFrame(step)
+    }
+
+    useEffect(() => {
+        animateTo(isFullscreen ? (fullscreenPreset) : (windowedPreset));
+    },[isFullscreen]);
 
     return (
         <>
@@ -69,10 +88,12 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                             style={{zIndex: zMap[appIndex] || 0}}
                         >
                             <motion.div
-                                initial={wasFullscreen.current?({ opacity: 0, scale: 1.2 }):{ opacity: 0, scale: 0.8 }}
+                                initial={
+                                    { opacity: 0, scale: 0.8}
+                                }
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0}}
-                                transition={{ duration: 0.15 }}
+                                transition={{ duration: 0.2 }}
                                 className={`w-full h-full overflow-hidden bg-background border-2 
                                 border-muted-border flex items-center justify-center
                                 ${isFullscreen ? 'rounded-none' : 'rounded-xl'}
