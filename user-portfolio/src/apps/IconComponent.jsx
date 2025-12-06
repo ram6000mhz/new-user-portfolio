@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { WindowComponent } from "../components/WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
@@ -40,15 +40,19 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
             const lerp = (a,b)=>a+(b-a)*k
 
             setRndPreset({
-            width:  lerp(start.width,  target.width),
-            height: lerp(start.height, target.height),
-            x:      lerp(start.x,      target.x),
-            y:      lerp(start.y,      target.y)
+                width:  lerp(start.width,  target.width),
+                height: lerp(start.height, target.height),
+                x:      lerp(start.x,      target.x),
+                y:      lerp(start.y,      target.y)
             })
 
             if (k < 1) requestAnimationFrame(step)
         }
         requestAnimationFrame(step)
+    }
+
+    const capturePreset = (height, width, x, y) => {
+        console.log("Captured Preset:", height, width, x, y);
     }
 
     useEffect(() => {
@@ -75,16 +79,25 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                             bounds="window"
                             enableResizing={isFullscreen ? false : true}
                             disableDragging={isFullscreen ? true : false}
-                            onDragStart={() => bringToFront(appIndex)}
-                            onDragStop={(e, d) => setRndPreset(p => ({...p, x: d.x, y: d.y}))}
-                            onResizeStop={(e, dir, ref, delta, pos) =>
-                                setRndPreset({
+                            onDragStart={() =>bringToFront(appIndex)}
+                            onDragStop={(e, d) => {
+                                setRndPreset(prev => {
+                                        const next = { ...prev, x: d.x, y: d.y };
+                                        capturePreset(next.height, next.width, next.x, next.y);
+                                        return next;
+                                    });
+                                }
+                            }
+                            onResizeStop={(e, dir, ref, delta, pos) => {
+                                const next = {
                                     width: ref.offsetWidth,
                                     height: ref.offsetHeight,
                                     x: pos.x,
                                     y: pos.y
-                                })
-                            }
+                                };
+                                setRndPreset(next);
+                                capturePreset(next.height, next.width, next.x, next.y);
+                            }}
                             style={{zIndex: zMap[appIndex] || 0}}
                         >
                             <motion.div
