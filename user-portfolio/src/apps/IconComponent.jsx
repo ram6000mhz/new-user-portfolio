@@ -29,6 +29,7 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
     };
 
     const [rndPreset, setRndPreset] = useState(isDragging ? (fullscreenPreset) : (windowedPreset));
+    const [lastPreset, setLastPreset] = useState(null);
 
     const animateTo = (target) => {
         const start = rndPreset
@@ -53,7 +54,58 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
 
     const capturePreset = (height, width, x, y) => {
         console.log("Captured Preset:", height, width, x, y);
+        const lastknownPreset = {height, width, x, y};
+        setLastPreset(lastknownPreset);
+        console.log("Last Preset Updated:", lastknownPreset);
     }
+
+    const handleResize = () => {
+        setRndPreset((prev) => {
+            let newWidth = prev.width;
+            let newHeight = prev.height;
+            let newX = prev.x;
+            let newY = prev.y;
+
+            if (isFullscreen) {
+                newWidth = window.innerWidth;
+                newHeight = window.innerHeight;
+                newX = 0;
+                newY = 0;
+            } else {
+                newWidth = Math.min(prev.width, window.innerWidth);
+                newHeight = Math.min(prev.height, window.innerHeight);
+
+                if (newX + newWidth > window.innerWidth) {
+                    newX = Math.max(0, window.innerWidth - newWidth);
+                }
+                if (newY + newHeight > window.innerHeight) {
+                    newY = Math.max(0, window.innerHeight - newHeight);
+                }
+            }
+
+            if (
+                newWidth !== prev.width ||
+                newHeight !== prev.height ||
+                newX !== prev.x ||
+                newY !== prev.y
+            ) {
+                return {
+                    width: newWidth,
+                    height: newHeight,
+                    x: newX,
+                    y: newY
+                };
+            }
+
+            return prev;
+        });
+    };
+
+    useEffect(() => {
+        console.log("change happening");
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [isFullscreen]);
 
     useEffect(() => {
         animateTo(isFullscreen ? (fullscreenPreset) : (windowedPreset));
@@ -116,8 +168,16 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                                     title={Title}
                                     isFullscreen={isFullscreen}
                                     terminationcallback={() => killProcess(appIndex)}
-                                    windowcallback={() => WindowMode(appIndex)}
-                                    minimizecallback={() => MinimizeMode(appIndex)}
+                                    windowcallback={() => { 
+                                            WindowMode(appIndex);
+                                            capturePreset(rndPreset.height, rndPreset.width, rndPreset.x, rndPreset.y);
+                                        }
+                                    }
+                                    minimizecallback={() =>{
+                                            MinimizeMode(appIndex)
+                                            capturePreset(rndPreset.height, rndPreset.width, rndPreset.x, rndPreset.y);
+                                        }
+                                    }
                                     appIndex={appIndex}
                                     content={appContent}
                                 />
