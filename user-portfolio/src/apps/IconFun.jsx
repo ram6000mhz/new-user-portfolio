@@ -1,6 +1,7 @@
-import { createContext, useContext, useState, useRef } from "react";
+import { createContext, useContext, useState, useRef, useCallback ,useMemo } from "react";
 import { useTaskman } from "../taskman/Taskman";
 import { useZIndexShuffler } from "../providers/ZIndexShuffler";
+
 const IconComponentContext = createContext();
 
 export const IconFun = ({children}) => {
@@ -8,29 +9,26 @@ export const IconFun = ({children}) => {
     const [appStates, setAppStates] = useState({});
     const {bringToFront} = useZIndexShuffler();
 
-    const getAppState = (appIndex) => {
-        return appStates[appIndex]||{
+    const getAppState = useCallback((appIndex) => {
+        return appStates[appIndex] || {
             isOpen: false,
             isFullscreen: false,
             isWindowed: false,
             isMinimized: false,
         };
-    };
+    }, [appStates]);
 
-    const updateAppState = (appIndex, updates) =>{
-        setAppStates(prevStates => {
-            const newStates = {
-                ...prevStates,
-                [appIndex]: {
-                    ...prevStates[appIndex],
-                    ...updates,
-                },
-            };
-            return newStates;
-        });
-    }
+    const updateAppState = useCallback((appIndex, updates) =>{
+        setAppStates(prevStates => ({
+            ...prevStates,
+            [appIndex]: {
+                ...prevStates[appIndex],
+                ...updates,
+            },
+        }));
+    }, []);
 
-    const handleClick = (appIndex) => {
+    const handleClick = useCallback((appIndex) => {
         updateAppState(appIndex, {
             isOpen: true,
             isFullscreen: true,
@@ -38,9 +36,9 @@ export const IconFun = ({children}) => {
             isMinimized: false,
         });
         addTask(appIndex);
-    };
+    }, [addTask, updateAppState]);
 
-    const killProcess = (appIndex) => {
+    const killProcess = useCallback((appIndex) => {
         updateAppState(appIndex, {
             isOpen: false,
             isFullscreen: false,
@@ -48,9 +46,9 @@ export const IconFun = ({children}) => {
             isMinimized: false
         });
         TerminateProcess(appIndex);
-    }
+    }, [TerminateProcess, updateAppState]);
 
-    const WindowMode = (appIndex) => {
+    const WindowMode = useCallback((appIndex) => {
         const currentState = getAppState(appIndex);
         updateAppState(appIndex, {
             isOpen: currentState.isOpen,
@@ -58,9 +56,9 @@ export const IconFun = ({children}) => {
             isWindowed: !currentState.isWindowed,
             isMinimized: currentState.isMinimized  
         });
-    }
+    }, [getAppState, updateAppState]);
 
-    const MinimizeMode = (appIndex) => {
+    const MinimizeMode = useCallback((appIndex) => {
         const currentState = getAppState(appIndex);
         updateAppState(appIndex, {
             isOpen: !currentState.isOpen,
@@ -68,31 +66,36 @@ export const IconFun = ({children}) => {
             isWindowed: currentState.isWindowed,
             isMinimized: !currentState.isMinimized
         });
-    }
+    }, [getAppState, updateAppState]);
 
-    const taskBarOpenClose = (appIndex) => {
+    const taskBarOpenClose = useCallback((appIndex) => {
         const currentState = getAppState(appIndex);
 
         if (currentState.isOpen) {
-            updateAppState(appIndex, {
-                isOpen: currentState.isOpen,
-                isFullscreen: currentState.isFullscreen,
-                isWindowed: currentState.isWindowed,
-                isMinimized: currentState.isMinimized
-            });
             bringToFront(appIndex);
         } else {
             MinimizeMode(appIndex);
         }
-    }
+    }, [getAppState, MinimizeMode, bringToFront]);
+
+    const contextValue = useMemo(() => ({
+        getAppState,
+        handleClick,
+        killProcess,
+        WindowMode,
+        MinimizeMode,
+        taskBarOpenClose
+    }), [getAppState, handleClick, killProcess, WindowMode, MinimizeMode, taskBarOpenClose]);
 
     return (
-        <IconComponentContext.Provider value={{ getAppState, handleClick, killProcess, WindowMode, MinimizeMode, taskBarOpenClose}}>
+        <IconComponentContext.Provider value={contextValue}>
             {children}
         </IconComponentContext.Provider>
     );
 };
 
+
 export const IconComponentProvider = () => {
     return useContext(IconComponentContext);
 };
+
