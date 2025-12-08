@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, memo } from "react";
 import { WindowComponent } from "../components/WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
@@ -6,8 +6,8 @@ import { IconComponentProvider } from "./IconFun";
 import { useZIndexShuffler } from "../providers/ZIndexShuffler";
 import { AnimatePresence, motion } from "motion/react";
 
-export const IconComponent = ({Children, Title, appContent, isDragging, appIndex}) => {
-
+export const IconComponent = memo(({Children, Title, appContent, isDragging, appIndex}) => {
+    console.log("IconComponent Rendered:");
     const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
 
     const { isOpen, isFullscreen} = getAppState(appIndex);
@@ -29,7 +29,6 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
     };
 
     const [rndPreset, setRndPreset] = useState(isDragging ? (fullscreenPreset) : (windowedPreset));
-    const [lastPreset, setLastPreset] = useState(null);
 
     const animateTo = (target) => {
         const start = rndPreset
@@ -50,13 +49,6 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
             if (k < 1) requestAnimationFrame(step)
         }
         requestAnimationFrame(step)
-    }
-
-    const capturePreset = (height, width, x, y) => {
-        console.log("Captured Preset:", height, width, x, y);
-        const lastknownPreset = {height, width, x, y};
-        setLastPreset(lastknownPreset);
-        console.log("Last Preset Updated:", lastknownPreset);
     }
 
     const handleResize = () => {
@@ -102,7 +94,7 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
     };
 
     useEffect(() => {
-        console.log("change happening");
+        console.log("log: Resizing due to fullscreen change");
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, [isFullscreen]);
@@ -132,14 +124,6 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                             enableResizing={isFullscreen ? false : true}
                             disableDragging={isFullscreen ? true : false}
                             onDragStart={() =>bringToFront(appIndex)}
-                            onDragStop={(e, d) => {
-                                setRndPreset(prev => {
-                                        const next = { ...prev, x: d.x, y: d.y };
-                                        capturePreset(next.height, next.width, next.x, next.y);
-                                        return next;
-                                    });
-                                }
-                            }
                             onResizeStop={(e, dir, ref, delta, pos) => {
                                 const next = {
                                     width: ref.offsetWidth,
@@ -148,7 +132,6 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                                     y: pos.y
                                 };
                                 setRndPreset(next);
-                                capturePreset(next.height, next.width, next.x, next.y);
                             }}
                             style={{zIndex: zMap[appIndex] || 0}}
                         >
@@ -170,12 +153,10 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
                                     terminationcallback={() => killProcess(appIndex)}
                                     windowcallback={() => { 
                                             WindowMode(appIndex);
-                                            capturePreset(rndPreset.height, rndPreset.width, rndPreset.x, rndPreset.y);
                                         }
                                     }
                                     minimizecallback={() =>{
                                             MinimizeMode(appIndex)
-                                            capturePreset(rndPreset.height, rndPreset.width, rndPreset.x, rndPreset.y);
                                         }
                                     }
                                     appIndex={appIndex}
@@ -189,4 +170,4 @@ export const IconComponent = ({Children, Title, appContent, isDragging, appIndex
             </AnimatePresence>
         </>
     )
-};
+});
