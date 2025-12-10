@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, memo } from "react";
+import { useEffect, useState, useRef } from "react";
 import { WindowComponent } from "../components/WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
@@ -6,8 +6,8 @@ import { IconComponentProvider } from "./IconFun";
 import { useZIndexShuffler } from "../providers/ZIndexShuffler";
 import { AnimatePresence, motion } from "motion/react";
 
-export const IconComponent = memo(({Children, Title, appContent, isDragging, appIndex}) => {
-    console.log("IconComponent Rendered:");
+export const IconComponent = ({AppIcon, Title, appContent, isDragging, appIndex}) => {
+    console.log("IconComponent rendered");
     const {getAppState, handleClick, killProcess, WindowMode, MinimizeMode} = IconComponentProvider();
 
     const { isOpen, isFullscreen} = getAppState(appIndex);
@@ -94,7 +94,7 @@ export const IconComponent = memo(({Children, Title, appContent, isDragging, app
     };
 
     useEffect(() => {
-        console.log("log: Resizing due to fullscreen change");
+        console.log("change happening");
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, [isFullscreen]);
@@ -107,7 +107,7 @@ export const IconComponent = memo(({Children, Title, appContent, isDragging, app
         <>
             <div className={`flex flex-col items-center justify-center h-[60px] w-[75px] p-1 rounded-md ${isDragging ? '' : 'hover:bg-foreground-highlight'}`}>
                 <div className="flex w-full h-full cursor-pointer items-center justify-center" onDoubleClick={()=>handleClick(appIndex)} onTouchEnd={(e)=>{e.preventDefault();handleClick(appIndex);}}>
-                    {Children}
+                    {AppIcon}
                 </div>  
                 <p className="text-center text-xs text-accent-text cursor-pointer">{Title}</p>
             </div>
@@ -124,6 +124,10 @@ export const IconComponent = memo(({Children, Title, appContent, isDragging, app
                             enableResizing={isFullscreen ? false : true}
                             disableDragging={isFullscreen ? true : false}
                             onDragStart={() =>bringToFront(appIndex)}
+                            onDragStop={(e, d) => {
+                                    setRndPreset(prev => ({ ...prev, x: d.x, y: d.y }));
+                                }
+                            }
                             onResizeStop={(e, dir, ref, delta, pos) => {
                                 const next = {
                                     width: ref.offsetWidth,
@@ -152,8 +156,7 @@ export const IconComponent = memo(({Children, Title, appContent, isDragging, app
                                     isFullscreen={isFullscreen}
                                     terminationcallback={() => killProcess(appIndex)}
                                     windowcallback={() => { 
-                                            WindowMode(appIndex);
-                                        }
+                                            WindowMode(appIndex);                                                                                    }
                                     }
                                     minimizecallback={() =>{
                                             MinimizeMode(appIndex)
@@ -170,4 +173,4 @@ export const IconComponent = memo(({Children, Title, appContent, isDragging, app
             </AnimatePresence>
         </>
     )
-});
+};
