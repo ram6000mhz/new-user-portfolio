@@ -36,7 +36,7 @@ export const Machineviewport=()=>{
                             y: index * 60,
                         }}
                     >
-                        <IconComponent Children={app.icon} Title={app.title} appContent={app.content} isDragging={ !!draggingIds[app.appid] } appIndex={app.appid}/>
+                        <IconComponent AppIcon={app.icon} Title={app.title} appContent={app.content} isDragging={ !!draggingIds[app.appid] } appIndex={app.appid}/>
                     </Rnd>
             )})}
         </div>
