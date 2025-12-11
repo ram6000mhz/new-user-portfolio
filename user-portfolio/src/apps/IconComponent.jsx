@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { WindowComponent } from "../components/WindowComponent";
+import { WindowComponent } from "./WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
 import { IconComponentProvider } from "./IconFun";
