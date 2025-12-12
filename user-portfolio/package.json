@@ -16,7 +16,8 @@
     "preact-iso": "^2.11.0",
     "react-rnd": "^10.5.2",
     "tailwindcss": "^4.1.16",
-    "three": "^0.181.2"
+    "three": "^0.181.2",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.2",
