@@ -2,7 +2,6 @@ import { Router, Route, lazy, prerender, LocationProvider } from 'preact-iso';
 import { MainLayout } from './pages/MainLayout';
 import { Machineviewport } from './pages/Machineviewport';
 import { TaskmanProvider } from './taskman/Taskman';
-import { IconFun } from './apps/IconFun';
 import { ZIndexShufflerProvider } from './providers/ZIndexShuffler';
 
 function HomePage() {
@@ -14,16 +13,15 @@ function HomePage() {
 }
 
 export function App() {
+  console.log("App rendered");
   return (
     <TaskmanProvider>
       <ZIndexShufflerProvider>
-        <IconFun>
           <div className='w-screen h-screen'>
             <LocationProvider>
                 <HomePage path="/" />
             </LocationProvider>
           </div>
-        </IconFun>
       </ZIndexShufflerProvider>
     </TaskmanProvider>
   )
