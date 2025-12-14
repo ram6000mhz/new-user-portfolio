@@ -1,42 +1,43 @@
 import { Rnd } from "react-rnd";
 import { IconComponent2 } from "../apps/IconComponent2";
 import { apps } from "../apps/Applist";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import DesktopBg from "../assets/img/desktop-bg.webp"
-import { useIconStore } from "../apps/IconFun";
+import { IconFun } from "../apps/IconFun";
 
-
-export const Machineviewport=()=>{
+export const Machineviewport = () => {
     console.log("Machineviewport rendered");
 
-    const handleClick =
-        useIconStore(state => state.handleClick);
-    const [draggingIds, setDraggingIds] = useState({});
+    const {setDragging, initializeApp} = IconFun.getState();
+    useEffect(() => {
+        apps.forEach(app => {
+            initializeApp(app.appid);
+        });
+    }, []);
 
     const handleDragStart = (id) => {
-        setDraggingIds(prev=>({ ...prev, [id]: true}));
+        setDragging(id,true);
     }
 
     const handleDragStop = (id) => {
-        setDraggingIds(prev=>({ ...prev, [id]: false}));
+        setDragging(id,false);
     }
 
-    return(
+    return (
         <div className="w-full h-full bg-cover bg-center flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
             {apps.map((app, index) => {
-                return(
+                return (
                     <Rnd 
-                        // onDragStart={() => {//culprit
-                        //     handleDragStart(app.appid);
-                        // }}
+                        onDragStart={() => {
+                            handleDragStart(app.appid);
+                        }}
                         
-                        // onDragStop={() => {////culprit
-                        //     handleDragStop(app.appid);
-                        // }}
+                        onDragStop={() => {
+                            handleDragStop(app.appid);
+                        }}
                         onDoubleclick={() => {
                             console.log("icon clicked");
                             console.log(app.appid);
-                            handleClick(app.appid);
                         }}
                         key={index}
                         bounds="parent"
@@ -46,7 +47,7 @@ export const Machineviewport=()=>{
                             y: index * 60,
                         }}
                     >
-                        <IconComponent2 AppIcon={app.icon} Title={app.title} appContent={app.content} isDragging={ !!draggingIds[app.appid] } appIndex={app.appid}/>
+                        <IconComponent2 AppIcon={app.icon} Title={app.title} appContent={app.content} appIndex={app.appid}/>
                     </Rnd>
             )})}
         </div>
