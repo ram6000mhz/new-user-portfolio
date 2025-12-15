@@ -57,20 +57,20 @@ export const IconFun = create((set, get) => ({
 
   toggleWindow: (appId) =>
     get().setAppState(appId,{
-      isFullscreen: !s.isFullscreen,
-      isWindowed: !s.isWindowed,
+      isFullscreen: !appId.isFullscreen,
+      isWindowed: !appId.isWindowed,
     }),
 
   toggleMinimize: (appId) =>
     get().setAppState(appId,{
-      isOpen: !s.isOpen,
-      isMinimized: !s.isMinimized,
+      isOpen: !appId.isOpen,
+      isMinimized: !appId.isMinimized,
     }),
 
   taskBarOpenClose: (appIndex) => {
       const { bringToFront } = ZIndexShuffler.getState()
       const state = get().appStates[appIndex];
-
+      console.log("bring app to front")
       if (!state) return;
       if (state.isOpen) {
           bringToFront(appIndex); 
