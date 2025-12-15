@@ -1,39 +1,55 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import {create}  from 'zustand';
 
-const ZIndexShufflerContext = createContext();
-
-export const ZIndexShufflerProvider = ( {children} ) => {
-    const [zMap, setZmap] = useState({dummyobject: 0});
-    const [maxZ, setMaxZ] = useState(0);
-
-    useEffect(() => {
-    }, [zMap, maxZ]);
-
-    const bringToFront = (appIndex) => {
-
+export const ZIndexShuffler = create(( set, get ) => ({
+    zMap: {dummyobject: 0 },
+    bringToFront: (appIndex) => set((state) => {
+        const { zMap } = state;
+        const currentZ = zMap[appIndex];
         const entries = Object.entries(zMap);
-        const max = entries.length - 1;
+        const maxZ = entries.length - 1;
+
+        if (currentZ === maxZ) {
+            return state; 
+        }
 
         const newMap = {};
         for (const [k, v] of entries) {
-            newMap[k] = v > zMap[appIndex] ? v - 1 : v;
+            if (k === appIndex) {
+                newMap[k] = maxZ;
+            } 
+            else if (v > currentZ) {
+                newMap[k] = v - 1;
+            }
+            else {
+                newMap[k] = v;
+            }
         }
-        newMap[appIndex] = max;
+        console.log(get().zMap)
+        return { zMap: newMap };
+    }),
 
-        setZmap(newMap);
-    };
+    removeZIndexOnTerminate: (appIndex) => set((state) => {
+        const { zMap } = state;
 
-    const removeZIndexOnTerminate = (appIndex) => {
+        if (!(appIndex in zMap)) {
+            return state;
+        }
 
-    };
+        const zToRemove = zMap[appIndex];
+        const newMap = {};
+        
+        for (const [k, v] of Object.entries(zMap)) {
+            if (k === appIndex) {
+                continue;
+            }
+            if (v > zToRemove) {
+                newMap[k] = v - 1;
+            } 
+            else {
+                newMap[k] = v;
+            }
+        }
 
-    return(
-        <ZIndexShufflerContext.Provider value={{zMap, bringToFront}}>
-            {children}
-        </ZIndexShufflerContext.Provider>
-    )
-}
-
-export const useZIndexShuffler = () =>{
-    return useContext(ZIndexShufflerContext);
-}
+        return { zMap: newMap };
+    }),
+}))
