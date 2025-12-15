@@ -1,13 +1,14 @@
 import { create } from "zustand";
+import {ZIndexShuffler} from '../providers/ZIndexShuffler.jsx';
 
 export const IconFun = create((set, get) => ({
   appStates: {}, 
 
-  initializeApp: (id, initialState) =>
+  initializeApp: (appId, initialState) =>
     set(s => ({
       appStates: {
         ...s.appStates,
-        [id]: initialState || {
+        [appId]: initialState || {
           isDragging: false,
           isOpen: false,
           isFullscreen: false,
@@ -17,50 +18,65 @@ export const IconFun = create((set, get) => ({
       },
     })),
 
-  setAppState: (id, newState) => {
-   if (!get().appStates[id]) return; 
+  setAppState: (appId, newState) => {
+   if (!get().appStates[appId]) return; 
 
     set(s => ({
       appStates: {
         ...s.appStates,
-        [id]: {
-          ...s.appStates[id],
+        [appId]: {
+          ...s.appStates[appId],
           ...newState,
         },
       },
     }));
   },
 
-  setDragging: (id, dragging) => {
-    console.log(`Setting app ID ${id} isDragging to ${dragging}`);
-    get().setAppState(id, { isDragging: dragging });
+  setDragging: (appId, dragging) => {
+    console.log(`Setting app ID ${appId} isDragging to ${dragging}`);
+    get().setAppState(appId, { isDragging: dragging });
+    console.log(`print all states:`, get().appStates);
   },
   
-  open: (id) => {
-    get().setAppState(id, {
+  open: (appId) => {
+    get().setAppState(appId, {
       isOpen: true,
       isFullscreen: true,
       isWindowed: false,
       isMinimized: false,
     });
   },
-  kill: () =>
-    set({
+
+  kill: (appId) =>
+    get().setAppState(appId,{
       isOpen: false,
       isFullscreen: false,
       isWindowed: false,
       isMinimized: false,
-    }),
+  }),
 
-  toggleWindow: () =>
-    set(s => ({
+  toggleWindow: (appId) =>
+    get().setAppState(appId,{
       isFullscreen: !s.isFullscreen,
       isWindowed: !s.isWindowed,
-    })),
+    }),
 
-  toggleMinimize: () =>
-    set(s => ({
+  toggleMinimize: (appId) =>
+    get().setAppState(appId,{
       isOpen: !s.isOpen,
       isMinimized: !s.isMinimized,
-    })),
+    }),
+
+  taskBarOpenClose: (appIndex) => {
+      const { bringToFront } = ZIndexShuffler.getState()
+      const state = get().appStates[appIndex];
+
+      if (!state) return;
+      if (state.isOpen) {
+          bringToFront(appIndex); 
+      } else {
+          get().toggleMinimize(appIndex);
+      }
+  }
+      
 }));
