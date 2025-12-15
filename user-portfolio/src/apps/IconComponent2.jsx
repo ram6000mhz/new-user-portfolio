@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { WindowComponent } from "./WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
-import { useZIndexShuffler } from "../providers/ZIndexShuffler";
 import { AnimatePresence, motion } from "motion/react";
 import { IconFun } from "../apps/IconFun";
 
