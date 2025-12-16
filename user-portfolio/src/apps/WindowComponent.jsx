@@ -1,8 +1,8 @@
 import { Minus,X, Square, PictureInPicture2} from "lucide-react";
-import { useZIndexShuffler } from "../providers/ZIndexShuffler";
+import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 export const WindowComponent=({title, isFullscreen, terminationcallback, windowcallback, minimizecallback, appIndex, content})=>{
     
-    const {bringToFront} = useZIndexShuffler();
+    const {bringToFront} = ZIndexShuffler();
 
     const Terminate=()=>{
         terminationcallback();
