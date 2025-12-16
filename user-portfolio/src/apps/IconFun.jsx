@@ -33,18 +33,18 @@ export const IconFun = create((set, get) => ({
   },
 
   setDragging: (appId, dragging) => {
-    console.log(`Setting app ID ${appId} isDragging to ${dragging}`);
     get().setAppState(appId, { isDragging: dragging });
-    console.log(`print all states:`, get().appStates);
   },
   
   open: (appId) => {
+    console.log(`Opening app ID ${appId}`); 
     get().setAppState(appId, {
       isOpen: true,
       isFullscreen: true,
       isWindowed: false,
       isMinimized: false,
     });
+    console.log(get().appStates[appId]);
   },
 
   kill: (appId) =>
@@ -53,19 +53,25 @@ export const IconFun = create((set, get) => ({
       isFullscreen: false,
       isWindowed: false,
       isMinimized: false,
-  }),
-
-  toggleWindow: (appId) =>
-    get().setAppState(appId,{
-      isFullscreen: !appId.isFullscreen,
-      isWindowed: !appId.isWindowed,
     }),
 
-  toggleMinimize: (appId) =>
-    get().setAppState(appId,{
-      isOpen: !appId.isOpen,
-      isMinimized: !appId.isMinimized,
-    }),
+  toggleWindow: (appId) => {
+      const currentState = get().appStates[appId];
+      if (!currentState) return; 
+      get().setAppState(appId, {
+        isFullscreen: !currentState.isFullscreen,
+        isWindowed: !currentState.isWindowed,
+      });
+  },
+
+  toggleMinimize: (appId) =>{
+    const currentState = get().appStates[appId];
+    if(!currentState) return;
+    get().setAppState(appId, {
+      isOpen: !currentState.isOpen,
+      isMinimized: !currentState.isMinimized
+    });
+  },
 
   taskBarOpenClose: (appIndex) => {
       const { bringToFront } = ZIndexShuffler.getState()
