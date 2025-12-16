@@ -8,7 +8,7 @@ import { IconFun } from "../apps/IconFun";
 export const Machineviewport = () => {
     console.log("Machineviewport rendered");
 
-    const {setDragging, initializeApp} = IconFun.getState();
+    const {setDragging, initializeApp, open} = IconFun.getState();
     useEffect(() => {
         apps.forEach(app => {
             initializeApp(app.appid);
@@ -38,6 +38,7 @@ export const Machineviewport = () => {
                         onDoubleclick={() => {
                             console.log("icon clicked");
                             console.log(app.appid);
+                            open(app.appid);
                         }}
                         key={index}
                         bounds="parent"
@@ -47,7 +48,7 @@ export const Machineviewport = () => {
                             y: index * 60,
                         }}
                     >
-                        <IconComponent2 AppIcon={app.icon} Title={app.title} appContent={app.content} appIndex={app.appid}/>
+                        <IconComponent2 AppIcon={app.icon} Title={app.title} appContent={app.content} appId={app.appid}/>
                     </Rnd>
             )})}
         </div>
