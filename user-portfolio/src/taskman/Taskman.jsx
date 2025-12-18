@@ -1,15 +1,18 @@
 import {create} from 'zustand';
 
-export const taskman = create((set,get) => ({
-    taskman: {},
+export const Taskman = create((set,get) => ({
+    taskman: [],
 
-    addTask: (taskId, taskData) => {
-        set(s => ({
-            taskman: {
-                ...s.taskman,
-                [taskId]: taskData,
-            },
-        }));
-    }
+    addTask: (appId) => {
+        set((state) => ({
+            taskman:[...state.taskman, appId]
+        }))
+    },
+
+    terminateTask: (appId) => {
+        set((state) => ({
+            taskman:state.taskman.filter((id)=> id !== appId)
+        }))
+    },
     
 }))
