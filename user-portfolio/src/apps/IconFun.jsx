@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import {ZIndexShuffler} from '../providers/ZIndexShuffler.jsx';
+import { Taskman } from "../taskman/Taskman.jsx";
+import { add } from "three/tsl";
 
 export const IconFun = create((set, get) => ({
   appStates: {}, 
@@ -37,6 +39,7 @@ export const IconFun = create((set, get) => ({
   },
   
   open: (appId) => {
+    const { addTask } = Taskman.getState()
     console.log(`Opening app ID ${appId}`); 
     get().setAppState(appId, {
       isOpen: true,
@@ -44,16 +47,21 @@ export const IconFun = create((set, get) => ({
       isWindowed: false,
       isMinimized: false,
     });
-    console.log(get().appStates[appId]);
+    addTask(appId);
   },
 
-  kill: (appId) =>
+  kill: (appId) => {
+    const {terminateTask} = Taskman.getState()
+    const {removeAppZmap} = ZIndexShuffler.getState()
     get().setAppState(appId,{
       isOpen: false,
       isFullscreen: false,
       isWindowed: false,
       isMinimized: false,
-    }),
+    });
+    terminateTask(appId);
+    removeAppZmap(appId);
+  },
 
   toggleWindow: (appId) => {
       const currentState = get().appStates[appId];
