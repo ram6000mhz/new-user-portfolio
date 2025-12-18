@@ -9,11 +9,12 @@ import { shallow } from "zustand/shallow";
 
 export const IconComponent2 = ({AppIcon, Title, appId, appContent}) => {
     console.log("IconComponent rendered");
+
     const { bringToFront } = ZIndexShuffler.getState();
     const isDragging = IconFun(s => s.appStates[appId]?.isDragging || false);
     const isOpen = IconFun(s => s.appStates[appId]?.isOpen || false);
     const isFullscreen = IconFun(s => s.appStates[appId]?.isFullscreen || false);
-    const zMap = ZIndexShuffler(s => s.zMap);
+    const zIndex = ZIndexShuffler(s => s.zMap[appId] || 0);
     const { kill, toggleWindow, toggleMinimize } = IconFun.getState();
     return (
         <>
@@ -51,7 +52,7 @@ export const IconComponent2 = ({AppIcon, Title, appId, appContent}) => {
                             //     };
                             //     setRndPreset(next);
                             // }}
-                            style={{zIndex: zMap[appId] || 0}}
+                            style={{zIndex: zIndex}}
                         >
                             <motion.div
                                 initial={
