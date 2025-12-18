@@ -3,12 +3,13 @@ import { useState } from "react";
 import {StartComponent} from "../components/StartComponent"
 // text-xs sm:text-sm md:text-base lg:text-lg
 import { apps } from "../apps/Applist";
-import { useTaskman } from "../taskman/Taskman";
-
+import { Taskman } from "../taskman/Taskman";
+import {IconFun} from "../apps/IconFun"
 export const MainLayout = ({children}) => {
   console.log("MainLayout rendered");
 
-  const { taskman } = useTaskman();
+  const taskman = Taskman((state) => state.taskman);
+  const { taskBarOpenClose } = IconFun.getState();
   const [isVisible, setIsVisible] = useState(false);
 
   const now = new Date().toLocaleString([], {
@@ -21,8 +22,8 @@ export const MainLayout = ({children}) => {
 
   const activeApps = apps.filter(app => taskman.includes(app.appid));
 
-  const reOpenWindow = (appIndex) => {
-    console.log("taskbaropenclose")
+  const reOpenWindow = (appId) => {
+    taskBarOpenClose(appId);
   }
 
   return (
