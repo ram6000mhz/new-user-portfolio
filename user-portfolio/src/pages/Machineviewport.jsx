@@ -2,7 +2,7 @@ import { Rnd } from "react-rnd";
 import { IconComponent2 } from "../apps/IconComponent2";
 import { apps } from "../apps/Applist";
 import { useState, useEffect } from "react";
-import DesktopBg from "../assets/img/desktop-bg.webp"
+import DesktopBg from "../assets/img/rice.png"
 import { IconFun } from "../apps/IconFun";
 
 export const Machineviewport = () => {
