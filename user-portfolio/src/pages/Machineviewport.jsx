@@ -1,7 +1,7 @@
 import { Rnd } from "react-rnd";
 import { IconComponent2 } from "../apps/IconComponent2";
 import { apps } from "../apps/Applist";
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import DesktopBg from "../assets/img/rice.png"
 import { IconFun } from "../apps/IconFun";
 
@@ -15,7 +15,12 @@ export const Machineviewport = () => {
         });
     }, []);
 
+    const startPos = useRef({ x: 0, y: 0 });
+    const isDragThresholdMet = useRef(false); 
+    const DRAG_THRESHOLD = 5;
+
     const handleDragStart = (id) => {
+        console.log("Drag threshold met, setting dragging to true for appId:", id);
         setDragging(id,true);
     }
 
@@ -28,11 +33,27 @@ export const Machineviewport = () => {
             {apps.map((app, index) => {
                 return (
                     <Rnd 
-                        onDragStart={() => {
-                            handleDragStart(app.appid);
+                        onDragStart={(e,data) => {
+                            startPos.current = { x: data.x, y: data.y };
+                            isDragThresholdMet.current = false;
+                        }}
+
+                        onDrag={(e, data) => {
+                            if (isDragThresholdMet.current) return;
+                            if (isDragThresholdMet.current) return;
+                            const distance = Math.hypot(
+                                data.x - startPos.current.x, 
+                                data.y - startPos.current.y
+                            );
+                            if (distance > DRAG_THRESHOLD) {
+                                isDragThresholdMet.current = true;
+                                handleDragStart(app.appid);
+                            }
                         }}
                         
                         onDragStop={() => {
+                            if (!isDragThresholdMet.current) return;
+                            console.log("Drag stopped for appId:", app.appid);
                             handleDragStop(app.appid);
                         }}
                         onDoubleclick={() => {
