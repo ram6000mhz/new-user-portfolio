@@ -17,7 +17,10 @@ export const IconComponent2 = ({AppIcon, Title, appId, appContent}) => {
     const zIndex = ZIndexShuffler(s => s.zMap[appId] || 0);
     const { kill, toggleWindow, toggleMinimize } = IconFun.getState();
 
-    
+    const startPos = useRef({ x: 0, y: 0 });
+    const isDragThresholdMet = useRef(false); 
+    const DRAG_THRESHOLD = 2;
+
     const fullscreenPreset = {
         width: window.innerWidth,
         height: window.innerHeight,
@@ -32,80 +35,16 @@ export const IconComponent2 = ({AppIcon, Title, appId, appContent}) => {
         y: (window.innerHeight - window.innerHeight * 0.75) / 2
     };
 
-    const [rndPreset, setRndPreset] = useState(isDragging ? (fullscreenPreset) : (windowedPreset));
+    const rndPreset = isFullscreen ? fullscreenPreset : windowedPreset;
+    
+    const rndRef = useRef(null);
 
-    const animateTo = (target) => {
-        const start = rndPreset
-        const dur = 50
-        const t0 = performance.now()
-
-        const step = (now) => {
-            const k = Math.min((now - t0) / dur, 1)
-            const lerp = (a,b)=>a+(b-a)*k
-
-            setRndPreset({
-                width:  lerp(start.width,  target.width),
-                height: lerp(start.height, target.height),
-                x:      lerp(start.x,      target.x),
-                y:      lerp(start.y,      target.y)
-            })
-
-            if (k < 1) requestAnimationFrame(step)
+    useEffect(() => {
+        if (isOpen && rndRef.current) {
+            rndRef.current.updateSize({ width: rndPreset.width, height: rndPreset.height });
+            rndRef.current.updatePosition({ x: rndPreset.x, y: rndPreset.y });
         }
-        requestAnimationFrame(step)
-    }
-
-    const handleResize = () => {
-        setRndPreset((prev) => {
-            let newWidth = prev.width;
-            let newHeight = prev.height;
-            let newX = prev.x;
-            let newY = prev.y;
-
-            if (isFullscreen) {
-                newWidth = window.innerWidth;
-                newHeight = window.innerHeight;
-                newX = 0;
-                newY = 0;
-            } else {
-                newWidth = Math.min(prev.width, window.innerWidth);
-                newHeight = Math.min(prev.height, window.innerHeight);
-
-                if (newX + newWidth > window.innerWidth) {
-                    newX = Math.max(0, window.innerWidth - newWidth);
-                }
-                if (newY + newHeight > window.innerHeight) {
-                    newY = Math.max(0, window.innerHeight - newHeight);
-                }
-            }
-
-            if (
-                newWidth !== prev.width ||
-                newHeight !== prev.height ||
-                newX !== prev.x ||
-                newY !== prev.y
-            ) {
-                return {
-                    width: newWidth,
-                    height: newHeight,
-                    x: newX,
-                    y: newY
-                };
-            }
-
-            return prev;
-        });
-    };
-
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, [isFullscreen]);
-
-    useEffect(() => {
-        animateTo(isFullscreen ? (fullscreenPreset) : (windowedPreset));
-    },[isFullscreen]);
-
+    }, [isFullscreen, isOpen]);
 
     return (
         <>
@@ -120,29 +59,32 @@ export const IconComponent2 = ({AppIcon, Title, appId, appContent}) => {
                     <>
                         <Rnd
                             cancel=".deadzone"
-                            size = {{width: rndPreset.width, height: rndPreset.height}}
-                            position = {{x: rndPreset.x, y: rndPreset.y}}
+                            ref={rndRef}
+                            default={{...windowedPreset}}
                             minWidth={180}
                             minHeight={200}
                             bounds="window"
                             enableResizing={isFullscreen ? false : true}
                             disableDragging={isFullscreen ? true : false}
-                            onDragStart={() =>{
-                                console.log("Dragging started for appId:", appId);
-                                bringToFront(appId)}}
-                            onDragStop={(e, d) => {
-                                    setRndPreset(prev => ({ ...prev, x: d.x, y: d.y }));
-                                }
-                            }
-                            onResizeStop={(e, dir, ref, delta, pos) => {
-                                const next = {
-                                    width: ref.offsetWidth,
-                                    height: ref.offsetHeight,
-                                    x: pos.x,
-                                    y: pos.y
-                                };
-                                setRndPreset(next);
+                            
+                            onDragStart={(e,data) => {
+                                startPos.current = { x: data.x, y: data.y };
+                                isDragThresholdMet.current = false;
                             }}
+
+                            onDrag={(e, data) => {
+                                if (isDragThresholdMet.current) return;
+                                if (isDragThresholdMet.current) return;
+                                const distance = Math.hypot(
+                                    data.x - startPos.current.x, 
+                                    data.y - startPos.current.y
+                                );
+                                if (distance > DRAG_THRESHOLD) {
+                                    isDragThresholdMet.current = true;
+                                    bringToFront(appId);
+                                }
+                            }}
+                            className="w-full h-full"
                             style={{zIndex: zIndex}}
                         >
                             <motion.div
