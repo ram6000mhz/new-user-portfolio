@@ -40,7 +40,6 @@ export const IconFun = create((set, get) => ({
   
   open: (appId) => {
     const { addTask } = Taskman.getState()
-    console.log(`Opening app ID ${appId}`); 
     get().setAppState(appId, {
       isOpen: true,
       isFullscreen: true,
@@ -84,7 +83,6 @@ export const IconFun = create((set, get) => ({
   taskBarOpenClose: (appIndex) => {
       const { bringToFront } = ZIndexShuffler.getState()
       const state = get().appStates[appIndex];
-      console.log("bring app to front")
       if (!state) return;
       if (state.isOpen) {
           bringToFront(appIndex); 
