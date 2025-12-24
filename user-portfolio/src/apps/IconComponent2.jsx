@@ -5,7 +5,6 @@ import { Rnd } from "react-rnd";
 import { AnimatePresence, motion } from "motion/react";
 import { IconFun } from "../apps/IconFun";
 import { ZIndexShuffler } from "../providers/ZIndexShuffler";
-import { shallow } from "zustand/shallow";
 
 export const IconComponent2 = ({AppIcon, Title, appId, appContent}) => {
     console.log("IconComponent rendered");
@@ -35,8 +34,6 @@ export const IconComponent2 = ({AppIcon, Title, appId, appContent}) => {
         y: (window.innerHeight - window.innerHeight * 0.75) / 2
     };
 
-    const rndPreset = isFullscreen ? fullscreenPreset : windowedPreset;
-    
     const rndRef = useRef(null);
 
     const animateToRef = (target) => {
