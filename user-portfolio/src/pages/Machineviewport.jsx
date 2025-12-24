@@ -20,7 +20,6 @@ export const Machineviewport = () => {
     const DRAG_THRESHOLD = 5;
 
     const handleDragStart = (id) => {
-        console.log("Drag threshold met, setting dragging to true for appId:", id);
         setDragging(id,true);
     }
 
@@ -53,12 +52,9 @@ export const Machineviewport = () => {
                         
                         onDragStop={() => {
                             if (!isDragThresholdMet.current) return;
-                            console.log("Drag stopped for appId:", app.appid);
                             handleDragStop(app.appid);
                         }}
                         onDoubleclick={() => {
-                            console.log("icon clicked");
-                            console.log(app.appid);
                             open(app.appid);
                         }}
                         key={index}
