@@ -1,5 +1,5 @@
 import { Rnd } from "react-rnd";
-import { IconComponent2 } from "../apps/IconComponent2";
+import { IconComponent } from "../apps/IconComponent";
 import { apps } from "../apps/Applist";
 import { useEffect, useRef } from "react";
 import DesktopBg from "../assets/img/rice.png"
@@ -65,7 +65,7 @@ export const Machineviewport = () => {
                             y: index * 60,
                         }}
                     >
-                        <IconComponent2 AppIcon={app.icon} Title={app.title} appContent={app.content} appId={app.appid}/>
+                        <IconComponent AppIcon={app.icon} Title={app.title} appContent={app.content} appId={app.appid}/>
                     </Rnd>
             )})}
         </div>
