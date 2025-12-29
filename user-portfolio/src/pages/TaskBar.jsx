@@ -17,17 +17,17 @@ export const TaskBar = () =>{
     return (
         <>
             {activeApps.map((app, index) => (
-            <div className="flex items-center justify-center 
-            h-[35px] w-[35px] hover:bg-foreground-highlight 
-            rounded cursor-pointer" 
-            onClick={
-                ()=>reOpenWindow(app.appid)} 
-                onTouchEnd={(e)=>{
-                    e.preventDefault();
-                    reOpenWindow(app.appid);
-                }}>
-                {app.icon}
-            </div>
+                <div className="flex items-center justify-center 
+                h-[35px] w-[35px] hover:bg-foreground-highlight 
+                rounded cursor-pointer" 
+                onClick={
+                    ()=>reOpenWindow(app.appid)} 
+                    onTouchEnd={(e)=>{
+                        e.preventDefault();
+                        reOpenWindow(app.appid);
+                    }}>
+                    {app.icon}
+                </div>
             ))}
         </>
     )
