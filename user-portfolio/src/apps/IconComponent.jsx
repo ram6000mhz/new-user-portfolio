@@ -1,12 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { WindowComponent } from "./WindowComponent";
-import { createPortal } from "react-dom";
-import { Rnd } from "react-rnd";
-import { AnimatePresence, motion } from "motion/react";
-import { IconFun } from "../apps/IconFun";
-import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 import { WindowCreationLogic } from "./WindowCreationLogic";
-
+import { IconFun } from "./IconFun"
 export const IconComponent = ({AppIcon, Title, appId, appContent}) => {
     console.log("IconComponent rendered");
 
