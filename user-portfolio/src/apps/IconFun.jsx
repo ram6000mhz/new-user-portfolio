@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import {ZIndexShuffler} from '../providers/ZIndexShuffler.jsx';
 import { Taskman } from "../taskman/Taskman.jsx";
-import { add } from "three/tsl";
 
 export const IconFun = create((set, get) => ({
   appStates: {}, 
@@ -21,7 +20,7 @@ export const IconFun = create((set, get) => ({
     })),
 
   setAppState: (appId, newState) => {
-   if (!get().appStates[appId]) return; 
+  if (!get().appStates[appId]) return; 
 
     set(s => ({
       appStates: {
@@ -37,7 +36,7 @@ export const IconFun = create((set, get) => ({
   setDragging: (appId, dragging) => {
     get().setAppState(appId, { isDragging: dragging });
   },
-  
+
   open: (appId) => {
     const { addTask } = Taskman.getState()
     get().setAppState(appId, {
