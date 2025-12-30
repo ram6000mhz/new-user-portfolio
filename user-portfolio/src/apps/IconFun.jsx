@@ -15,6 +15,8 @@ export const IconFun = create((set, get) => ({
           isFullscreen: false,
           isWindowed: false,
           isMinimized: false,
+          wasFullscreen: false,
+          wasWindowed: false,
         },
       },
     })),
@@ -44,6 +46,8 @@ export const IconFun = create((set, get) => ({
       isFullscreen: true,
       isWindowed: false,
       isMinimized: false,
+      wasFullscreen: true,
+      wasWindowed: false,
     });
     addTask(appId);
   },
@@ -56,6 +60,8 @@ export const IconFun = create((set, get) => ({
       isFullscreen: false,
       isWindowed: false,
       isMinimized: false,
+      wasFullscreen: false,
+      wasWindowed: false,
     });
     terminateTask(appId);
     removeAppZmap(appId);
@@ -67,6 +73,8 @@ export const IconFun = create((set, get) => ({
       get().setAppState(appId, {
         isFullscreen: !currentState.isFullscreen,
         isWindowed: !currentState.isWindowed,
+        wasFullscreen: !currentState.wasFullscreen,
+        wasWindowed: !currentState.wasWindowed,
       });
   },
 
