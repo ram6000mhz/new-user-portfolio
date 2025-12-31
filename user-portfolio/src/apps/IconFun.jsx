@@ -17,6 +17,7 @@ export const IconFun = create((set, get) => ({
           isMinimized: false,
           wasFullscreen: false,
           wasWindowed: false,
+          wasMinimized: false,
         },
       },
     })),
@@ -46,8 +47,9 @@ export const IconFun = create((set, get) => ({
       isFullscreen: true,
       isWindowed: false,
       isMinimized: false,
-      wasFullscreen: true,
-      wasWindowed: false,
+      wasFullscreen: get().appStates[appId].isFullscreen,
+      wasWindowed: get().appStates[appId].isWindowed,
+      wasMinimized: get().appStates[appId].isMinimized
     });
     addTask(appId);
   },
@@ -71,10 +73,11 @@ export const IconFun = create((set, get) => ({
       const currentState = get().appStates[appId];
       if (!currentState) return; 
       get().setAppState(appId, {
+        wasFullscreen: currentState.isFullscreen,
+        wasWindowed: currentState.isWindowed,
+        wasMinimized: currentState.isMinimized,
         isFullscreen: !currentState.isFullscreen,
         isWindowed: !currentState.isWindowed,
-        wasFullscreen: !currentState.wasFullscreen,
-        wasWindowed: !currentState.wasWindowed,
       });
   },
 
@@ -83,7 +86,8 @@ export const IconFun = create((set, get) => ({
     if(!currentState) return;
     get().setAppState(appId, {
       isOpen: !currentState.isOpen,
-      isMinimized: !currentState.isMinimized
+      isMinimized: !currentState.isMinimized, 
+      wasMinimized: get().appStates[appId].isMinimized,
     });
   },
 
