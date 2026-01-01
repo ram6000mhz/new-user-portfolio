@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { WindowComponent } from "./WindowComponent";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, scale } from "motion/react";
 import { IconFun } from "../apps/IconFun";
 import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 
@@ -12,6 +12,11 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
     const { bringToFront } = ZIndexShuffler.getState();
     const isOpen = IconFun(s => s.appStates[appId]?.isOpen || false);
     const isFullscreen = IconFun(s => s.appStates[appId]?.isFullscreen || false);
+    const isWindowed = IconFun(s => s.appStates[appId]?.isWindowed || false);
+    const isMinimized = (s => s.appStates[appId]?.isMinimized || false);
+    const wasFullscreen = IconFun(s => s.appStates[appId]?.wasFullscreen || false);
+    const wasWindowed = IconFun(s => s.appStates[appId]?.wasWindowed || false);
+    const wasMinimized = IconFun(s => s.appStates[appId]?.wasMinimized || false);
     const zIndex = ZIndexShuffler(s => s.zMap[appId] || 0);
     const { kill, toggleWindow, toggleMinimize } = IconFun.getState();
 
@@ -20,8 +25,8 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
     const DRAG_THRESHOLD = 2;
 
     const fullscreenPreset = {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: "100vw",
+        height: "100vh",
         x: 0,
         y: 0
     };
@@ -33,51 +38,100 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
         y: (window.innerHeight - window.innerHeight * 0.75) / 2
     };
 
-    const rndRef = useRef(null);
-
-    const animateToRef = (target) => {
-        if (!rndRef.current) return;
-
-        const start = {
-            width: rndRef.current.getSelfElement().offsetWidth,
-            height: rndRef.current.getSelfElement().offsetHeight,
-            x: rndRef.current.draggable.state.x,
-            y: rndRef.current.draggable.state.y
-        };
-
-        const duration = 150;
-        const startTime = performance.now();
-
-        const step = (now) => {
-            const progress = Math.min((now - startTime) / duration, 1);
-            
-            const ease = 1 - Math.pow(1 - progress, 3); 
-
-            const lerp = (a, b) => a + (b - a) * ease;
-
-            rndRef.current.updateSize({
-                width: lerp(start.width, target.width),
-                height: lerp(start.height, target.height)
-            });
-            rndRef.current.updatePosition({
-                x: lerp(start.x, target.x),
-                y: lerp(start.y, target.y)
-            });
-
-            if (progress < 1) {
-                requestAnimationFrame(step);
-            }
-        };
-        requestAnimationFrame(step);
+    const transitions = {
+        'none_fullscreen': { initial: { scale: 0.1, opacity: 0 }, animate: { scale: 1, opacity: 1 } },
+        'fullscreen_windowed': { initial: { scale: 1.2, opacity: 1 }, animate: { scale: 1, opacity: 1 } },
+        'windowed_fullscreen': { initial: { scale: 0.8, opacity: 1 }, animate: { scale: 1, opacity: 1 } },
+        'windowed_minimized': { initial: { scale: 1, opacity: 1 }, animate: { scale: 0.8, opacity: 0 } },
+        'fullscreen_minimized': { initial: { scale: 1, opacity: 1 }, animate: { scale: 0, opacity: 0 } },
     };
 
+    const rndRef = useRef(null);
+
+    // const animateToRef = (target) => {
+    //     if (!rndRef.current) return;
+
+    //     const start = {
+    //         width: rndRef.current.getSelfElement().offsetWidth,
+    //         height: rndRef.current.getSelfElement().offsetHeight,
+    //         x: rndRef.current.draggable.state.x,
+    //         y: rndRef.current.draggable.state.y
+    //     };
+
+    //     const duration = 150;
+    //     const startTime = performance.now();
+
+    //     const step = (now) => {
+    //         const progress = Math.min((now - startTime) / duration, 1);
+            
+    //         const ease = 1 - Math.pow(1 - progress, 3); 
+
+    //         const lerp = (a, b) => a + (b - a) * ease;
+
+    //         rndRef.current.updateSize({
+    //             width: lerp(start.width, target.width),
+    //             height: lerp(start.height, target.height)
+    //         });
+    //         rndRef.current.updatePosition({
+    //             x: lerp(start.x, target.x),
+    //             y: lerp(start.y, target.y)
+    //         });
+
+    //         if (progress < 1) {
+    //             requestAnimationFrame(step);
+    //         }
+    //     };
+    //     requestAnimationFrame(step);
+    // };
+
+    const getWindowMotion = () => {
+        const prevState = wasFullscreen ? 'fullscreen' : wasWindowed ? 'windowed' : wasMinimized ? 'minimized' : 'none';
+        const currState = isFullscreen ? 'fullscreen' : isWindowed ? 'windowed' : isMinimized ? 'minimized' : 'none';
+        if (wasMinimized) {
+            return { initial: { scale: 0, opacity: 0 }, animate: { scale: 1, opacity: 1 } };
+        }
+
+        return transitions[`${prevState}_${currState}`] || { initial: { scale: 1, opacity: 1 }, animate: { scale: 1, opacity: 1 } };
+    };
+
+    const { initial, animate } = getWindowMotion();
+
+    // useEffect(()=>{
+    //     console.log("last state was fullscreen: ",wasFullscreen);
+    //     console.log("last state was windowed: ",wasWindowed)
+    //     console.log("last state was minimized: ",wasMinimized)
+    // })
+
+    // useEffect(() => {
+    //     if (isOpen) {
+    //         animateToRef(isFullscreen ? fullscreenPreset : windowedPreset);
+    //     }
+    // }, [isFullscreen, isOpen]);
 
     useEffect(() => {
         if (isOpen) {
-            animateToRef(isFullscreen ? fullscreenPreset : windowedPreset);
+            if (isFullscreen) {
+                rndRef.current.updateSize({ 
+                width: fullscreenPreset.width, 
+                height: fullscreenPreset.height 
+                });
+                rndRef.current.updatePosition({ 
+                x: fullscreenPreset.x, 
+                y: fullscreenPreset.y 
+                });
+            } else {
+                rndRef.current.updateSize({ 
+                width: windowedPreset.width, 
+                height: windowedPreset.height 
+                });
+                rndRef.current.updatePosition({ 
+                x: windowedPreset.x, 
+                y: windowedPreset.y 
+                });
+            }
         }
     }, [isFullscreen, isOpen]);
-
+            
     return(
         <AnimatePresence>
             {isOpen && createPortal(
@@ -85,7 +139,7 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
                     <Rnd
                         cancel=".deadzone"
                         ref={rndRef}
-                        default={{...windowedPreset}}
+                        default={isFullscreen ? fullscreenPreset : windowedPreset}
                         minWidth={180}
                         minHeight={200}
                         bounds="window"
@@ -113,12 +167,13 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
                         style={{zIndex: zIndex}}
                     >
                         <motion.div
-                            initial={
-                                { opacity: 0, scale: 0.8}
+                            key={isFullscreen ? 'fs' : isWindowed ? 'wd' : 'min'}
+                            initial={initial}
+                            animate={animate}
+                            exit={
+                                {scale:0, opacity:0}
                             }
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0}}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.1 }}
                             className={`w-full h-full overflow-hidden bg-background border-2 
                             border-muted-border flex items-center justify-center
                             ${isFullscreen ? 'rounded-none' : 'rounded-xl'}
