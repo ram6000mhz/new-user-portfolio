@@ -48,42 +48,6 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
 
     const rndRef = useRef(null);
 
-    // const animateToRef = (target) => {
-    //     if (!rndRef.current) return;
-
-    //     const start = {
-    //         width: rndRef.current.getSelfElement().offsetWidth,
-    //         height: rndRef.current.getSelfElement().offsetHeight,
-    //         x: rndRef.current.draggable.state.x,
-    //         y: rndRef.current.draggable.state.y
-    //     };
-
-    //     const duration = 150;
-    //     const startTime = performance.now();
-
-    //     const step = (now) => {
-    //         const progress = Math.min((now - startTime) / duration, 1);
-            
-    //         const ease = 1 - Math.pow(1 - progress, 3); 
-
-    //         const lerp = (a, b) => a + (b - a) * ease;
-
-    //         rndRef.current.updateSize({
-    //             width: lerp(start.width, target.width),
-    //             height: lerp(start.height, target.height)
-    //         });
-    //         rndRef.current.updatePosition({
-    //             x: lerp(start.x, target.x),
-    //             y: lerp(start.y, target.y)
-    //         });
-
-    //         if (progress < 1) {
-    //             requestAnimationFrame(step);
-    //         }
-    //     };
-    //     requestAnimationFrame(step);
-    // };
-
     const getWindowMotion = () => {
         const prevState = wasFullscreen ? 'fullscreen' : wasWindowed ? 'windowed' : wasMinimized ? 'minimized' : 'none';
         const currState = isFullscreen ? 'fullscreen' : isWindowed ? 'windowed' : isMinimized ? 'minimized' : 'none';
@@ -95,18 +59,6 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
     };
 
     const { initial, animate } = getWindowMotion();
-
-    // useEffect(()=>{
-    //     console.log("last state was fullscreen: ",wasFullscreen);
-    //     console.log("last state was windowed: ",wasWindowed)
-    //     console.log("last state was minimized: ",wasMinimized)
-    // })
-
-    // useEffect(() => {
-    //     if (isOpen) {
-    //         animateToRef(isFullscreen ? fullscreenPreset : windowedPreset);
-    //     }
-    // }, [isFullscreen, isOpen]);
 
     useEffect(() => {
         if (isOpen) {
