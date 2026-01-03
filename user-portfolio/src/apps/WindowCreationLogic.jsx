@@ -6,7 +6,6 @@ import { AnimatePresence, motion, scale } from "motion/react";
 import { IconFun } from "../apps/IconFun";
 import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 
-
 export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
     console.log("render window creation logic")
     const { bringToFront } = ZIndexShuffler.getState();
@@ -17,7 +16,7 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
     const wasFullscreen = IconFun(s => s.appStates[appId]?.wasFullscreen || false);
     const wasWindowed = IconFun(s => s.appStates[appId]?.wasWindowed || false);
     const wasMinimized = IconFun(s => s.appStates[appId]?.wasMinimized || false);
-    const zIndex = ZIndexShuffler(s => s.zMap[appId] || 0);
+    const zIndex = ZIndexShuffler(state => state.zMap[appId]);
     const { kill, toggleWindow, toggleMinimize } = IconFun.getState();
 
     const startPos = useRef({ x: 0, y: 0 });
