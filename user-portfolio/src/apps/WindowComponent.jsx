@@ -3,7 +3,7 @@ import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 
 export const WindowComponent=({title, isFullscreen, terminationcallback, windowcallback, minimizecallback, appIndex, content})=>{
     console.log("WindowComponent rendered",title);
-    const {bringToFront} = ZIndexShuffler(s => s.bringToFront);
+    const { bringToFront } = ZIndexShuffler.getState();
 
     const Terminate=()=>{
         terminationcallback();
