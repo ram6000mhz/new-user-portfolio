@@ -1,33 +1,25 @@
 import {create}  from 'zustand';
 
-export const ZIndexShuffler = create(( set, get ) => ({
-    zMap: {dummyobject: 0 },
-    bringToFront: ((appId) => {
-        set((state) => {
-            const entries = Object.entries(state.zMap);
-            const max = entries.length - 1;
-            const targetZ = state.zMap[appId];
+export const ZIndexShuffler = create((set) => ({
+    zMap: {},
+    maxZ: 0,
+    
+    bringToFront: (appId) => set((state) => {
+        if (state.zMap[appId] === state.maxZ && state.maxZ !== 0) return state;
 
-            if (targetZ === max) return state;
-
-            const newMap = {};
-            for (const [k, v] of entries) {
-                newMap[k] = v > targetZ ? v - 1 : v;
+        const nextZ = state.maxZ + 1;
+        return {
+            maxZ: nextZ,
+            zMap: { 
+                ...state.zMap, 
+                [appId]: nextZ 
             }
-            newMap[appId] = max;
-            return { zMap: newMap };
-        })
+        };
     }),
 
-    removeAppZmap: (appId) =>
-        set((state) => {
-        const { [appId]: removedZ, ...remainingMap } = state.zMap;
-        if (removedZ === undefined) return state;
-
-        const newMap = {};
-        for (const [k, v] of Object.entries(remainingMap)) {
-            newMap[k] = v > removedZ ? v - 1 : v;
-        }
+    removeAppZmap: (appId) => set((state) => {
+        const newMap = { ...state.zMap };
+        delete newMap[appId];
         return { zMap: newMap };
-        }),
-}))
+    }),
+}));
