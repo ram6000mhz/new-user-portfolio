@@ -1,7 +1,7 @@
 import { Minus,X, Square, PictureInPicture2} from "lucide-react";
 import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 
-export const WindowComponent=({title, isFullscreen, terminationcallback, windowcallback, minimizecallback, appIndex, content})=>{
+export const WindowComponent=({title, isFullscreen, terminationcallback, windowcallback, minimizecallback, appId, content})=>{
     console.log("WindowComponent rendered",title);
     const { bringToFront } = ZIndexShuffler.getState();
 
@@ -34,7 +34,7 @@ export const WindowComponent=({title, isFullscreen, terminationcallback, windowc
                     <X className="!h-[15px] !w-[15px] text-accent-icon"/>
                 </div>
             </div>
-            <div className="deadzone w-full h-full" onClick={()=>{bringToFront(appIndex)}} onTouchEnd={(e)=>{e.preventDefault();bringToFront(appIndex);}}>
+            <div className="deadzone w-full h-full" onClick={()=>{bringToFront(appId)}} onTouchEnd={(e)=>{e.preventDefault();bringToFront(appId);}}>
                 {content}
             </div>
         </div>
