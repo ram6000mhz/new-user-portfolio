@@ -6,21 +6,14 @@ import MathSolve from "../assets/data/mathsolve.webp"
 import Tipai from "../assets/data/tipai.webp"
 import { Rubric } from "../projects3d/Rubric";
 
+import { Aboutme } from "./appcontent/Aboutme";
+
 export const apps = [
     { 
         appid: 0,
         icon: <User className="!h-[25px] !w-[25px] text-accent-icon"/>, 
         title: "About Me" ,
-        content: 
-        <div className="flex flex-col items-center w-full h-full bg-white relative p-10 @container">
-            <img
-                src={Me}
-                className="!h-[100px] !w-[100px] @sm:!h-[150px] @sm:!w-[150px] rounded-full border-4 border-muted-border"
-            />
-            <h1>
-                Hello I am, Ethan I am a software developer in the philippines.
-            </h1>
-        </div>
+        content: <Aboutme/>
     },
     { 
         appid: 1,
