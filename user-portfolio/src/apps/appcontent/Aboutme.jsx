@@ -16,7 +16,13 @@ export const Aboutme = ()=>{
             <div className="grid grid-cols-2 w-full">
                 <div className="flex flex-col items-start justify-center border-muted-border">
                     <h2 className="font-semibold text-md py-2 text-muted-text">Contact</h2>
-                    <div className="flex flex-col">
+                    <div className="flex flex-row justify-items-center gap-3">
+                        <div className="flex flex-row gap-2">
+                            <Mail className="!w-[35px] !h-[35px] text-black"/>
+                            <h4 className="font-sm text-sm text-muted-text">
+                                esyworkpro@gmail.com
+                            </h4>
+                        </div>
                         <div className="flex flex-row gap-2">
                             <Github className="!w-[35px] !h-[35px] text-black"/>
                             <h4 className="font-sm text-sm text-muted-text">
@@ -29,17 +35,6 @@ export const Aboutme = ()=>{
                                 LinkdIn
                             </h4>
                         </div>
-                    </div>
-                </div>
-                <div className="flex flex-col items-start justify-center">
-                    <h3 className="font-semibold text-md py-2 text-muted-text">Socials</h3>
-                    <div className="flex flex-col">
-                        <h4 className="font-sm text-sm text-muted-text">
-                            Github
-                        </h4>
-                        <h4 className="font-sm text-sm text-muted-text">
-                            LinkdIn
-                        </h4>
                     </div>
                 </div>
             </div>
