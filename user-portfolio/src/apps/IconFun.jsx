@@ -42,6 +42,7 @@ export const IconFun = create((set, get) => ({
 
   open: (appId) => {
     const { addTask } = Taskman.getState()
+    const { bringToFront } = ZIndexShuffler.getState()
     get().setAppState(appId, {
       isOpen: true,
       isFullscreen: true,
@@ -52,6 +53,7 @@ export const IconFun = create((set, get) => ({
       wasMinimized: get().appStates[appId].isMinimized
     });
     addTask(appId);
+    bringToFront(appId);
   },
 
   kill: (appId) => {
