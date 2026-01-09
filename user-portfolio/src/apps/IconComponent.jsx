@@ -1,6 +1,6 @@
 import { WindowCreationLogic } from "./WindowCreationLogic";
 import { IconFun } from "./IconFun"
-export const IconComponent = ({AppIcon, Title, appId, appContent}) => {
+export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) => {
     console.log("IconComponent rendered");
 
     const isDragging = IconFun(s => s.appStates[appId]?.isDragging || false);
@@ -18,6 +18,7 @@ export const IconComponent = ({AppIcon, Title, appId, appContent}) => {
                 Title={Title}
                 appId={appId}
                 appContent={appContent}
+                viewportRef={viewportRef}
             />
         </>
     )
