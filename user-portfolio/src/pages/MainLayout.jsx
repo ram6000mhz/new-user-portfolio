@@ -19,7 +19,7 @@ export const MainLayout = ({children}) => {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <main className="flex-1 overflow-auto">
+      <main className="grow">
         {children}
       </main>
       <footer className="w-full h-[50px] flex flex-row items-center border-t-2 border-muted-border p-2 sm:p-2 md:p-4 lg:p-6 bg-foreground z-50">
