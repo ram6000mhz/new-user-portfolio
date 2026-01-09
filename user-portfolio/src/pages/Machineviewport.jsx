@@ -7,6 +7,7 @@ import { IconFun } from "../apps/IconFun";
 
 export const Machineviewport = () => {
     console.log("Machineviewport rendered");
+    const viewportRef = useRef(null);
 
     const {setDragging, initializeApp, open} = IconFun.getState();
     useEffect(() => {
@@ -28,7 +29,9 @@ export const Machineviewport = () => {
     }
 
     return (
-        <div className="w-full h-full bg-cover bg-center flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
+        <div 
+            ref={viewportRef}
+            className="w-full h-full bg-cover bg-center flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
             {apps.map((app, index) => {
                 return (
                     <Rnd 
@@ -65,7 +68,7 @@ export const Machineviewport = () => {
                             y: index * 60,
                         }}
                     >
-                        <IconComponent AppIcon={app.icon} Title={app.title} appContent={app.content} appId={app.appid}/>
+                        <IconComponent AppIcon={app.icon} Title={app.title} appContent={app.content} appId={app.appid} viewportRef={viewportRef}/>
                     </Rnd>
             )})}
         </div>
