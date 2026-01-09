@@ -6,7 +6,7 @@ import { AnimatePresence, motion, scale } from "motion/react";
 import { IconFun } from "../apps/IconFun";
 import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 
-export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
+export const WindowCreationLogic = ({AppIcon, Title, appId, appContent, viewportRef}) =>{
     console.log("render window creation logic")
     const { bringToFront } = ZIndexShuffler.getState();
     const isOpen = IconFun(s => s.appStates[appId]?.isOpen || false);
@@ -23,19 +23,28 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
     const isDragThresholdMet = useRef(false); 
     const DRAG_THRESHOLD = 2;
 
+    // const getBoundsRect = () => {
+    //     if (viewportRef.current) {
+    //         return viewportRef.current.getBoundingClientRect();
+    //     }
+    //     return { width: window.innerWidth, height: window.innerHeight, left: 0, top: 0 };
+    // };
+
+    // const bounds = getBoundsRect();
+
     const fullscreenPreset = {
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        height: "100%",
         x: 0,
         y: 0
     };
 
-    const windowedPreset = {
+     const windowedPreset = {
         width: window.innerWidth * 0.85,
         height: window.innerHeight * 0.75,
         x: (window.innerWidth - window.innerWidth * 0.85) / 2,
         y: (window.innerHeight - window.innerHeight * 0.75) / 2
-    };
+    }; 
 
     const transitions = {
         'none_fullscreen': { initial: { scale: 0.1, opacity: 0 }, animate: { scale: 1, opacity: 1 } },
@@ -82,6 +91,23 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
             }
         }
     }, [isFullscreen, isOpen]);
+
+    // useEffect(() => {
+    //     if (!viewportRef.current || !isOpen) return;
+    //     const resizeObserver = new ResizeObserver((entries) => {
+    //         for (let entry of entries) {
+    //             const { width, height } = entry.contentRect;
+
+    //             if (isFullscreen && rndRef.current) {
+    //                 rndRef.current.updateSize({ width, height });
+    //                 rndRef.current.updatePosition({ x: 0, y: 0 });
+    //             }
+    //         }
+    //     });
+
+    //     resizeObserver.observe(viewportRef.current);
+    //     return () => resizeObserver.disconnect();
+    // }, [isOpen, isFullscreen]);
             
     return(
         <AnimatePresence>
@@ -93,7 +119,7 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
                         default={isFullscreen ? fullscreenPreset : windowedPreset}
                         minWidth={180}
                         minHeight={200}
-                        bounds="window"
+                        bounds="parent"
                         enableResizing={isFullscreen ? false : true}
                         disableDragging={isFullscreen ? true : false}
                         
@@ -148,7 +174,7 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent}) =>{
                         </motion.div>
                     </Rnd>
                 </>,
-                document.body
+                viewportRef.current
             )}
         </AnimatePresence>
     )
