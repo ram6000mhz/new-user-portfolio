@@ -23,15 +23,6 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent, viewport
     const isDragThresholdMet = useRef(false); 
     const DRAG_THRESHOLD = 2;
 
-    // const getBoundsRect = () => {
-    //     if (viewportRef.current) {
-    //         return viewportRef.current.getBoundingClientRect();
-    //     }
-    //     return { width: window.innerWidth, height: window.innerHeight, left: 0, top: 0 };
-    // };
-
-    // const bounds = getBoundsRect();
-
     const fullscreenPreset = {
         width: "100%",
         height: "100%",
@@ -91,23 +82,6 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent, viewport
             }
         }
     }, [isFullscreen, isOpen]);
-
-    // useEffect(() => {
-    //     if (!viewportRef.current || !isOpen) return;
-    //     const resizeObserver = new ResizeObserver((entries) => {
-    //         for (let entry of entries) {
-    //             const { width, height } = entry.contentRect;
-
-    //             if (isFullscreen && rndRef.current) {
-    //                 rndRef.current.updateSize({ width, height });
-    //                 rndRef.current.updatePosition({ x: 0, y: 0 });
-    //             }
-    //         }
-    //     });
-
-    //     resizeObserver.observe(viewportRef.current);
-    //     return () => resizeObserver.disconnect();
-    // }, [isOpen, isFullscreen]);
             
     return(
         <AnimatePresence>
