@@ -30,7 +30,7 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent, viewport
         y: 0
     };
 
-     const windowedPreset = {
+    const windowedPreset = {
         width: window.innerWidth * 0.85,
         height: window.innerHeight * 0.75,
         x: (window.innerWidth - window.innerWidth * 0.85) / 2,
@@ -58,6 +58,35 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent, viewport
     };
 
     const { initial, animate } = getWindowMotion();
+
+    const animateToRef = (target) => {
+        if (!rndRef.current) return;
+        const start = {
+            width: rndRef.current.getSelfElement().offsetWidth,
+            height: rndRef.current.getSelfElement().offsetHeight,
+            x: rndRef.current.draggable.state.x,
+            y: rndRef.current.draggable.state.y
+        };
+        const duration = 150;
+        const startTime = performance.now();
+        const step = (now) => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3); 
+            const lerp = (a, b) => a + (b - a) * ease;
+            rndRef.current.updateSize({
+                width: lerp(start.width, target.width),
+                height: lerp(start.height, target.height)
+            });
+            rndRef.current.updatePosition({
+                x: lerp(start.x, target.x),
+                y: lerp(start.y, target.y)
+            });
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            }
+        };
+        requestAnimationFrame(step);
+    };
 
     useEffect(() => {
         if (isOpen) {
