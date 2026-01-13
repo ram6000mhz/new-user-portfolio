@@ -87,13 +87,14 @@ export const Aboutme = ()=>{
                             return langKeys.map(name => (
                                 <div 
                                     key={`${name}-${currentRow}`}
-                                    className={`h-6 w-full ${langs[name].rating >= currentRow ? 'bg-blue-500' : 'bg-gray-200'}`}
+                                    className={`h-6 w-full rounded-md ${langs[name].rating >= currentRow ? 'bg-blue-500' : 'bg-gray-200'}`}
                                 />
                             ));
                         })}
                     </div>
                 </div>
             </div>
+            <div className="w-full h-px bg-muted-text my-5" />
         </div>         
     )
 }
