@@ -1,19 +1,24 @@
 import {Power, Linkedin, Mail, Github, MapPin} from "lucide-react";
 
 export const Aboutme = ()=>{
-    const lang = ["JS", "Py", "Rust", "Go", "C++", "Java", "Swift", "TS", "PHP", "Ruby"];  
-
+    
     const langs = {
-        "JS": { rating: 1 },
-        "Flutter": { rating: 1 },
-        "Python": { rating: 9 },
-        "Rust": { rating: 4 },
-        "Go": { rating: 7 },
-        "C++": { rating: 10 },
-        "Java": { rating: 3 },
-        "Swift": { rating: 6 },
-        "TS": { rating: 8 },
-        "PHP": { rating: 2 }
+        "PHP": { rating: 2 },
+        "MongoDB": { rating: 3 },
+        "Express": { rating: 4 },
+        "JavaScript": { rating: 5 },
+        "CSS": { rating: 6 },
+        "Python": { rating: 6 },
+        "Java": { rating: 7 },
+        "Flutter": { rating: 7 },
+        "HTML": { rating: 7 },
+        "React": { rating: 7 },
+        "Tailwind CSS": { rating: 6 },
+        "Firebase": { rating: 5 },
+        "PostgreSQL": { rating: 4 },
+        "MySQL": { rating: 3 },
+        "Laravel": { rating: 2 },
+        "Oracle Database": { rating: 1 }
     };
 
     const langKeys = Object.keys(langs)
@@ -29,7 +34,6 @@ export const Aboutme = ()=>{
             <h3 className="font-extralight text-md">
                 I enjoy building interesting projects.
             </h3>
-            <div className="w-full h-px bg-muted-text my-5" />
             <div className="w-full">
                 <div className="flex flex-row items-center justify-center w-full gap-5 px-3">
                     <div className="flex flex-col gap-1">
@@ -70,13 +74,12 @@ export const Aboutme = ()=>{
                     </div>
                 </div>
             </div>
-            <div className="w-full h-px bg-muted-text my-5" />
             <div className="w-full flex flex-col items-start">
                 <h2 className="font-semibold text-xl text-muted-text">
                     Skills
                 </h2>
                 <div className="flex bg-red items-center w-full justify-center">
-                    <div className="grid grid-cols-10 grid-rows-[auto_repeat(10,minmax(0,1fr))] gap-1">
+                    <div className="grid grid-cols-16 grid-rows-[auto_repeat(10,minmax(0,1fr))] gap-1">
                         {langKeys.map(name => (
                             <div key={name} className="text-center font-bold text-xs">{name}</div>
                         ))}
@@ -94,7 +97,6 @@ export const Aboutme = ()=>{
                     </div>
                 </div>
             </div>
-            <div className="w-full h-px bg-muted-text my-5" />
         </div>         
     )
 }
