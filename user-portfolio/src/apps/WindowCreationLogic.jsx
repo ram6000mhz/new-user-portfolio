@@ -123,9 +123,9 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent, viewport
                         minWidth={180}
                         minHeight={200}
                         bounds="parent"
+                        dragHandleClassName="window-header"
                         enableResizing={isFullscreen ? false : true}
                         disableDragging={isFullscreen ? true : false}
-                        
                         onDragStart={(e,data) => {
                             startPos.current = { x: data.x, y: data.y };
                             isDragThresholdMet.current = false;
