@@ -19,7 +19,8 @@ export const WindowComponent=({title, isFullscreen, terminationcallback, windowc
 
     return(
         <div className="w-full h-full bg-background flex flex-col">
-            <div className="flex flex-row items-center justify-center bg-foreground border-b-2 border-muted-border w-full h-[40px] p-2 gap-1 @container">
+            <div className="window-header flex flex-row items-center justify-center bg-foreground 
+                border-b-2 border-muted-border w-full h-[40px] p-2 gap-1 @container cursor-move">
                 <h1 className="text-[10px] @sm:text-xs @md:text-sm @lg:text-base @xl:text-lg text-accent-text">   
                     {title}
                 </h1>
