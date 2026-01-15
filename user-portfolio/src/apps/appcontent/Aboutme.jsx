@@ -24,79 +24,89 @@ export const Aboutme = ()=>{
     const langKeys = Object.keys(langs)
 
     return(
-        <div className="flex flex-col items-start w-full h-full bg-white relative px-80 pt-5 @container gap-3 overflow-y-auto">
-            <h1 className="font-bold text-5xl">
-                Ethan Sancho Yap
-            </h1>
-            <h2 className="font-semibold text-xl text-muted-text">
-                Software developer
-            </h2>
-            <h3 className="font-extralight text-md">
-                I enjoy building interesting projects.
-            </h3>
-            <div className="w-full">
-                <div className="flex flex-row items-center justify-center w-full gap-5 px-3">
-                    <div className="flex flex-col gap-1">
-                        <h2 className="font-semibold text-sm text-muted-text">Email</h2>
-                        <div className="flex flex-row gap-1 justify-center items-center">
-                            <Mail className="!w-[35px] !h-[35px] text-black"/>
-                            <h4 className="font-sm text-sm text-black">
-                                esyworkpro@gmail.com
-                            </h4>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <h2 className="font-semibold text-sm text-muted-text">Github</h2>
-                        <div className="flex flex-row gap-1 justify-center items-center">
-                            <Github className="!w-[35px] !h-[35px] text-black"/>
-                            <h4 className="font-sm text-sm text-black">
-                                github.com/ram6000mhz
-                            </h4>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <h2 className="font-semibold text-sm text-muted-text">LinkedIn</h2>
-                        <div className="flex flex-row gap-1 justify-center items-center">
-                            <Linkedin className="!w-[35px] !h-[35px] text-black"/>
-                            <h4 className="font-sm text-sm text-black">
-                                linkedin.com/in/ethan-sancho-yap-2439a2297/
-                            </h4>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-1">
-                        <h2 className="font-semibold text-sm text-muted-text">Location</h2>
-                        <div className="flex flex-row gap-1 justify-center items-center">
-                            <MapPin className="!w-[35px] !h-[35px] text-black"/>
-                            <h4 className="font-sm text-sm text-black">
-                                Philippines
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="w-full flex flex-col items-start">
+        <div className="flex w-full h-full flex-row @container overflow-y-auto bg-white">
+            <div class="w-[10%] h-full"/>
+            <div className="flex-1 flex-col items-start h-full relative px-5 pt-5 gap-3">
+                <h1 className="font-bold text-5xl">
+                    Ethan Sancho Yap
+                </h1>
                 <h2 className="font-semibold text-xl text-muted-text">
-                    Skills
+                    Software developer
                 </h2>
-                <div className="flex bg-red items-center w-full justify-center">
-                    <div className="grid grid-cols-16 grid-rows-[auto_repeat(10,minmax(0,1fr))] gap-1">
-                        {langKeys.map(name => (
-                            <div key={name} className="text-center font-bold text-xs">{name}</div>
-                        ))}
-
-                        {Array.from({ length: 10 }, (_, i) => {
-                            const currentRow = i + 1; 
-                            
-                            return langKeys.map(name => (
-                                <div 
-                                    key={`${name}-${currentRow}`}
-                                    className={`h-6 w-full rounded-md ${langs[name].rating >= currentRow ? 'bg-blue-500' : 'bg-gray-200'}`}
-                                />
-                            ));
-                        })}
+                <h3 className="font-extralight text-md">
+                    I enjoy building interesting projects.
+                </h3>
+                <div className="w-full">
+                    <div className="flex flex-row items-center justify-center w-full gap-5 px-3">
+                        <div className="flex flex-col gap-1">
+                            <h2 className="font-semibold text-sm text-muted-text">Email</h2>
+                            <div className="flex flex-row gap-1 justify-center items-center">
+                                <Mail className="!w-[35px] !h-[35px] text-black"/>
+                                <h4 className="font-sm text-sm text-black">
+                                    esyworkpro@gmail.com
+                                </h4>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <h2 className="font-semibold text-sm text-muted-text">Github</h2>
+                            <div className="flex flex-row gap-1 justify-center items-center">
+                                <Github className="!w-[35px] !h-[35px] text-black"/>
+                                <h4 className="font-sm text-sm text-black">
+                                    github.com/ram6000mhz
+                                </h4>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <h2 className="font-semibold text-sm text-muted-text">LinkedIn</h2>
+                            <div className="flex flex-row gap-1 justify-center items-center">
+                                <Linkedin className="!w-[35px] !h-[35px] text-black"/>
+                                    <a 
+                                        href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                    >
+                                    <h4 className="font-sm text-sm text-black">
+                                        linkedin.com/in/ethan-sancho-yap
+                                    </h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <h2 className="font-semibold text-sm text-muted-text">Location</h2>
+                            <div className="flex flex-row gap-1 justify-center items-center">
+                                <MapPin className="!w-[35px] !h-[35px] text-black"/>
+                                <h4 className="font-sm text-sm text-black">
+                                    Philippines
+                                </h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>         
+                <div className="w-full flex flex-col items-start">
+                    <h2 className="font-semibold text-xl text-muted-text">
+                        Skills https://thetshaped.dev/p/the-t-shaped-software-developer
+                    </h2>
+                    <div className="flex bg-red items-center w-full justify-center">
+                        <div className="grid grid-cols-16 grid-rows-[auto_repeat(10,minmax(0,1fr))] gap-1">
+                            {langKeys.map(name => (
+                                <div key={name} className="text-center font-semibold text-[1px] @sm:text-xs px-1">{name}</div>
+                            ))}
+
+                            {Array.from({ length: 10 }, (_, i) => {
+                                const currentRow = i + 1; 
+                                
+                                return langKeys.map(name => (
+                                    <div 
+                                        key={`${name}-${currentRow}`}
+                                        className={`h-6 w-full rounded-md ${langs[name].rating >= currentRow ? 'bg-blue-500' : 'bg-gray-200'}`}
+                                    />
+                                ));
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="w-[10%] h-full"/>
+        </div> 
     )
 }
