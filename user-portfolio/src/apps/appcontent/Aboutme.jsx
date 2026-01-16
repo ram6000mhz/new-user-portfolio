@@ -60,11 +60,11 @@ export const Aboutme = ()=>{
                             <h2 className="font-semibold text-sm text-muted-text">LinkedIn</h2>
                             <div className="flex flex-row gap-1 justify-center items-center">
                                 <Linkedin className="!w-[35px] !h-[35px] text-black"/>
-                                    <a 
-                                        href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                    >
+                                <a 
+                                    href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                >
                                     <h4 className="font-sm text-sm text-black">
                                         linkedin.com/in/ethan-sancho-yap
                                     </h4>
@@ -75,7 +75,7 @@ export const Aboutme = ()=>{
                             <h2 className="font-semibold text-sm text-muted-text">Location</h2>
                             <div className="flex flex-row gap-1 justify-center items-center">
                                 <MapPin className="!w-[35px] !h-[35px] text-black"/>
-                                <h4 className="font-sm text-sm text-black">
+                                <h4 className="font-sm text-sm text-black"> 
                                     Philippines
                                 </h4>
                             </div>
@@ -84,8 +84,20 @@ export const Aboutme = ()=>{
                 </div>
                 <div className="w-full flex flex-col items-start">
                     <h2 className="font-semibold text-xl text-muted-text">
-                        Skills https://thetshaped.dev/p/the-t-shaped-software-developer
+                        Skills
                     </h2>
+                    <h3 className="font-extralight text-md">
+                        This chart is based on the article {' '}
+                        <a 
+                            href="https://thetshaped.dev/p/the-t-shaped-software-developer"
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                        >
+                            <span className="font-semibold text-md underline"> 
+                                the t-shaped developer.
+                            </span>
+                        </a>
+                    </h3>
                     <div className="flex bg-red items-center w-full justify-center">
                         <div className="grid grid-cols-16 grid-rows-[auto_repeat(10,minmax(0,1fr))] gap-1">
                             {langKeys.map(name => (
