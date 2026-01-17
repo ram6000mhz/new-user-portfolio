@@ -24,7 +24,7 @@ export const Aboutme = ()=>{
     const langKeys = Object.keys(langs)
 
     return(
-        <div className="flex w-full h-full flex-row @container overflow-y-auto bg-white">
+        <div className="flex w-full h-full flex-row @container overflow-y-auto bg-white no-scrollbar">
             <div class="w-[10%] h-full"/>
             <div className="flex-1 flex-col items-start h-full relative px-5 pt-5 gap-3">
                 <h1 className="font-bold text-5xl">
@@ -37,7 +37,7 @@ export const Aboutme = ()=>{
                     I enjoy building interesting projects.
                 </h3>
                 <div className="w-full">
-                    <div className="flex flex-row items-center justify-center w-full gap-5 px-3">
+                    <div className="flex flex-col items-start @md:flex-row @md:items-center w-full gap-5 px-3">
                         <div className="flex flex-col gap-1">
                             <h2 className="font-semibold text-sm text-muted-text">Email</h2>
                             <div className="flex flex-row gap-1 justify-center items-center">
