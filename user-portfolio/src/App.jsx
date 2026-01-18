@@ -4,9 +4,7 @@ import { Machineviewport } from './pages/Machineviewport';
 
 function HomePage() {
   return (
-    <MainLayout>
-      <Machineviewport/>
-    </MainLayout>
+    <MainLayout/>
   );
 }
 
