@@ -2,6 +2,8 @@ import { Monitor } from "lucide-react";
 import { useState } from "react";
 import {StartComponent} from "../components/StartComponent"
 import { TaskBar } from "./TaskBar";
+import { Machineviewport } from './Machineviewport';
+import { ViewHandler } from "../providers/ViewHandler";
 // text-xs sm:text-sm md:text-base lg:text-lg
 export const MainLayout = ({children}) => {
   console.log("MainLayout rendered");
@@ -20,7 +22,7 @@ export const MainLayout = ({children}) => {
   return (
     <div className="w-full h-full flex flex-col">
       <main className="grow">
-        {children}
+        <Machineviewport/>
       </main>
       <footer className="w-full h-[50px] flex flex-row items-center border-t-2 border-muted-border p-2 sm:p-2 md:p-4 lg:p-6 bg-foreground z-50">
         <div className="relative">
