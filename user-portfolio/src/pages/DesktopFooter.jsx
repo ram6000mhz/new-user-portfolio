@@ -2,6 +2,7 @@ import { ViewHandler } from "../providers/ViewHandler";
 import {BuildStartWindow} from "./BuildStartWindow"
 import {TaskBar} from "./Taskbar"
 export const DesktopFooter = () => {
+    console.log("renderdesktopfooter")
     const hr_mode = ViewHandler((state) => state.hr_Mode);
     
     const now = new Date().toLocaleString([], {
