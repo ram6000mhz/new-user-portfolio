@@ -1,9 +1,11 @@
 import { WindowCreationLogic } from "./WindowCreationLogic";
-import { IconFun } from "./IconFun"
+import { IconFun } from "./IconFun";
+import { createPortal } from "react-dom";
 export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) => {
     console.log("IconComponent rendered");
 
     const isDragging = IconFun(s => s.appStates[appId]?.isDragging || false);
+    const isOpen = IconFun(s => s.appStates[appId]?.isOpen || false);
 
     return (
         <>
@@ -13,13 +15,15 @@ export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) 
                 </div>  
                 <p className="text-center text-xs text-accent-text cursor-pointer">{Title}</p>
             </div>
-            <WindowCreationLogic
-                AppIcon={AppIcon}
-                Title={Title}
-                appId={appId}
-                appContent={appContent}
-                viewportRef={viewportRef}
-            />
+            {isOpen && createPortal(
+                <WindowCreationLogic
+                    AppIcon={AppIcon}
+                    Title={Title}
+                    appId={appId}
+                    appContent={appContent}
+                    viewportRef={viewportRef}
+                />
+            ,viewportRef.current)}
         </>
     )
 };
