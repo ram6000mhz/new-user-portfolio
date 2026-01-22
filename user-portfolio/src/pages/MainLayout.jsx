@@ -10,11 +10,15 @@ export const MainLayout = () => {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <Navbar/>
+      {hr_mode &&(
+        <Navbar/>
+      )}
       <main className="grow">
         {hr_mode ? <Aboutme/>:<Machineviewport/>}
       </main>
-      <DesktopFooter/>
+      {!hr_mode &&(
+        <DesktopFooter/>
+      )}
     </div>
   );
 };
