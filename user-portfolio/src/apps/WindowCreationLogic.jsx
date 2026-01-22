@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { WindowComponent } from "./WindowComponent";
-import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
 import { AnimatePresence, motion, scale } from "motion/react";
 import { IconFun } from "../apps/IconFun";
@@ -114,71 +113,66 @@ export const WindowCreationLogic = ({AppIcon, Title, appId, appContent, viewport
             
     return(
         <AnimatePresence>
-            {isOpen && createPortal(
-                <>
-                    <Rnd
-                        cancel=".deadzone"
-                        ref={rndRef}
-                        default={isFullscreen ? fullscreenPreset : windowedPreset}
-                        minWidth={180}
-                        minHeight={200}
-                        bounds="parent"
-                        dragHandleClassName="window-header"
-                        enableResizing={isFullscreen ? false : true}
-                        disableDragging={isFullscreen ? true : false}
-                        onDragStart={(e,data) => {
-                            startPos.current = { x: data.x, y: data.y };
-                            isDragThresholdMet.current = false;
-                        }}
+            <Rnd
+                cancel=".deadzone"
+                ref={rndRef}
+                default={isFullscreen ? fullscreenPreset : windowedPreset}
+                minWidth={180}
+                minHeight={200}
+                bounds="parent"
+                dragHandleClassName="window-header"
+                enableResizing={isFullscreen ? false : true}
+                disableDragging={isFullscreen ? true : false}
+                onDragStart={(e,data) => {
+                    startPos.current = { x: data.x, y: data.y };
+                    isDragThresholdMet.current = false;
+                }}
 
-                        onDrag={(e, data) => {
-                            if (isDragThresholdMet.current) return;
-                            if (isDragThresholdMet.current) return;
-                            const distance = Math.hypot(
-                                data.x - startPos.current.x, 
-                                data.y - startPos.current.y
-                            );
-                            if (distance > DRAG_THRESHOLD) {
-                                isDragThresholdMet.current = true;
-                                bringToFront(appId);
+                onDrag={(e, data) => {
+                    if (isDragThresholdMet.current) return;
+                    if (isDragThresholdMet.current) return;
+                    const distance = Math.hypot(
+                        data.x - startPos.current.x, 
+                        data.y - startPos.current.y
+                    );
+                    if (distance > DRAG_THRESHOLD) {
+                        isDragThresholdMet.current = true;
+                        bringToFront(appId);
+                    }
+                }}
+                className="w-full h-full"
+                style={{zIndex: zIndex}}
+            >
+                <motion.div
+                    key={isFullscreen ? 'fs' : isWindowed ? 'wd' : 'min'}
+                    initial={initial}
+                    animate={animate}
+                    exit={
+                        {scale:0, opacity:0}
+                    }
+                    transition={{ duration: 0.1 }}
+                    className={`w-full h-full overflow-hidden bg-background border-2 
+                    border-muted-border flex items-center justify-center
+                    ${isFullscreen ? 'rounded-none' : 'rounded-xl'}
+                    `}
+                >
+                    <WindowComponent
+                        title={Title}
+                        isFullscreen={isFullscreen}
+                        terminationcallback={() => kill(appId)}
+                        windowcallback={() => {
+                                toggleWindow(appId);
                             }
-                        }}
-                        className="w-full h-full"
-                        style={{zIndex: zIndex}}
-                    >
-                        <motion.div
-                            key={isFullscreen ? 'fs' : isWindowed ? 'wd' : 'min'}
-                            initial={initial}
-                            animate={animate}
-                            exit={
-                                {scale:0, opacity:0}
+                        }
+                        minimizecallback={() =>{
+                                toggleMinimize(appId)
                             }
-                            transition={{ duration: 0.1 }}
-                            className={`w-full h-full overflow-hidden bg-background border-2 
-                            border-muted-border flex items-center justify-center
-                            ${isFullscreen ? 'rounded-none' : 'rounded-xl'}
-                            `}
-                        >
-                            <WindowComponent
-                                title={Title}
-                                isFullscreen={isFullscreen}
-                                terminationcallback={() => kill(appId)}
-                                windowcallback={() => {
-                                        toggleWindow(appId);
-                                    }
-                                }
-                                minimizecallback={() =>{
-                                        toggleMinimize(appId)
-                                    }
-                                }
-                                appId={appId}
-                                content={appContent}
-                            />
-                        </motion.div>
-                    </Rnd>
-                </>,
-                viewportRef.current
-            )}
+                        }
+                        appId={appId}
+                        content={appContent}
+                    />
+                </motion.div>
+            </Rnd>
         </AnimatePresence>
     )
 }
