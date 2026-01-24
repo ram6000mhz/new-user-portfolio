@@ -1,7 +1,20 @@
 import {Power, Linkedin, Mail, Github, MapPin} from "lucide-react";
 
 export const Aboutme = ()=>{
-    
+
+// possible ranking
+// 1	Exposed	
+// 2	Acquainted
+// 3	Familiar
+// 4	Functional
+// 5	Practiced
+// 6	Capable
+// 7	Adept
+// 8	Proficient
+// 9	In-depth
+// 10	Knowledgeable
+
+
     const langs = {
         "PHP": { rating: 2 },
         "MongoDB": { rating: 3 },
@@ -21,7 +34,8 @@ export const Aboutme = ()=>{
         "Oracle Database": { rating: 1 }
     };
 
-    const langKeys = Object.keys(langs)
+    const maxRating = 10
+    const languages = Object.entries(langs);
 
     return(
         <div className="flex w-full h-full flex-row @container overflow-y-auto bg-white no-scrollbar">
@@ -99,21 +113,56 @@ export const Aboutme = ()=>{
                         </a>
                     </h3>
                     <div className="flex bg-red items-center w-full justify-center">
-                        <div className="grid grid-cols-16 grid-rows-[auto_repeat(10,minmax(0,1fr))] gap-1">
-                            {langKeys.map(name => (
-                                <div key={name} className="text-center font-semibold text-[1px] @sm:text-xs px-1">{name}</div>
+                        <div className="hidden @md:grid grid-cols-[auto_repeat(16,minmax(0,1fr))] gap-2">
+                        <div className="flex flex-col items-end pr-2">
+                            <div className="h-12 mb-4" /> 
+                            <div className="flex flex-col gap-1">
+                            {[...Array(11)].map((_, i) => (
+                                <span key={i} className="h-6 flex items-center text-xs font-medium text-gray-500">{i}</span>
                             ))}
+                            </div>
+                        </div>
+                        {Object.entries(langs).map(([name, { rating }]) => (
+                            <div key={name} className="flex flex-col items-center">
+                            <span className="mb-4 text-xs font-bold rotate-45 origin-bottom-left whitespace-nowrap h-12 w-6 flex items-end">
+                                {name}
+                            </span>
+                            <div className="flex flex-col gap-1">
+                                {[...Array(11)].map((_, i) => (
+                                <div
+                                    key={i}
+                                    className={`w-6 h-6 border ${i <= rating ? 'bg-blue-600' : 'bg-gray-200'}`}
+                                />
+                                ))}
+                            </div>
+                            </div>
+                        ))}
+                        </div>
 
-                            {Array.from({ length: 10 }, (_, i) => {
-                                const currentRow = i + 1; 
-                                
-                                return langKeys.map(name => (
-                                    <div 
-                                        key={`${name}-${currentRow}`}
-                                        className={`h-6 w-full rounded-md ${langs[name].rating >= currentRow ? 'bg-blue-500' : 'bg-gray-200'}`}
-                                    />
-                                ));
-                            })}
+                        <div className="flex  @md:hidden flex-col gap-4">
+                            <div className="flex items-center gap-2">
+                                <div className="w-24" />
+                                <div className="flex gap-1">
+                                    {[...Array(11)].map((_, i) => (
+                                        <span key={i} className="w-4 text-[10px] text-center font-medium text-gray-500">
+                                            {i}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                            {Object.entries(langs).map(([name, { rating }]) => (
+                                <div key={name} className="flex items-center gap-2">
+                                    <span className="w-24 text-xs font-bold truncate">{name}</span>
+                                    <div className="flex gap-1">
+                                        {[...Array(11)].map((_, i) => (
+                                            <div
+                                                key={i}
+                                                className={`w-4 h-4 border ${i <= rating ? 'bg-blue-600' : 'bg-gray-200'}`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
