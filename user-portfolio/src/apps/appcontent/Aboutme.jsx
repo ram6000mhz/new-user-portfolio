@@ -34,8 +34,9 @@ export const Aboutme = ()=>{
         "Oracle Database": { rating: 1 }
     };
 
+    const language_entries=Object.entries(langs);
+    const language_count=Object.keys(langs).length;
     const maxRating = 10
-    const languages = Object.entries(langs);
 
     return(
         <div className="flex w-full h-full flex-row @container overflow-y-auto bg-white no-scrollbar">
@@ -113,32 +114,37 @@ export const Aboutme = ()=>{
                         </a>
                     </h3>
                     <div className="flex bg-red items-center w-full justify-center">
-                        <div className="hidden @md:grid grid-cols-[auto_repeat(16,minmax(0,1fr))] gap-2">
-                        <div className="flex flex-col items-end pr-2">
-                            <div className="h-12 mb-4" /> 
-                            <div className="flex flex-col gap-1">
-                            {[...Array(11)].map((_, i) => (
-                                <span key={i} className="h-6 flex items-center text-xs font-medium text-gray-500">{i}</span>
+
+                        <div className="hidden @md:grid gap-1 w-full h-full py-10" 
+                            style={{ gridTemplateColumns: `repeat(${language_entries.length + 1}, minmax(0, 1fr))` }}>
+                            <div></div>
+                            {language_entries.map(([name]) => (
+                                <div key={`name-${name}`} className="w-10 flex">
+                                    <span className="text-xs origin-top-left -rotate-45">{name}</span>
+                                </div>
                             ))}
-                            </div>
-                        </div>
-                        {Object.entries(langs).map(([name, { rating }]) => (
-                            <div key={name} className="flex flex-col items-center">
-                            <span className="mb-4 text-xs font-bold rotate-45 origin-bottom-left whitespace-nowrap h-12 w-6 flex items-end">
-                                {name}
-                            </span>
-                            <div className="flex flex-col gap-1">
-                                {[...Array(11)].map((_, i) => (
-                                <div
-                                    key={i}
-                                    className={`w-6 h-6 border ${i <= rating ? 'bg-blue-600' : 'bg-gray-200'}`}
-                                />
+                            <div className="flex flex-col gap-1 pr-2">
+                                {[...Array(maxRating)].map((_, i) => (
+                                    <span key={i} className="h-8 flex items-center justify-end text-xs  text-gray-500">
+                                        {i + 1}
+                                    </span>
                                 ))}
                             </div>
-                            </div>
-                        ))}
-                        </div>
 
+                            {language_entries.map(([name, { rating }]) => (
+                                <div key={`col-${name}`} className="flex flex-col gap-1">
+                                    {[...Array(maxRating)].map((_, i) => {
+                                        const rowLevel = i + 1;
+                                        return (
+                                            <div
+                                                key={rowLevel}
+                                                className={`w-8 h-8 border ${rowLevel <= rating ? 'bg-blue-600' : 'bg-gray-200'}`}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            ))}
+                        </div>  
                         <div className="flex  @md:hidden flex-col gap-4">
                             <div className="flex items-center gap-2">
                                 <div className="w-24" />
