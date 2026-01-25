@@ -13,7 +13,7 @@ export const MainLayout = () => {
       {hr_mode &&(
         <Navbar/>
       )}
-      <main className="grow">
+      <main className="grow overflow-auto no-scrollbar">
         {hr_mode ? <Aboutme/>:<Machineviewport/>}
       </main>
       {!hr_mode &&(
