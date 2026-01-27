@@ -1,6 +1,6 @@
 import { Machineviewport } from './Machineviewport';
 import { ViewHandler } from "../providers/ViewHandler";
-import { Aboutme } from "../apps/appcontent/Aboutme";
+import { Aboutme } from "../apps/appcontent/aboutme/Aboutme";
 import { DesktopFooter } from './DesktopFooter';
 import {Navbar} from './Navbar'
 // text-xs sm:text-sm md:text-base lg:text-lg
@@ -13,7 +13,7 @@ export const MainLayout = () => {
       {hr_mode &&(
         <Navbar/>
       )}
-      <main className="grow overflow-auto no-scrollbar">
+      <main className="flex-1 min-h-0">
         {hr_mode ? <Aboutme/>:<Machineviewport/>}
       </main>
       {!hr_mode &&(
