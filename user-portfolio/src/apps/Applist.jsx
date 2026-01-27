@@ -6,7 +6,7 @@ import MathSolve from "../assets/data/mathsolve.webp"
 import Tipai from "../assets/data/tipai.webp"
 import { Rubric } from "../projects3d/Rubric";
 
-import { Aboutme } from "./appcontent/Aboutme";
+import { Aboutme } from "./appcontent/aboutme/Aboutme";
 
 export const apps = [
     { 
