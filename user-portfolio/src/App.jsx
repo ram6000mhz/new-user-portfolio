@@ -9,7 +9,6 @@ function HomePage() {
 }
 
 export function App() {
-  console.log("App rendered");
   return (
     <div className='w-screen h-screen'>
       <LocationProvider>

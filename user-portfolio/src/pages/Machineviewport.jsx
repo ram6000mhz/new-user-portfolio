@@ -6,7 +6,6 @@ import DesktopBg from "../assets/img/rice.webp"
 import { IconFun } from "../apps/IconFun";
 
 export const Machineviewport = () => {
-    console.log("Machineviewport rendered");
     const viewportRef = useRef(null);
 
     const {setDragging, initializeApp, open} = IconFun.getState();

@@ -3,7 +3,6 @@ import { Taskman } from "../taskman/Taskman";
 import {IconFun} from "../apps/IconFun"
 
 export const TaskBar = () =>{
-    console.log("TaskBar rendered");
 
     const taskman = Taskman((state) => state.taskman);
     const { taskBarOpenClose } = IconFun.getState();

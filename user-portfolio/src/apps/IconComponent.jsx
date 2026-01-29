@@ -2,8 +2,6 @@ import { WindowCreationLogic } from "./WindowCreationLogic";
 import { IconFun } from "./IconFun";
 import { createPortal } from "react-dom";
 export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) => {
-    console.log("IconComponent rendered");
-
     const isDragging = IconFun(s => s.appStates[appId]?.isDragging || false);
     const isOpen = IconFun(s => s.appStates[appId]?.isOpen || false);
 

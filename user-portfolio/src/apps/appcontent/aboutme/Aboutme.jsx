@@ -3,8 +3,6 @@ import { Contacables } from "./Contacables";
 import { Intro } from "./Intro";
 
 export const Aboutme = ()=>{
-    console.log("renderabourme")
-
     return(
         <div className="flex w-full h-full flex-row @container overflow-auto no-scrollbar bg-white">
             <div class="w-[10%] h-full"/>

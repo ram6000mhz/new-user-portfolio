@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 export const Timer = ()=>{
-    console.log("time change")
     const [time,setTime] = useState(new Date())
 
     useEffect(() => {

@@ -5,7 +5,6 @@ import { DesktopFooter } from './DesktopFooter';
 import {Navbar} from './Navbar'
 // text-xs sm:text-sm md:text-base lg:text-lg
 export const MainLayout = () => {
-  console.log("MainLayout rendered");
   const hr_mode = ViewHandler((state) => state.hr_Mode);
 
   return (
