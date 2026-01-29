@@ -1,7 +1,8 @@
 import {Power, Linkedin, Mail, Github} from "lucide-react";
 import ProfilePic from "../assets/img/profile-pic.webp";
-
+import { ViewHandler } from "../providers/ViewHandler";
 export const StartComponent=()=>{
+    const toggleHrMode = ViewHandler((state) => state.toggleHrMode);
     return(
         <div className="flex flex-col w-full h-full">
             <h1 className="text-xs font-medium text-muted-text mb-2 px-4 pt-3 items-center flex justify-start">
@@ -41,7 +42,7 @@ export const StartComponent=()=>{
                     Ethan
                 </p>
                 <div className="grow"></div>
-                <div className="w-[25px] h-[25px] p-1 hover:bg-foreground-highlight flex items-center justify-center rounded-2xl cursor-pointer">
+                <div onClick={toggleHrMode} className="w-[25px] h-[25px] p-1 hover:bg-foreground-highlight flex items-center justify-center rounded-2xl cursor-pointer">
                     <Power className="!w-[20px] !h-[20px] text-accent-icon"/>
                 </div>
             </div>
