@@ -22,4 +22,9 @@ export const ZIndexShuffler = create((set) => ({
         delete newMap[appId];
         return { zMap: newMap };
     }),
+
+    shutdownZIndexShuffler: () => set({ 
+        zMap: {}, 
+        maxZ: 0 
+    })    
 }));
