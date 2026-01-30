@@ -1,4 +1,4 @@
-import {Power, Linkedin, Mail, Github, MapPin} from "lucide-react";
+import {Power, Linkedin, Mail, Github, MapPin} from "lucide-preact";
 export const Contacables = () => {
     return(
         <div className="w-full">

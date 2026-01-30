@@ -1,4 +1,4 @@
-import {Power, Linkedin, Mail, Github} from "lucide-react";
+import {Power, Linkedin, Mail, Github} from "lucide-preact";
 import ProfilePic from "../assets/img/profile-pic.webp";
 import { ViewHandler } from "../providers/ViewHandler";
 export const StartComponent=()=>{

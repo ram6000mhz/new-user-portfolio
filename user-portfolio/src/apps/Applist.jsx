@@ -1,4 +1,4 @@
-import { Folder, User, ScanFace, Soup, Gamepad2, BusFront, BotMessageSquare } from "lucide-react";
+import { Folder, User, ScanFace, Soup, Gamepad2, BusFront, BotMessageSquare } from "lucide-preact";
 import  Me  from "../assets/img/profile-pic.webp"
 import Optiface from "../assets/data/optiface.webp"
 import BakeBrewCook from "../assets/data/bbc.webp"

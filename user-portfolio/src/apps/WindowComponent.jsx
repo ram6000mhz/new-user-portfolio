@@ -1,4 +1,4 @@
-import { Minus,X, Square, PictureInPicture2} from "lucide-react";
+import { Minus,X, Square, PictureInPicture2} from "lucide-preact";
 import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 
 export const WindowComponent=({title, isFullscreen, terminationcallback, windowcallback, minimizecallback, appId, content})=>{

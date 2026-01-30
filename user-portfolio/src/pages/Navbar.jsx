@@ -1,5 +1,5 @@
 import { ViewHandler } from "../providers/ViewHandler";
-import {Power} from "lucide-react";
+import {Power} from "lucide-preact";
 export const Navbar=()=>{
     const toggleHrMode = ViewHandler((state) => state.toggleHrMode);
     return(
