@@ -102,6 +102,10 @@ export const IconFun = create((set, get) => ({
       } else {
           get().toggleMinimize(appIndex);
       }
+  },
+
+  shutdownIconFun: () => {
+    set({ appStates: {} });
   }
       
 }));
