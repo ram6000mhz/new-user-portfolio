@@ -1,6 +1,7 @@
 import { WindowCreationLogic } from "./WindowCreationLogic";
 import { IconFun } from "./IconFun";
 import { createPortal } from "react-dom";
+import { AnimatePresence } from "motion/react";
 export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) => {
     const isDragging = IconFun(s => s.appStates[appId]?.isDragging || false);
     const isOpen = IconFun(s => s.appStates[appId]?.isOpen || false);
@@ -13,15 +14,17 @@ export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) 
                 </div>  
                 <p className="text-center text-xs text-accent-text cursor-pointer">{Title}</p>
             </div>
-            {isOpen && createPortal(
-                <WindowCreationLogic
-                    AppIcon={AppIcon}
-                    Title={Title}
-                    appId={appId}
-                    appContent={appContent}
-                    viewportRef={viewportRef}
-                />
-            ,viewportRef.current)}
+            <AnimatePresence>
+                {isOpen && createPortal(
+                    <WindowCreationLogic
+                        AppIcon={AppIcon}
+                        Title={Title}
+                        appId={appId}
+                        appContent={appContent}
+                        viewportRef={viewportRef}
+                    />
+                ,viewportRef.current)}
+            </AnimatePresence>
         </>
     )
 };
