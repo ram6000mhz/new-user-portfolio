@@ -15,4 +15,7 @@ export const Taskman = create((set,get) => ({
         }))
     },
     
+    shutdownTaskman: () => set({ 
+        taskman: [] 
+    })
 }))
