@@ -4,10 +4,23 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    preact({
-      prerender:true,
-    }
-    ),tailwindcss(),],
-  
+  plugins: [preact({prerender:true,}),tailwindcss(),],
+  resolve: {
+    alias: {
+      'react': 'preact/compat',
+      'react-dom': 'preact/compat',
+      'react/jsx-runtime': 'preact/jsx-runtime',
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'three-bundle': ['three'],
+          'motion-bundle': ['motion'],
+          'ui-bundle': ['react-rnd', 'lucide-preact', 'zustand'],
+        },
+      },
+    },
+  },
 })
