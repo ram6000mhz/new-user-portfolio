@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preview:worker": "bun run build && bun wrangler dev",
+    "deploy:worker": "bun run build && bun wrangler deploy"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
