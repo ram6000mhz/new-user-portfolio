@@ -8,6 +8,9 @@ import { IconFun } from "../apps/IconFun";
 export const Machineviewport = () => {
     const viewportRef = useRef(null);
 
+    const lastTap = useRef(0);
+    
+    console.log(lastTap)
     const {setDragging, initializeApp, open} = IconFun.getState();
     useEffect(() => {
         apps.forEach(app => {
@@ -26,6 +29,16 @@ export const Machineviewport = () => {
     const handleDragStop = (id) => {
         setDragging(id,false);
     }
+
+    const handleTap = (appid) => {
+        const now = Date.now();
+        const DOUBLE_PRESS_DELAY = 500;
+
+        if (now - lastTap.current < DOUBLE_PRESS_DELAY) {
+            open(appid);
+        }
+        lastTap.current = now;
+    };
 
     return (
         <div 
@@ -56,9 +69,7 @@ export const Machineviewport = () => {
                             if (!isDragThresholdMet.current) return;
                             handleDragStop(app.appid);
                         }}
-                        onDoubleclick={() => {
-                            open(app.appid);
-                        }}
+                        onclick={() => handleTap(app.appid)}
                         key={index}
                         bounds="parent"
                         enableResizing={false}
