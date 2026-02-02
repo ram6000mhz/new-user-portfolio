@@ -21,7 +21,6 @@ export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) 
                         Title={Title}
                         appId={appId}
                         appContent={appContent}
-                        viewportRef={viewportRef}
                     />
                 ,viewportRef.current)}
             </AnimatePresence>

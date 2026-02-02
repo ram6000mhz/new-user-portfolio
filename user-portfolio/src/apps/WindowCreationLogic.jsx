@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { IconFun } from "../apps/IconFun";
 import { ZIndexShuffler } from "../providers/ZIndexShuffler";
 
-export const WindowCreationLogic = ({AppIcon, Title, appId, appContent, viewportRef}) =>{
+export const WindowCreationLogic = ({AppIcon, Title, appId, appContent }) =>{
     const { bringToFront } = ZIndexShuffler.getState();
     const isOpen = IconFun(s => s.appStates[appId]?.isOpen || false);
     const isFullscreen = IconFun(s => s.appStates[appId]?.isFullscreen || false);
