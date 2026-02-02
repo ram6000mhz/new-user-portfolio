@@ -8,9 +8,8 @@ import { IconFun } from "../apps/IconFun";
 export const Machineviewport = () => {
     const viewportRef = useRef(null);
 
-    const lastTap = useRef(0);
-    
-    console.log(lastTap)
+    const lastTap = useRef({ time: 0, id: null });
+
     const {setDragging, initializeApp, open} = IconFun.getState();
     useEffect(() => {
         apps.forEach(app => {
@@ -34,10 +33,11 @@ export const Machineviewport = () => {
         const now = Date.now();
         const DOUBLE_PRESS_DELAY = 500;
 
-        if (now - lastTap.current < DOUBLE_PRESS_DELAY) {
+        if (lastTap.current.id === appid && (now - lastTap.current.time < DOUBLE_PRESS_DELAY)) {
             open(appid);
         }
-        lastTap.current = now;
+        
+        lastTap.current = { time: now, id: appid };
     };
 
     return (
