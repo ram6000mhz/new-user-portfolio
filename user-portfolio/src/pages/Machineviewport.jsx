@@ -69,7 +69,7 @@ export const Machineviewport = () => {
                             if (!isDragThresholdMet.current) return;
                             handleDragStop(app.appid);
                         }}
-                        onclick={() => handleTap(app.appid)}
+                        onClick={() => handleTap(app.appid)}
                         key={index}
                         bounds="parent"
                         enableResizing={false}
