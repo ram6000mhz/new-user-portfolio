@@ -13,6 +13,7 @@ export default defineConfig({
     },
   },
   build: {
+    assetsInlineLimit: 16000,
     rollupOptions: {
       output: {
         manualChunks: {
