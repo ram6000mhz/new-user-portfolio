@@ -56,20 +56,20 @@ export const Skillchart = ()=>{
             </h3>
             <div className="flex items-center w-full justify-center">
 
-                <div className="hidden @2xl:grid w-full h-full py-15" 
+                <div className="hidden @2xl:grid py-15" 
                     style={{ gridTemplateColumns: `auto auto` }}>
                     <div></div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                         {language_entries.map(([name]) => (
                             <div 
                                 key={`name-${name}`} 
                                 className="flex-1 flex items-center w-full"
-                                style={{ width: 'clamp(20px, 4vw, 80px)'}}
+                                style={{ width: 'clamp(20px, 4cqw, 40px)'}}
                             >
                                 <span 
                                 className="origin-top-left -rotate-45 whitespace-nowrap"
                                     style={{ 
-                                        fontSize: 'clamp(14px, 1.5vw, 18px)'
+                                        fontSize: 'clamp(12px, 1.5cqw, 14px)'
                                     }}
                                 >
                                     {name}
@@ -77,11 +77,11 @@ export const Skillchart = ()=>{
                             </div>
                         ))}
                     </div>
-                    <div className="flex flex-col gap-1 pr-4">
+                    <div className="flex flex-col gap-2 pr-4">
                         {[...Array(maxRating)].map((_, i) => (
                             <span key={i} className="flex items-center justify-end text-xs text-gray-500"
                                 style={{
-                                    height: 'clamp(1px, 4vw, 80px)'
+                                    height: 'clamp(1px, 4cqw, 40px)'
                                 }}
                             >
                                 {i + 1}
@@ -90,14 +90,14 @@ export const Skillchart = ()=>{
                     </div>
                     <div className="flex">
                         {language_entries.map(([name, { rating }]) => (
-                            <div key={`col-${name}`} className="flex-1 flex flex-col gap-1">
+                            <div key={`col-${name}`} className="flex-1 flex flex-col gap-2">
                                 {[...Array(maxRating)].map((_, i) => (
                                     <div
                                         key={i + 1}
                                         className={`border ${i + 1 <= rating ? 'bg-blue-600' : 'bg-gray-200'}`}
                                         style={{
-                                            width: 'clamp(20px, 4vw, 80px)',
-                                            height: 'clamp(20px, 4vw, 80px)'
+                                            width: 'clamp(20px, 4cqw, 40px)',
+                                            height: 'clamp(20px, 4cqw, 40px)'
                                         }}
                                     />
                                 ))}
@@ -114,7 +114,7 @@ export const Skillchart = ()=>{
                     <div className="flex gap-1">
                         {[...Array(maxRating)].map((_, i) => (
                             <span key={i} className="w-5 flex items-center justify-center text-xs text-gray-500"
-                                style={{ width: 'clamp(1px, 4vw, 20px)' }}
+                                style={{ width: 'clamp(1px, 4cqw, 20px)' }}
                             >
                                 {i + 1}
                             </span>
@@ -125,7 +125,7 @@ export const Skillchart = ()=>{
                         {language_entries.map(([name]) => (
                             <div key={`name-mob-${name}`} 
                                 className=" flex items-center justify-end pr-2"
-                                style={{ height: 'clamp(1px, 4vw, 20px)' }}
+                                style={{ height: 'clamp(1px, 4cqw, 20px)' }}
                             >
                                 <span className="text-xs font-medium truncate">{name}</span>
                             </div>
@@ -139,8 +139,8 @@ export const Skillchart = ()=>{
                                     <div key={i + 1} 
                                         className={`border ${i + 1 <= rating ? 'bg-blue-600' : 'bg-gray-200'}`} 
                                         style={{
-                                            width: 'clamp(1px, 4vw, 20px)',
-                                            height: 'clamp(1px, 4vw, 20px)'
+                                            width: 'clamp(1px, 4cqw, 20px)',
+                                            height: 'clamp(1px, 4cqw, 20px)'
                                         }}
                                     />
                                 ))}
