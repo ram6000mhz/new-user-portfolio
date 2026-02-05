@@ -41,7 +41,7 @@ export const Skillchart = ()=>{
                 Skills
             </h2>
             <h3 className="font-extralight text-md">
-                Here is the distrubution of my skill across multiple technologies.
+                {'  '}Here is the distribution of my skill across multiple technologies.
                 This chart is based on the article {' '}
                 <a 
                     href="https://thetshaped.dev/p/the-t-shaped-software-developer"
