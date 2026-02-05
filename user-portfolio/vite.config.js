@@ -1,12 +1,19 @@
 import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
 import tailwindcss from '@tailwindcss/vite'
+import { beasties } from 'vite-plugin-beasties'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     preact({prerender:true,}),
     tailwindcss(),
+    beasties({
+      options: {
+        pruneSource: false,
+        preload: 'swap',
+      }
+    })
   ],
   resolve: {
     alias: {
@@ -16,7 +23,6 @@ export default defineConfig({
     },
   },
   build: {
-    assetsInlineLimit: 16000,
     rollupOptions: {
       output: {
         manualChunks: {
