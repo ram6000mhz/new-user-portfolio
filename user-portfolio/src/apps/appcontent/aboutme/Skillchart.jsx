@@ -29,7 +29,8 @@ export const Skillchart = ()=>{
         "PostgreSQL": { rating: 4 },
         "MySQL": { rating: 3 },
         "Laravel": { rating: 2 },
-        "Oracle Database": { rating: 1 }
+        "Oracle Database": { rating: 1 },
+        "Cloudflare": { rating:1 } 
     };
 
     const language_entries=Object.entries(langs);
@@ -37,11 +38,11 @@ export const Skillchart = ()=>{
 
     return(
         <div className="w-full flex flex-col items-start">
-            <h2 className="font-semibold text-xl text-muted-text">
+            <h2 className="font-semibold text-xl text-black">
                 Skills
             </h2>
-            <h3 className="font-extralight text-md">
-                {'  '}Here is the distribution of my skill across multiple technologies.
+            <h3 className="font-extralight text-justify text-md indent-12">
+                Here is the distribution of my skill across multiple technologies.
                 This chart is based on the article {' '}
                 <a 
                     href="https://thetshaped.dev/p/the-t-shaped-software-developer"
@@ -94,7 +95,7 @@ export const Skillchart = ()=>{
                                 {[...Array(maxRating)].map((_, i) => (
                                     <div
                                         key={i + 1}
-                                        className={`border ${i + 1 <= rating ? 'bg-blue-600' : 'bg-gray-200'}`}
+                                        className={`rounded-md border ${i + 1 <= rating ? 'bg-blue-600' : 'bg-gray-200'}`}
                                         style={{
                                             width: 'clamp(20px, 4cqw, 40px)',
                                             height: 'clamp(20px, 4cqw, 40px)'
@@ -137,7 +138,7 @@ export const Skillchart = ()=>{
                             <div key={`row-${name}`} className="flex gap-1">
                                 {[...Array(maxRating)].map((_, i) => (
                                     <div key={i + 1} 
-                                        className={`border ${i + 1 <= rating ? 'bg-blue-600' : 'bg-gray-200'}`} 
+                                        className={`rounded-xs border ${i + 1 <= rating ? 'bg-blue-600' : 'bg-gray-200'}`} 
                                         style={{
                                             width: 'clamp(1px, 4cqw, 20px)',
                                             height: 'clamp(1px, 4cqw, 20px)'
