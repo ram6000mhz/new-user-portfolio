@@ -2,7 +2,7 @@ import {Power, Linkedin, Mail, Github, MapPin} from "lucide-preact";
 export const Contacables = () => {
     return(
         <div className="w-full">
-            <div className="flex flex-col items-start @2xl:flex-row @2xl:items-center w-full gap-5 px-3">
+            <div class="grid justify-center justify-items-start @2xl:grid-flow-col @2xl:items-center w-full gap-5 px-3 py-2">
                 <div className="flex flex-col gap-1">
                     <h2 className="font-semibold text-sm text-muted-text">Email</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
