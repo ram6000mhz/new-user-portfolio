@@ -7,18 +7,18 @@ export const Contacables = () => {
                     <h2 className="font-semibold text-sm text-muted-text">Email</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
                         <Mail className="!w-[35px] !h-[35px] text-black"/>
-                        <h4 className="font-sm text-sm text-black">
+                        <h3 className="font-sm text-sm text-black">
                             esyworkpro@gmail.com
-                        </h4>
+                        </h3>
                     </div>
                 </div>
                 <div className="flex flex-col gap-1">
                     <h2 className="font-semibold text-sm text-muted-text">Github</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
                         <Github className="!w-[35px] !h-[35px] text-black"/>
-                        <h4 className="font-sm text-sm text-black">
+                        <h3 className="font-sm text-sm text-black">
                             github.com/ram6000mhz
-                        </h4>
+                        </h3>
                     </div>
                 </div>
                 <div className="flex flex-col gap-1">
@@ -30,9 +30,9 @@ export const Contacables = () => {
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
-                            <h4 className="font-sm text-sm text-black">
+                            <h3 className="font-sm text-sm text-black">
                                 linkedin.com/in/ethan-sancho-yap
-                            </h4>
+                            </h3>
                         </a>
                     </div>
                 </div>
@@ -40,9 +40,9 @@ export const Contacables = () => {
                     <h2 className="font-semibold text-sm text-muted-text">Location</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
                         <MapPin className="!w-[35px] !h-[35px] text-black"/>
-                        <h4 className="font-sm text-sm text-black"> 
+                        <h3 className="font-sm text-sm text-black"> 
                             Philippines
-                        </h4>
+                        </h3>
                     </div>
                 </div>
             </div>
