@@ -18,9 +18,11 @@
   --accent: oklch(.8 0.05 0);
   --icon-accent: oklch(1 0 0);
   --accent-text: oklch(1 0 0);
-  --muted-text: oklch(60.193% 0.00008 271.152);
+  --muted-text: oklch(80.193% 0 271);
   --accent-border: oklch(0 0 0);
   --muted-border: oklch(34.77% 0.03214 272.755);
+  --muted-border-2: oklch(80.193% 0 271);
+  --background-muted: oklch(80.193% 0 271);
 } 
 
 @theme {
@@ -34,4 +36,6 @@
     --color-muted-text: var(--muted-text);
     --color-accent-border: var(--accent-border);
     --color-muted-border: var(--muted-border);
+    --color-muted-border-2: var(--muted-border-2);
+    --color-background-muted: var(--background-muted);
 }
