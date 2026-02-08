@@ -25,9 +25,7 @@ export const MainLayout = () => {
   return (
     <div className="w-full h-full flex flex-col">
       {hr_mode &&(
-        <div className='pb-12'>
-          <Navbar/>
-        </div>
+        <Navbar />
       )}
       <main className="flex-1 min-h-0">
         <Suspense fallback={null}>
