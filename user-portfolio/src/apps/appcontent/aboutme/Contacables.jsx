@@ -6,8 +6,8 @@ export const Contacables = () => {
                 <div className="flex flex-col gap-1">
                     <h2 className="font-semibold text-sm text-muted-text">Email</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
-                        <Mail className="!w-[35px] !h-[35px] text-black"/>
-                        <h3 className="font-sm text-sm text-black">
+                        <Mail className="!w-[35px] !h-[35px] text-white"/>
+                        <h3 className="font-sm text-sm text-white">
                             esyworkpro@gmail.com
                         </h3>
                     </div>
@@ -15,8 +15,8 @@ export const Contacables = () => {
                 <div className="flex flex-col gap-1">
                     <h2 className="font-semibold text-sm text-muted-text">Github</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
-                        <Github className="!w-[35px] !h-[35px] text-black"/>
-                        <h3 className="font-sm text-sm text-black">
+                        <Github className="!w-[35px] !h-[35px] text-white"/>
+                        <h3 className="font-sm text-sm text-white">
                             github.com/ram6000mhz
                         </h3>
                     </div>
@@ -24,13 +24,13 @@ export const Contacables = () => {
                 <div className="flex flex-col gap-1">
                     <h2 className="font-semibold text-sm text-muted-text">LinkedIn</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
-                        <Linkedin className="!w-[35px] !h-[35px] text-black"/>
+                        <Linkedin className="!w-[35px] !h-[35px] text-white"/>
                         <a 
                             href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
-                            <h3 className="font-sm text-sm text-black">
+                            <h3 className="font-sm text-sm text-white">
                                 linkedin.com/in/ethan-sancho-yap
                             </h3>
                         </a>
@@ -39,8 +39,8 @@ export const Contacables = () => {
                 <div className="flex flex-col gap-1">
                     <h2 className="font-semibold text-sm text-muted-text">Location</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
-                        <MapPin className="!w-[35px] !h-[35px] text-black"/>
-                        <h3 className="font-sm text-sm text-black"> 
+                        <MapPin className="!w-[35px] !h-[35px] text-white"/>
+                        <h3 className="font-sm text-sm text-white"> 
                             Philippines
                         </h3>
                     </div>
