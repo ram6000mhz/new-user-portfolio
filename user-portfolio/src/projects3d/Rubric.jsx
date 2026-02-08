@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
@@ -57,5 +57,5 @@ export const Rubric = () => {
     };
   }, []);
 
-  return <div ref={mountRef} style={{ width: "100%", height: "100vh" }} />;
+  return <div ref={mountRef} style={{ width: "100vw", height: "100vh" }} />;
 };
