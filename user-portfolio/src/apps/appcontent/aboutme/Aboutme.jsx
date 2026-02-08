@@ -4,14 +4,12 @@ import { Intro } from "./Intro";
 
 export const Aboutme = ()=>{
     return(
-        <div className="flex w-full h-full flex-row @container overflow-auto no-scrollbar bg-white">
-            <div class="w-[10%] h-full"/>
-            <div className="flex-1 flex-col items-center h-full relative pt-5 gap-3">
+        <div className="flex w-full h-full flex-row @container overflow-auto overscroll-none no-scrollbar bg-black">
+            <div className="flex-1 flex-col items-center h-full relative">
                 <Intro/>
                 <Contacables/>
-                <Skillchart/>
+                <Skillchart/>      
             </div>    
-            <div class="w-[10%] h-full"/>
         </div> 
     )
 }
