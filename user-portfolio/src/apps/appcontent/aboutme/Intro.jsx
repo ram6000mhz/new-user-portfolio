@@ -1,5 +1,5 @@
 import { Hero3d } from "./Hero3d"
-
+import { Contacables } from "./Contacables";
 export const Intro = () =>{
     return(
         <div className="flex flex-row w-full h-full items-center justify-center">
@@ -13,6 +13,7 @@ export const Intro = () =>{
                 <h3 className="font-extralight text-md text-muted-text">
                     I enjoy building interesting projects.
                 </h3>
+                <Contacables/>
             </div>
             <div className="bg-black flex-1 h-full ">
                 <Hero3d></Hero3d>
