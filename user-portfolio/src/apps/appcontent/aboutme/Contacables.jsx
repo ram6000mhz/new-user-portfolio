@@ -2,47 +2,47 @@ import {Power, Linkedin, Mail, Github, MapPin} from "lucide-preact";
 export const Contacables = () => {
     return(
         <div className="w-full">
-            <div class="grid justify-center justify-items-start @2xl:grid-flow-col @2xl:items-center w-full gap-5 px-3 py-2">
+            <div class="flex flex-row items-start w-full gap-5 pt-2">
                 <div className="flex flex-col gap-1">
-                    <h2 className="font-semibold text-sm text-muted-text">Email</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
-                        <Mail className="!w-[35px] !h-[35px] text-white"/>
-                        <h3 className="font-sm text-sm text-white">
-                            esyworkpro@gmail.com
-                        </h3>
+                        <a 
+                            href="mailto:esyworkpro@gmail.com"
+                        >
+                            <Mail className="!w-[25px] !h-[25px] text-white"/>
+                        </a>
                     </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                    <h2 className="font-semibold text-sm text-muted-text">Github</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
-                        <Github className="!w-[35px] !h-[35px] text-white"/>
-                        <h3 className="font-sm text-sm text-white">
-                            github.com/ram6000mhz
-                        </h3>
+                        <a 
+                            href="https://github.com/ram6000mhz"
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                        >
+                            <Github className="!w-[25px] !h-[25px] text-white"/>
+                        </a>
                     </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                    <h2 className="font-semibold text-sm text-muted-text">LinkedIn</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
-                        <Linkedin className="!w-[35px] !h-[35px] text-white"/>
                         <a 
                             href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
-                            <h3 className="font-sm text-sm text-white">
-                                linkedin.com/in/ethan-sancho-yap
-                            </h3>
+                            <Linkedin className="!w-[25px] !h-[25px] text-white"/>
                         </a>
                     </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                    <h2 className="font-semibold text-sm text-muted-text">Location</h2>
                     <div className="flex flex-row gap-1 justify-center items-center">
-                        <MapPin className="!w-[35px] !h-[35px] text-white"/>
-                        <h3 className="font-sm text-sm text-white"> 
-                            Philippines
-                        </h3>
+                        <a 
+                            href=""
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                        >
+                            <MapPin className="!w-[25px] !h-[25px] text-white"/>
+                        </a>
                     </div>
                 </div>
             </div>
