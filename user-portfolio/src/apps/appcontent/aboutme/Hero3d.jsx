@@ -4,10 +4,9 @@ import {
   Scene, 
   PerspectiveCamera, 
   TorusGeometry, 
-  SphereGeometry, 
-  MeshBasicMaterial, 
-  InstancedMesh, 
-  Object3D 
+  LineSegments, 
+  LineBasicMaterial, 
+  EdgesGeometry 
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
@@ -18,14 +17,12 @@ export const Hero3d = () => {
     const container = mountRef.current;
     if (!container) return;
 
-    const renderer = new WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new WebGLRenderer({ antialias: false, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
     renderer.domElement.style.display = 'block';
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.top = '0';
     renderer.domElement.style.left = '0';
-
     container.appendChild(renderer.domElement);
 
     const scene = new Scene();
@@ -33,71 +30,67 @@ export const Hero3d = () => {
     camera.position.set(0, 3, 5);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = false;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 4.0;
-    controls.enablePan = false;
+    Object.assign(controls, {
+      enableZoom: false,
+      autoRotate: true,
+      autoRotateSpeed: 5.0,
+      enablePan: false
+    });
 
-    const geo = new TorusGeometry(2, 1, 20, 20);
-    const iMesh = new InstancedMesh(
-      new SphereGeometry(0.03, 16, 16),
-      new MeshBasicMaterial({ color: 0xffffff }),
-      geo.attributes.position.count,
-    );
+    const geo = new TorusGeometry(2, 1, 15, 15);
+    const edges = new EdgesGeometry(geo);
+    const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
+    const wireframe = new LineSegments(edges, lineMat);
+    scene.add(wireframe);
 
-    const dummy = new Object3D();
-    for (let i = 0; i < geo.attributes.position.count; i++) {
-      dummy.position.set(
-        geo.attributes.position.getX(i),
-        geo.attributes.position.getY(i),
-        geo.attributes.position.getZ(i),
-      );
-      dummy.updateMatrix();
-      iMesh.setMatrixAt(i, dummy.matrix);
-    }
-    scene.add(iMesh);
+    let isVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    }, { threshold: 0.1 });
+    observer.observe(container);
 
     const sizeToHost = () => {
       const w = container.clientWidth;
       const h = container.clientHeight;
-
       renderer.setSize(w, h);
-
-      camera.aspect = Math.max(w, 1) / Math.max(h, 1);
+      camera.aspect = w / (h || 1);
       camera.updateProjectionMatrix();
-
-      requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
-      });
     };
 
     window.addEventListener("resize", sizeToHost, { passive: true });
     sizeToHost();
 
     let frameId;
+
     const animate = () => {
-      iMesh.rotation.x += 0.01;
-      iMesh.rotation.z += 0.005;
+      frameId = requestAnimationFrame(animate);
+      
+      if (!isVisible) return;
+
+      wireframe.rotation.x += 0.005;
+      wireframe.rotation.z += 0.003;
       controls.update();
       renderer.render(scene, camera);
-      frameId = requestAnimationFrame(animate);
     };
     animate();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", sizeToHost);
       cancelAnimationFrame(frameId);
-      geo.dispose();
-      iMesh.geometry.dispose();
-      iMesh.material.dispose();
-      controls.dispose(); 
+      
       renderer.dispose();
       renderer.forceContextLoss();
+      geo.dispose();
+      edges.dispose();
+      lineMat.dispose();
+      controls.dispose();
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
     };
   }, []);
 
-  return <div ref={mountRef} className="h-full w-full relative"/>;
+  return <div ref={mountRef} className="h-full w-full relative" />;
 };
