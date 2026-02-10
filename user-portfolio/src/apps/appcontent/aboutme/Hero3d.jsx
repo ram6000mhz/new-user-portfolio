@@ -38,7 +38,7 @@ export const Hero3d = () => {
     controls.autoRotateSpeed = 4.0;
     controls.enablePan = false;
 
-    const geo = new TorusGeometry(2, 1, 50, 50);
+    const geo = new TorusGeometry(2, 1, 20, 20);
     const iMesh = new InstancedMesh(
       new SphereGeometry(0.03, 16, 16),
       new MeshBasicMaterial({ color: 0xffffff }),
