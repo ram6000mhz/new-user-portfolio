@@ -11,6 +11,12 @@ export const Hero3d = () => {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    renderer.domElement.style.display = 'block';
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+
     container.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
@@ -23,34 +29,41 @@ export const Hero3d = () => {
     controls.autoRotateSpeed = 4.0;
     controls.enablePan = false;
 
-    const geo = new THREE.TorusGeometry(2, 1, 20, 30);
-    const positions = geo.attributes.position;
-    const count = positions.count;
+    const geo = new THREE.TorusGeometry(2, 1, 50, 50);
+    const iMesh = new THREE.InstancedMesh(
+      new THREE.SphereGeometry(0.03, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xffffff }),
+      geo.attributes.position.count,
+    );
 
-    const dotGeo = new THREE.CircleGeometry(0.03, 12);
-    const dotMat = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
-    const iMesh = new THREE.InstancedMesh(dotGeo, dotMat, count);
-    
     const dummy = new THREE.Object3D();
-    for (let i = 0; i < count; i++) {
-      dummy.position.set(positions.getX(i), positions.getY(i), positions.getZ(i));
-      const angle = Math.atan2(positions.getZ(i), positions.getX(i));
-      dummy.lookAt(Math.cos(angle) * 1.5, 0, Math.sin(angle) * 1.5);
+    for (let i = 0; i < geo.attributes.position.count; i++) {
+      dummy.position.set(
+        geo.attributes.position.getX(i),
+        geo.attributes.position.getY(i),
+        geo.attributes.position.getZ(i),
+      );
       dummy.updateMatrix();
       iMesh.setMatrixAt(i, dummy.matrix);
     }
     scene.add(iMesh);
 
-    const resize = () => {
-      const width = container.clientWidth;
-      const height = container.clientHeight;
-      renderer.setSize(width, height);
-      camera.aspect = width / height;
+    const sizeToHost = () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+
+      renderer.setSize(w, h);
+
+      camera.aspect = Math.max(w, 1) / Math.max(h, 1);
       camera.updateProjectionMatrix();
+
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
     };
 
-    const observer = new ResizeObserver(resize);
-    observer.observe(container);
+    window.addEventListener("resize", sizeToHost, { passive: true });
+    sizeToHost();
 
     let frameId;
     const animate = () => {
@@ -63,17 +76,15 @@ export const Hero3d = () => {
     animate();
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener("resize", sizeToHost);
       cancelAnimationFrame(frameId);
+      renderer.dispose();
+      geo.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
-      renderer.dispose();
-      geo.dispose();
-      dotGeo.dispose();
-      dotMat.dispose();
     };
   }, []);
 
-  return <div ref={mountRef} className="w-full h-full" />;
+  return <div ref={mountRef} className="h-full w-full relative overflow-hidden"/>;
 };
