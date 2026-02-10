@@ -87,8 +87,12 @@ export const Hero3d = () => {
     return () => {
       window.removeEventListener("resize", sizeToHost);
       cancelAnimationFrame(frameId);
-      renderer.dispose();
       geo.dispose();
+      iMesh.geometry.dispose();
+      iMesh.material.dispose();
+      controls.dispose(); 
+      renderer.dispose();
+      renderer.forceContextLoss();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
