@@ -1,5 +1,14 @@
 import { useRef, useEffect } from "react";
-import * as THREE from "three";
+import { 
+  WebGLRenderer, 
+  Scene, 
+  PerspectiveCamera, 
+  TorusGeometry, 
+  SphereGeometry, 
+  MeshBasicMaterial, 
+  InstancedMesh, 
+  Object3D 
+} from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 export const Hero3d = () => {
@@ -9,7 +18,7 @@ export const Hero3d = () => {
     const container = mountRef.current;
     if (!container) return;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     renderer.domElement.style.display = 'block';
@@ -19,8 +28,8 @@ export const Hero3d = () => {
 
     container.appendChild(renderer.domElement);
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 100);
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(75, 1, 0.1, 100);
     camera.position.set(0, 3, 5);
 
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -29,14 +38,14 @@ export const Hero3d = () => {
     controls.autoRotateSpeed = 4.0;
     controls.enablePan = false;
 
-    const geo = new THREE.TorusGeometry(2, 1, 50, 50);
-    const iMesh = new THREE.InstancedMesh(
-      new THREE.SphereGeometry(0.03, 16, 16),
-      new THREE.MeshBasicMaterial({ color: 0xffffff }),
+    const geo = new TorusGeometry(2, 1, 50, 50);
+    const iMesh = new InstancedMesh(
+      new SphereGeometry(0.03, 16, 16),
+      new MeshBasicMaterial({ color: 0xffffff }),
       geo.attributes.position.count,
     );
 
-    const dummy = new THREE.Object3D();
+    const dummy = new Object3D();
     for (let i = 0; i < geo.attributes.position.count; i++) {
       dummy.position.set(
         geo.attributes.position.getX(i),
@@ -86,5 +95,5 @@ export const Hero3d = () => {
     };
   }, []);
 
-  return <div ref={mountRef} className="h-full w-full relative overflow-hidden"/>;
+  return <div ref={mountRef} className="h-full w-full relative"/>;
 };
