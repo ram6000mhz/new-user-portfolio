@@ -1,4 +1,3 @@
-import { ViewHandler } from "../providers/ViewHandler";
 import {BuildStartWindow} from "./BuildStartWindow"
 import {TaskBar} from "./Taskbar"
 import { Timer } from "./Timer";

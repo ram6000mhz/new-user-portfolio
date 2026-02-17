@@ -1,18 +1,6 @@
 
 export const Skillchart = ()=>{
 
-// 1	Exposed	
-// 2	Acquainted
-// 3	Familiar
-// 4	Functional
-// 5	Practiced
-// 6	Capable
-// 7	Adept
-// 8	Proficient
-// 9	In-depth
-// 10	Knowledgeable
-
-
     const langs = {
         "PHP": { rating: 2 },
         "MongoDB": { rating: 3 },
