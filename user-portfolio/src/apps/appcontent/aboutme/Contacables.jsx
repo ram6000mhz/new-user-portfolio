@@ -7,6 +7,7 @@ export const Contacables = () => {
                     <div className="flex flex-row gap-1 justify-center items-center">
                         <a 
                             href="mailto:esyworkpro@gmail.com"
+                            aria-label="Email"
                         >
                             <Mail className="!w-[25px] !h-[25px] text-white"/>
                         </a>
@@ -16,6 +17,7 @@ export const Contacables = () => {
                     <div className="flex flex-row gap-1 justify-center items-center">
                         <a 
                             href="https://github.com/ram6000mhz"
+                            aria-label="Github"
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
@@ -27,6 +29,7 @@ export const Contacables = () => {
                     <div className="flex flex-row gap-1 justify-center items-center">
                         <a 
                             href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
+                            aria-label="LinkedIn"
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
@@ -38,6 +41,7 @@ export const Contacables = () => {
                     <div className="flex flex-row gap-1 justify-center items-center">
                         <a 
                             href=""
+                            aria-label="Philippines"
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
