@@ -61,12 +61,9 @@ export const Hero3d = () => {
     sizeToHost();
 
     let frameId;
-
     const animate = () => {
       frameId = requestAnimationFrame(animate);
-      
       if (!isVisible) return;
-
       wireframe.rotation.x += 0.005;
       wireframe.rotation.z += 0.003;
       controls.update();
@@ -78,7 +75,6 @@ export const Hero3d = () => {
       observer.disconnect();
       window.removeEventListener("resize", sizeToHost);
       cancelAnimationFrame(frameId);
-      
       renderer.dispose();
       renderer.forceContextLoss();
       geo.dispose();
