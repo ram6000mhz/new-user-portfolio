@@ -1,9 +1,15 @@
 import { useRef, useEffect } from "react";
 import { 
-  WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, 
-  LineSegments, LineBasicMaterial, EdgesGeometry, Group 
+  WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, Mesh, MeshBasicMaterial,
+  LineSegments, LineBasicMaterial, EdgesGeometry, Group, Raycaster, Vector2
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { apps } from "../projects/Projectlist";
+
+const boxGeo = new BoxGeometry(1, 1, 1);
+const edgeGeo = new EdgesGeometry(boxGeo);
+const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
+const hitMat = new MeshBasicMaterial({ visible: false });
 
 export const Hero23d = () => {
   const mountRef = useRef(null);
@@ -24,29 +30,43 @@ export const Hero23d = () => {
     Object.assign(controls, { enableZoom: false, autoRotate: true, enablePan: false });
 
     const group = new Group();
-    const geo = new BoxGeometry(1, 1, 1);
-    const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
-    
-    const spacing = 1; 
-    for (let x = 0; x < 2; x++) {
-      for (let y = 0; y < 2; y++) {
-        for (let z = 0; z < 2; z++) {
-          const edges = new EdgesGeometry(geo);
-          const wireframe = new LineSegments(edges, lineMat);
-          wireframe.position.set(
-            (x - 0.5) * spacing, 
-            (y - 0.5) * spacing, 
-            (z - 0.5) * spacing
-          );
-          group.add(wireframe);
-        }
-      }
-    }
+    const spacing = 1.3;
+
+    apps.forEach((app, i) => {
+      const hitBox = new Mesh(boxGeo, hitMat);
+      const wireframe = new LineSegments(edgeGeo, lineMat);
+      
+      wireframe.raycast = () => null; 
+      hitBox.add(wireframe);
+
+      const x = i % 2;
+      const y = Math.floor(i / 2) % 2;
+      const z = Math.floor(i / 4) % 2;
+
+      hitBox.position.set((x - 0.5) * spacing, (y - 0.5) * spacing, (z - 0.5) * spacing);
+      hitBox.userData = { id: app.appid, title: app.title };
+      group.add(hitBox);
+    });
     scene.add(group);
 
-    let isVisible = true;
-    const observer = new IntersectionObserver(([e]) => isVisible = e.isIntersecting);
-    observer.observe(container);
+    const raycaster = new Raycaster();
+    const mouse = new Vector2();
+
+    const onClick = (event) => {
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(group.children, false);
+
+      if (intersects.length > 0) {
+        const data = intersects[0].object.userData;
+        console.log("Opening App ID:", data.id);
+      }
+    };
+
+    renderer.domElement.addEventListener("click", onClick);
 
     const sizeToHost = () => {
       const { clientWidth: w, clientHeight: h } = container;
@@ -60,22 +80,18 @@ export const Hero23d = () => {
     let frameId;
     const animate = () => {
       frameId = requestAnimationFrame(animate);
-      if (!isVisible) return;
-      group.rotation.y += 0.01;
-      group.rotation.x += 0.005;
+      group.rotation.y += 0.008;
+      group.rotation.x += 0.004;
       controls.update();
       renderer.render(scene, camera);
     };
     animate();
 
     return () => {
-      observer.disconnect();
+      renderer.domElement.removeEventListener("click", onClick);
       window.removeEventListener("resize", sizeToHost);
       cancelAnimationFrame(frameId);
       renderer.dispose();
-      geo.dispose();
-      lineMat.dispose();
-      group.children.forEach(child => child.geometry.dispose());
       if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
     };
   }, []);
