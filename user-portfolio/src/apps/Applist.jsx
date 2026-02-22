@@ -1,12 +1,7 @@
 import { Folder, User, ScanFace, Soup, Gamepad2, BusFront, BotMessageSquare } from "lucide-preact";
-import  Me  from "../assets/img/profile-pic.webp"
-import Optiface from "../assets/data/optiface.webp"
-import BakeBrewCook from "../assets/data/bbc.webp"
-import MathSolve from "../assets/data/mathsolve.webp"
-import Tipai from "../assets/data/tipai.webp"
-import { Rubric } from "../projects3d/Rubric";
 
 import { Aboutme } from "./appcontent/aboutme/Aboutme";
+import { Hero23d } from "./appcontent/aboutme/Hero23d";
 
 export const apps = [
     { 
@@ -21,7 +16,7 @@ export const apps = [
         title: "My Projects" ,
         content: 
         <div className="canvas-container w-full h-full flex justify-center items-center">
-            <Rubric />
+            <Hero23d/>
         </div>
     },
 ];
