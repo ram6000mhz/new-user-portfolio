@@ -4,7 +4,7 @@ import {
   LineSegments, LineBasicMaterial, EdgesGeometry, Group, Raycaster, Vector2
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { apps } from "../projects/Projectlist";
+import { Projectlist } from "../projects/Projectlist";
 
 const boxGeo = new BoxGeometry(1, 1, 1);
 const edgeGeo = new EdgesGeometry(boxGeo);
@@ -30,9 +30,10 @@ export const Hero23d = () => {
     Object.assign(controls, { enableZoom: false, autoRotate: true, enablePan: false });
 
     const group = new Group();
-    const spacing = 1.3;
+    const spacing = 1;
 
-    apps.forEach((app, i) => {
+    Projectlist.forEach((app, i) => {
+      
       const hitBox = new Mesh(boxGeo, hitMat);
       const wireframe = new LineSegments(edgeGeo, lineMat);
       
@@ -47,7 +48,14 @@ export const Hero23d = () => {
       hitBox.userData = { id: app.appid, title: app.title };
       group.add(hitBox);
     });
+
     scene.add(group);
+
+    let isVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+    }, { threshold: 0.1 });
+    observer.observe(container);
 
     const raycaster = new Raycaster();
     const mouse = new Vector2();
@@ -69,7 +77,8 @@ export const Hero23d = () => {
     renderer.domElement.addEventListener("click", onClick);
 
     const sizeToHost = () => {
-      const { clientWidth: w, clientHeight: h } = container;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
       renderer.setSize(w, h);
       camera.aspect = w / (h || 1);
       camera.updateProjectionMatrix();
@@ -80,6 +89,7 @@ export const Hero23d = () => {
     let frameId;
     const animate = () => {
       frameId = requestAnimationFrame(animate);
+      if (!isVisible) return;
       group.rotation.y += 0.008;
       group.rotation.x += 0.004;
       controls.update();
@@ -88,6 +98,7 @@ export const Hero23d = () => {
     animate();
 
     return () => {
+      observer.disconnect();
       renderer.domElement.removeEventListener("click", onClick);
       window.removeEventListener("resize", sizeToHost);
       cancelAnimationFrame(frameId);
