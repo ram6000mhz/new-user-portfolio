@@ -3,7 +3,7 @@ import Optiface from "../../../assets/data/optiface.webp"
 import BakeBrewCook from "../../../assets/data/bbc.webp"
 import MathSolve from "../../../assets/data/mathsolve.webp"
 import Tipai from "../../../assets/data/tipai.webp"
-export const apps = [
+export const Projectlist = [
     { 
         appid: 0,
         icon: <ScanFace className="!h-[25px] !w-[25px] text-accent-icon"/>, 
