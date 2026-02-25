@@ -11,9 +11,9 @@ export const Projectlist = [
         title: "Opti-Face" ,
         preview:Optiface,
         content: 
-        <div className="flex flex-col items-center">
+        <p className="text-white">
             A lightweight facial recognition application built by using scrfd, mediapipe's FaceMesh, and Edgeface that is still accurate and fast.
-        </div>
+        </p>
     },
     { 
         appid: 1,
@@ -21,9 +21,9 @@ export const Projectlist = [
         title: "Bake, Brew and Cook" ,
         preview:BakeBrewCook,
         content: 
-        <div className="">
+        <p className="text-white">
             A small recipe application that contains a variety of Filipino recipes for baking, brewing, and cooking.
-        </div>
+        </p>
     },
     { 
         appid: 2,
@@ -31,9 +31,9 @@ export const Projectlist = [
         title: "Math Solve" ,
         preview:MathSolve,
         content: 
-        <div className="">
+        <p className="text-white">
             A game that generates a random -+/x problem to solve within a time limit.
-        </div>
+        </p>
     },
     { 
         appid: 3,
@@ -41,9 +41,9 @@ export const Projectlist = [
         title: "Magic C Transport" ,
         preview:MagicC,
         content: 
-        <div className="">
+        <p className="text-white">
             A transportation booking application for Magic C Transport Services.
-        </div>
+        </p>
     },
     { 
         appid: 4,
@@ -51,8 +51,8 @@ export const Projectlist = [
         title: "T.I.P.A.I" ,
         preview:Tipai,
         content: 
-        <div className="">
+        <p className="text-white">
             A simple AI chatbot that responds to user's queries about the technological institute of the philippines.
-        </div>
+        </p>
     },
 ];
