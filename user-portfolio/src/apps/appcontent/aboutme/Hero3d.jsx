@@ -76,7 +76,6 @@ export const Hero3d = () => {
       window.removeEventListener("resize", sizeToHost);
       cancelAnimationFrame(frameId);
       renderer.dispose();
-      renderer.forceContextLoss();
       geo.dispose();
       edges.dispose();
       lineMat.dispose();
