@@ -4,13 +4,14 @@ import { ViewHandler } from "../providers/ViewHandler";
 import { Aboutme } from "../apps/appcontent/aboutme/Aboutme";
 import { DesktopFooter } from './DesktopFooter';
 import {Navbar} from './Navbar'
-import { Project } from '../apps/appcontent/projects/Project'
 import DesktopBg from "../assets/img/rice.webp"
 // text-xs sm:text-sm md:text-base lg:text-lg
 
 const loaddesktop = () => import('./Machineviewport').then(m => m.Machineviewport)
+const loadproject = () => import('../apps/appcontent/projects/Project').then(m => m.Project)
 
 const Machineviewport = lazy(loaddesktop);
+const Project = lazy(loadproject);
 
 export const MainLayout = () => {
   const hr_mode = ViewHandler((state) => state.hr_Mode);
