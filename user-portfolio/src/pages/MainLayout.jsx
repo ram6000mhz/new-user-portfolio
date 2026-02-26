@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'preact/compat';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { ViewHandler } from "../providers/ViewHandler";
 import { Aboutme } from "../apps/appcontent/aboutme/Aboutme";
 import { DesktopFooter } from './DesktopFooter';
@@ -16,11 +16,16 @@ const Project = lazy(loadproject);
 export const MainLayout = () => {
   const hr_mode = ViewHandler((state) => state.hr_Mode);
   const isHome = ViewHandler((state)=> state.isHome)
+  const hasPreloaded = useRef(false);
+
   useEffect(() => {
-    if (hr_mode) {
+    if (hr_mode && !hasPreloaded.current) {
       loaddesktop();
-        const img = new Image();
-        img.src = DesktopBg;
+      loadproject();
+      const img = new Image();
+      img.src = DesktopBg;
+      hasPreloaded.current = true;
+      console.log("Preloaded successfully");
     }
   }, [hr_mode]);
 
