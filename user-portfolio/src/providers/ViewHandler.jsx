@@ -5,6 +5,7 @@ import { Taskman } from '../taskman/Taskman';
 
 export const ViewHandler = create((set,get) => ({
     hr_Mode: true,
+    isHome: true,
     toggleHrMode() {
         set((state) => ({ hr_Mode: !state.hr_Mode }));
         if(!get().hr_Mode){
@@ -15,5 +16,15 @@ export const ViewHandler = create((set,get) => ({
             shutdownTaskman();
             shutdownZIndexShuffler();
         }
+    },
+
+    toggleisHome() {
+        if (get().isHome) return;
+        set({ isHome: true });
+    },
+
+    toggleisProject() {
+        if (!get().isHome) return;
+        set({ isHome: false });
     },
 }))
