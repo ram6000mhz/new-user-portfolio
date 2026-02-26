@@ -25,7 +25,6 @@ export const MainLayout = () => {
       const img = new Image();
       img.src = DesktopBg;
       hasPreloaded.current = true;
-      console.log("Preloaded successfully");
     }
   }, [hr_mode]);
 

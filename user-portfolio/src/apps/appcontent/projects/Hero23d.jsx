@@ -72,9 +72,7 @@ export const Hero23d = () => {
 
       if (intersects.length > 0) {
         const data = intersects[0].object.userData;
-        console.log("Opening App ID:", data.id);
         setSelectedProject(data.id);
-        console.log("sel")
       }   
 
     };
