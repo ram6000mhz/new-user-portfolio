@@ -19,5 +19,5 @@ export const useProjectStore = create((set, get) => ({
     })
   },
   
-  closeSidebar: () => set({ isOpen: false, selectedId: null, project: null }),
+  closeSidebar: () => set({ isOpen: false }),
 }));
