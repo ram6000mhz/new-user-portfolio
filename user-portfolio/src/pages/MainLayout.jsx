@@ -4,6 +4,7 @@ import { ViewHandler } from "../providers/ViewHandler";
 import { Aboutme } from "../apps/appcontent/aboutme/Aboutme";
 import { DesktopFooter } from './DesktopFooter';
 import {Navbar} from './Navbar'
+import { Project } from '../apps/appcontent/projects/Project'
 import DesktopBg from "../assets/img/rice.webp"
 // text-xs sm:text-sm md:text-base lg:text-lg
 
@@ -13,13 +14,13 @@ const Machineviewport = lazy(loaddesktop);
 
 export const MainLayout = () => {
   const hr_mode = ViewHandler((state) => state.hr_Mode);
-
+  const isHome = ViewHandler((state)=> state.isHome)
   useEffect(() => {
     if (hr_mode) {
       loaddesktop();
         const img = new Image();
         img.src = DesktopBg;
-      }
+    }
   }, [hr_mode]);
 
   return (
@@ -29,7 +30,16 @@ export const MainLayout = () => {
       )}
       <main className="flex-1 min-h-0">
         <Suspense fallback={null}>
-          {hr_mode ? <Aboutme /> : <Machineviewport />}
+          {hr_mode ? 
+            isHome ? 
+              <Aboutme /> 
+              : 
+              <div className='pt-[70px] w-full h-full bg-black'>
+                <Project /> 
+              </div>
+            : 
+            <Machineviewport />
+          }
         </Suspense>
       </main>
       {!hr_mode &&(
