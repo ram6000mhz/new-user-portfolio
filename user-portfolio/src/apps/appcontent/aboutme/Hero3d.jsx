@@ -34,7 +34,18 @@ export const Hero3d = () => {
       enableZoom: false,
       autoRotate: true,
       autoRotateSpeed: 5.0,
-      enablePan: false
+      enablePan: false,
+      enableDamping: true
+    });
+
+    controls.addEventListener('start', () => {
+      console.log("start")
+      controls.autoRotate = false;
+    });
+
+    controls.addEventListener('end', () => {
+      console.log("end")
+      controls.autoRotate = true;
     });
 
     const geo = new TorusGeometry(2, 1, 15, 15);
@@ -64,8 +75,10 @@ export const Hero3d = () => {
     const animate = () => {
       frameId = requestAnimationFrame(animate);
       if (!isVisible) return;
-      wireframe.rotation.x += 0.005;
-      wireframe.rotation.z += 0.003;
+      if (controls.autoRotate) {
+          wireframe.rotation.x += 0.005;
+          wireframe.rotation.z += 0.003;
+      }
       controls.update();
       renderer.render(scene, camera);
     };
