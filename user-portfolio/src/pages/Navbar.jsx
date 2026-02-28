@@ -8,23 +8,17 @@ export const Navbar=()=>{
     const closeSidebar = useProjectStore((state) => state.closeSidebar);
 
     return(
-        <nav className=" flex flex-row h-[70px] w-full items-center justify-between px-10 fixed top-0 z-50 bg-black/30 backdrop-blur-xs">  
-            <div className="w-[25px]" />
-            <div className="flex flex-row gap-10">
-                <h1 className="text-white" onClick={()=> {
-                    toggleisHome()
-                    closeSidebar()
-                }}>
-                    Home
+        <nav className="flex flex-row h-[70px] w-full items-center justify-between px-4 min-[350px]:px-8 fixed top-0 z-50 bg-black/30 backdrop-blur-xs">  
+            <div/> 
+            <div className="flex flex-row gap-2 min-[350px]:gap-9">
+                <h1 className="text-white cursor-pointer font-semibold text-sm min-[350px]:text-l" onClick={()=> { toggleisHome(); closeSidebar(); }}>
+                    About me
                 </h1>  
-                <h1 className="text-white" onClick={() => {
-                    toggleisProject()
-                    closeSidebar()
-                }}>
+                <h1 className="text-white cursor-pointer font-semibold text-sm min-[350px]:text-l" onClick={() => { toggleisProject(); closeSidebar(); }}>
                     Projects
                 </h1>  
             </div>
-            <Power onClick={toggleHrMode} className="!h-[25px] !w-[25px] text-white cursor-pointer"/>
-        </nav> 
+            <Power onClick={toggleHrMode} size={24} className="text-white cursor-pointer shrink-0"/>
+        </nav>
     )
 }
