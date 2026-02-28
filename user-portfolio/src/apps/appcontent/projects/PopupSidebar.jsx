@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from "motion/react";
 import { useProjectStore } from "./Projectstore";
 import { X } from "lucide-preact"
 
@@ -6,7 +5,7 @@ export const PopupSidebar = () => {
   const { project, closeSidebar } = useProjectStore();
   return (
       <>
-        <button onClick={closeSidebar} className="self-end p-2 hover:bg-muted rounded-full">
+        <button onClick={closeSidebar} className="self-end p-2 hover:bg-muted rounded-full cursor-pointer">
           <X className="text-white" size={24} />
         </button>
         
@@ -19,11 +18,13 @@ export const PopupSidebar = () => {
           <img 
             src={project.preview} 
             alt={project.title} 
-            className="w-full rounded-lg mb-6 object-cover aspect-video" 
+            className="w-full rounded-lg mb-6 object aspect-video object-contain" 
           />
           
-          <div className="prose prose-invert">
-            {project.content}
+          <div className="w-full">
+            <p className="text-justify">
+              {project.content}
+            </p>
           </div>
         </div>
       </>
