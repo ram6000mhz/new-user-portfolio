@@ -28,9 +28,22 @@ export const Hero23d = () => {
     const camera = new PerspectiveCamera(75, 1, 0.1, 100);
     camera.position.set(0, 0, 4);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    Object.assign(controls, { enableZoom: false, autoRotate: true, enablePan: false });
+    const controls = new OrbitControls(camera, renderer.domElement);  
+    Object.assign(controls, { 
+      enableZoom: false, 
+      autoRotate: true, 
+      enablePan: false,
+      enableDamping: true
+    });
 
+    controls.addEventListener('start', () => {
+      controls.autoRotate = false;
+    });
+
+    controls.addEventListener('end', () => {
+      controls.autoRotate = true;
+    });
+    
     const group = new Group();
     const spacing = 1;
 
@@ -93,8 +106,10 @@ export const Hero23d = () => {
     const animate = () => {
       frameId = requestAnimationFrame(animate);
       if (!isVisible) return;
-      group.rotation.y += 0.008;
-      group.rotation.x += 0.004;
+      if (controls.autoRotate) {
+          group.rotation.x += 0.005;
+          group.rotation.z += 0.003;
+      }
       controls.update();
       renderer.render(scene, camera);
     };
