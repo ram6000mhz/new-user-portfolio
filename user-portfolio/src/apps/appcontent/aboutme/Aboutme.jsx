@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'preact/compat';
+import { lazy, ErrorBoundary } from 'preact-iso';
 import { Intro } from "./Intro";
 
 const Skillchart = lazy(() => import('./Skillchart').then(m => m.Skillchart));
@@ -8,9 +8,9 @@ export const Aboutme = ()=>{
         <div className="flex w-full h-full flex-row @container overflow-auto overscroll-none no-scrollbar bg-black">
             <div className="flex-1 flex-col items-center h-full relative">
                 <Intro/>
-                <Suspense fallback={null}>
-                    <Skillchart/>   
-                </Suspense>   
+                <ErrorBoundary>
+                    <Skillchart/>     
+                </ErrorBoundary>  
             </div>    
         </div> 
     )
