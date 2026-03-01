@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'preact/compat';
+import { lazy, ErrorBoundary } from 'preact-iso';
 import { useEffect, useRef } from 'react';
 import { ViewHandler } from "../providers/ViewHandler";
 import { Aboutme } from "../apps/appcontent/aboutme/Aboutme";
@@ -34,7 +34,7 @@ export const MainLayout = () => {
         <Navbar />
       )}
       <main className="flex-1 min-h-0">
-        <Suspense fallback={null}>
+        <ErrorBoundary>
           {hr_mode ? 
             isHome ? 
               <Aboutme /> 
@@ -45,7 +45,7 @@ export const MainLayout = () => {
             : 
             <Machineviewport />
           }
-        </Suspense>
+        </ErrorBoundary>
       </main>
       {!hr_mode &&(
         <DesktopFooter/>
