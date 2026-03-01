@@ -1,7 +1,9 @@
-import { Folder, User, ScanFace, Soup, Gamepad2, BusFront, BotMessageSquare } from "lucide-preact";
+import { Folder, User } from "lucide-preact";
 
 import { Aboutme } from "./appcontent/aboutme/Aboutme";
-import { Project } from "./appcontent/projects/Project";
+
+const loadproject = () => import('../apps/appcontent/projects/Project').then(m => m.Project)
+const Project = lazy(loadproject);
 
 export const apps = [
     { 
