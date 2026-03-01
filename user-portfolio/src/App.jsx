@@ -1,12 +1,11 @@
-import { Router, Route, lazy, prerender, LocationProvider } from 'preact-iso';
-import { Suspense } from 'preact/compat';
-const MainLayout = lazy(() => import('./pages/MainLayout').then(m => m.MainLayout));
+import { lazy, LocationProvider, ErrorBoundary} from 'preact-iso';
+const MainLayout = lazy(() => import('./pages/MainLayout'));
 
 function HomePage() {
   return (
-    <Suspense fallback={null}>
+    <ErrorBoundary>
       <MainLayout/>
-    </Suspense>
+    </ErrorBoundary>
   );
 }
 
