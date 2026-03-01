@@ -1,5 +1,5 @@
 import { Folder, User } from "lucide-preact";
-
+import { lazy } from "preact-iso"
 import { Aboutme } from "./appcontent/aboutme/Aboutme";
 
 const loadproject = () => import('../apps/appcontent/projects/Project').then(m => m.Project)

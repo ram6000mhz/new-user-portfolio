@@ -1,5 +1,5 @@
 import { lazy, LocationProvider, ErrorBoundary} from 'preact-iso';
-const MainLayout = lazy(() => import('./pages/MainLayout'));
+const MainLayout = lazy(() => import('./pages/MainLayout').then(m => m.MainLayout));
 
 function HomePage() {
   return (
