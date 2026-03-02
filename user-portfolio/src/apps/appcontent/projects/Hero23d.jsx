@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { 
-  WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, Mesh, MeshBasicMaterial,
+  WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial,
   LineSegments, LineBasicMaterial, EdgesGeometry, Group, Raycaster, Vector2
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -10,7 +10,10 @@ import { useProjectStore } from "./Projectstore";
 const boxGeo = new BoxGeometry(1, 1, 1);
 const edgeGeo = new EdgesGeometry(boxGeo);
 const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
-const hitMat = new MeshBasicMaterial({ visible: false });
+const hitMat = new MeshStandardMaterial({ 
+  color: 0x222222, 
+});
+
 
 export const Hero23d = () => {
   const setSelectedProject = useProjectStore((state) => state.setSelectedProject);  
