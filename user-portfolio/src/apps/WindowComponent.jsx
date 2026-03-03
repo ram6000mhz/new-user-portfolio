@@ -1,6 +1,6 @@
 import { Minus,X, Square, PictureInPicture2} from "lucide-preact";
 import { ZIndexShuffler } from "../providers/ZIndexShuffler";
-
+import { ErrorBoundary } from "preact-iso";
 export const WindowComponent=({title, isFullscreen, terminationcallback, windowcallback, minimizecallback, appId, content})=>{
     const { bringToFront } = ZIndexShuffler.getState();
 
@@ -35,7 +35,9 @@ export const WindowComponent=({title, isFullscreen, terminationcallback, windowc
                 </div>
             </div>
             <div className="deadzone w-full flex-1 min-h-0" onClick={()=>{bringToFront(appId)}} onTouchEnd={(e)=>{e.preventDefault();bringToFront(appId);}}>
-                {content}
+                <ErrorBoundary>
+                    {content}
+                </ErrorBoundary>
             </div>
         </div>
     )
