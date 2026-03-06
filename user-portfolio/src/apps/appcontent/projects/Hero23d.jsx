@@ -102,7 +102,10 @@ export const Hero23d = () => {
       camera.aspect = w / (h || 1);
       camera.updateProjectionMatrix();
     };
+
     window.addEventListener("resize", sizeToHost);
+    const resizeObserver = new ResizeObserver(sizeToHost);
+    resizeObserver.observe(container);
     sizeToHost();
 
     let frameId;
@@ -119,6 +122,7 @@ export const Hero23d = () => {
     animate();
 
     return () => {
+      resizeObserver.disconnect();
       observer.disconnect();
       renderer.domElement.removeEventListener("click", onClick);
       window.removeEventListener("resize", sizeToHost);
