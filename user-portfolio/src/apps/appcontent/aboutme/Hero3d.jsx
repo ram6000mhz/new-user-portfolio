@@ -67,7 +67,9 @@ export const Hero3d = () => {
       camera.updateProjectionMatrix();
     };
 
-    window.addEventListener("resize", sizeToHost, { passive: true });
+    window.addEventListener("resize", sizeToHost);
+    const resizeObserver = new ResizeObserver(sizeToHost);
+    resizeObserver.observe(container);
     sizeToHost();
 
     let frameId;
