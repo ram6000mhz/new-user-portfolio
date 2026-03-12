@@ -1,25 +1,58 @@
 import { useRef, useEffect } from "react";
 import { 
-  WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial,
-  LineSegments, LineBasicMaterial, EdgesGeometry, Group, Raycaster, Vector2
+  WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, Mesh, MeshStandardMaterial,
+  LineSegments, LineBasicMaterial, EdgesGeometry, Group, Raycaster, Vector2, 
+  CanvasTexture, AmbientLight, DirectionalLight
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { Projectlist } from "./Projectlist";
 import { useProjectStore } from "./Projectstore";
+import { render } from "preact"
 
-const boxGeo = new BoxGeometry(1, 1, 1);
-const edgeGeo = new EdgesGeometry(boxGeo);
-const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
-const hitMat = new MeshStandardMaterial({ 
-  color: 0x222222, 
-});
+const createIconTexture = (iconComponent) => {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+  const ctx = canvas.getContext("2d");
 
+  ctx.fillStyle = "#000000"; 
+  ctx.fillRect(0, 0, 512, 512);
+
+  const container = document.createElement("div");
+  render(iconComponent, container);
+  const svg = container.querySelector("svg");
+  
+  svg.setAttribute("width", "400");
+  svg.setAttribute("height", "400");
+  svg.setAttribute("stroke", "white");
+
+  const svgData = new XMLSerializer().serializeToString(svg);
+  render(null, container);
+  const img = new Image();
+  const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(svgBlob);
+
+  const texture = new CanvasTexture(canvas);
+
+  img.onload = () => {
+    ctx.drawImage(img, 56, 56, 400, 400);
+    texture.needsUpdate = true;
+    URL.revokeObjectURL(url);
+  };
+  img.src = url;
+
+  return texture;
+};
 
 export const Hero23d = () => {
   const setSelectedProject = useProjectStore((state) => state.setSelectedProject);  
   const mountRef = useRef(null);
 
   useEffect(() => {
+    const boxGeo = new BoxGeometry(1, 1, 1);
+    const edgeGeo = new EdgesGeometry(boxGeo);
+    const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
+
     const container = mountRef.current;
     if (!container) return;
 
@@ -51,8 +84,15 @@ export const Hero23d = () => {
     const spacing = 1;
 
     Projectlist.forEach((app, i) => {
-      
-      const hitBox = new Mesh(boxGeo, hitMat);
+
+      const iconTexture = createIconTexture(app.icon);
+      const material = new MeshStandardMaterial({ 
+        map: iconTexture,
+        metalness: 0.5,
+        roughness: 0.5 
+      });
+
+      const hitBox = new Mesh(boxGeo, material);
       const wireframe = new LineSegments(edgeGeo, lineMat);
       
       wireframe.raycast = () => null; 
@@ -66,6 +106,13 @@ export const Hero23d = () => {
       hitBox.userData = { id: app.appid, title: app.title };
       group.add(hitBox);
     });
+
+    const ambientLight = new AmbientLight(0xffffff, 1.5);
+    scene.add(ambientLight);
+
+    const directionalLight = new DirectionalLight(0xffffff, 2);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
 
     scene.add(group);
 
@@ -122,13 +169,36 @@ export const Hero23d = () => {
     animate();
 
     return () => {
+      cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
       observer.disconnect();
-      renderer.domElement.removeEventListener("click", onClick);
       window.removeEventListener("resize", sizeToHost);
-      cancelAnimationFrame(frameId);
+      renderer.domElement.removeEventListener("click", onClick);
+      
+      controls.dispose();
+
+      group.traverse((child) => {
+        if (child.isMesh) {
+          const materials = Array.isArray(child.material) ? child.material : [child.material];
+          materials.forEach(mat => {
+            if (mat.map) {
+              mat.map.dispose();
+            }
+            mat.dispose();
+          });
+        }
+      });
+
+      boxGeo.dispose();
+      edgeGeo.dispose();
+      lineMat.dispose();
+
+      scene.clear();
       renderer.dispose();
-      if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
+
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
     };
   }, []);
 
