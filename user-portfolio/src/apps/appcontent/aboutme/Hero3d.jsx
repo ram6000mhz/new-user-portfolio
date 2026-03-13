@@ -10,15 +10,15 @@ import {
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-const geo = new TorusGeometry(2, 1, 15, 15);
-const edges = new EdgesGeometry(geo);
-const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
-const wireframe = new LineSegments(edges, lineMat);
-
 export const Hero3d = () => {
   const mountRef = useRef(null);
 
   useEffect(() => {
+    const geo = new TorusGeometry(2, 1, 15, 15);
+    const edges = new EdgesGeometry(geo);
+    const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
+    const wireframe = new LineSegments(edges, lineMat);
+
     const container = mountRef.current;
     if (!container) return;
 
