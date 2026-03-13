@@ -94,7 +94,8 @@ export const Hero3d = () => {
       edges.dispose();
       lineMat.dispose();
       controls.dispose();
-
+      scene.clear();
+      renderer.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
