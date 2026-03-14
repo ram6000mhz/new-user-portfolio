@@ -9,13 +9,13 @@ import { Projectlist } from "./Projectlist";
 import { useProjectStore } from "./Projectstore";
 import { render } from "preact"
 
-const createIconTexture = (iconComponent) => {
+const createIconTexture = (iconComponent, objectColor) => {
   const canvas = document.createElement("canvas");
   canvas.width = 512;
   canvas.height = 512;
   const ctx = canvas.getContext("2d");
 
-  ctx.fillStyle = "#000000"; 
+  ctx.fillStyle = objectColor; 
   ctx.fillRect(0, 0, 512, 512);
 
   const container = document.createElement("div");
@@ -85,7 +85,7 @@ export const Hero23d = () => {
 
     Projectlist.forEach((app, i) => {
 
-      const iconTexture = createIconTexture(app.icon);
+      const iconTexture = createIconTexture(app.icon, app.boxcolor);
       const material = new MeshStandardMaterial({ 
         map: iconTexture,
         metalness: 0.5,
