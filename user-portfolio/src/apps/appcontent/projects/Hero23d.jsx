@@ -51,7 +51,7 @@ export const Hero23d = () => {
   useEffect(() => {
     const boxGeo = new BoxGeometry(1, 1, 1);
     const edgeGeo = new EdgesGeometry(boxGeo);
-    const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
+    const lineMat = new LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 1 });
 
     const container = mountRef.current;
     if (!container) return;
