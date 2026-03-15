@@ -12,7 +12,7 @@ export const Projectlist = [
         preview:Optiface,
         boxcolor:"#00FF00",
         content: 
-        <p className="text-white">
+        <p className="text-white text-justify">
             A lightweight facial recognition application built by using scrfd, mediapipe's FaceMesh, and Edgeface that is still accurate and fast.
         </p>
     },
@@ -23,7 +23,7 @@ export const Projectlist = [
         preview:BakeBrewCook,
         boxcolor:"#FF0000",
         content: 
-        <p className="text-white">
+        <p className="text-white text-justify">
             A small recipe application that contains a variety of Filipino recipes for baking, brewing, and cooking.
         </p>
     },
@@ -34,7 +34,7 @@ export const Projectlist = [
         preview:MathSolve,
         boxcolor:"#0000FF",
         content: 
-        <p className="text-white">
+        <p className="text-white text-justify">
             A game that generates a random -+/x problem to solve within a time limit.
         </p>
     },
@@ -45,7 +45,7 @@ export const Projectlist = [
         preview:MagicC,
         boxcolor:"#FA5902",
         content: 
-        <p className="text-white">
+        <p className="text-white text-justify">
             A transportation booking application for Magic C Transport Services.
         </p>
     },
@@ -56,7 +56,7 @@ export const Projectlist = [
         preview:Tipai,
         boxcolor:"#FFFF00",
         content: 
-        <p className="text-white">
+        <p className="text-white text-justify">
             A simple AI chatbot that responds to user's queries about the technological institute of the philippines.
         </p>
     },
