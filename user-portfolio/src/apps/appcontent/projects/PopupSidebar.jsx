@@ -22,9 +22,7 @@ export const PopupSidebar = () => {
           />
           
           <div className="w-full">
-            <p className="text-justify">
               {project.content}
-            </p>
           </div>
         </div>
       </>
