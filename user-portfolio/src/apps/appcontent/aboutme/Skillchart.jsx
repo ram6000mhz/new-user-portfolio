@@ -116,7 +116,7 @@ export const Skillchart = ()=>{
                                     className=" flex items-center justify-end pr-2"
                                     style={{ height: 'clamp(1px, 4cqw, 20px)' }}
                                 >
-                                    <span className="text-xs font-medium truncate text-white">{name}</span>
+                                    <span className="text-[clamp(0.5rem,3cqw,0.75rem)] font-medium truncate text-white">{name}</span>
                                 </div>
                             ))}
                         </div>
