@@ -9,7 +9,7 @@ export const Contacables = () => {
                             href="mailto:esyworkpro@gmail.com"
                             aria-label="Email"
                         >
-                            <Mail className="!w-[25px] !h-[25px] text-white"/>
+                            <Mail className="!w-[clamp(18px,5vw,25px)] !h-[clamp(18px,5vw,25px)] text-white"/>
                         </a>
                     </div>
                 </div>
@@ -21,7 +21,7 @@ export const Contacables = () => {
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
-                            <Github className="!w-[25px] !h-[25px] text-white"/>
+                            <Github className="!w-[clamp(18px,5vw,25px)] !h-[clamp(18px,5vw,25px)] text-white"/>
                         </a>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ export const Contacables = () => {
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
-                            <Linkedin className="!w-[25px] !h-[25px] text-white"/>
+                            <Linkedin className="!w-[clamp(18px,5vw,25px)] !h-[clamp(18px,5vw,25px)] text-white"/>
                         </a>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ export const Contacables = () => {
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
-                            <MapPin className="!w-[25px] !h-[25px] text-white"/>
+                            <MapPin className="!w-[clamp(18px,5vw,25px)] !h-[clamp(18px,5vw,25px)] text-white"/>
                         </a>
                     </div>
                 </div>
