@@ -2,8 +2,8 @@ import { Hero3d } from "./Hero3d"
 import { Contacables } from "./Contacables";
 export const Intro = () =>{
     return(
-        <div className="relative flex flex-row w-full h-full items-center justify-center">
-            <div className="relative z-1 bg-black/30 backdrop-blur-xs flex-1 h-full grid place-content-center justify-items-start px-0 sm:px-10">
+        <div className="relative flex flex-row w-full h-full items-center justify-center @container">
+            <div className="relative z-1 bg-black/30 backdrop-blur-xs flex-1 h-full grid place-content-center justify-items-start px-0 @sm:px-10">
                 <h1 className="font-bold text-[clamp(1.5rem,8vw,3rem)] text-white">
                    Ethan Sancho Yap
                 </h1>
@@ -15,7 +15,7 @@ export const Intro = () =>{
                 </h3>
                 <Contacables/>
             </div>
-            <div className="absolute inset-0 md:relative md:flex-1 h-full w-full bg-black z-0">
+            <div className="absolute inset-0 @md:relative @md:flex-1 h-full w-full bg-black z-0">
                 <Hero3d />
             </div>
         </div>
