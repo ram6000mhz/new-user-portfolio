@@ -9,7 +9,7 @@ export const Contacables = () => {
                             href="mailto:esyworkpro@gmail.com"
                             aria-label="Email"
                         >
-                            <Mail className="!w-[clamp(18px,5vw,25px)] !h-[clamp(18px,5vw,25px)] text-white"/>
+                            <Mail className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
                         </a>
                     </div>
                 </div>
@@ -21,7 +21,7 @@ export const Contacables = () => {
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
-                            <Github className="!w-[clamp(18px,5vw,25px)] !h-[clamp(18px,5vw,25px)] text-white"/>
+                            <Github className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
                         </a>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ export const Contacables = () => {
                             target="_blank" 
                             rel="noopener noreferrer"
                         >
-                            <Linkedin className="!w-[clamp(18px,5vw,25px)] !h-[clamp(18px,5vw,25px)] text-white"/>
+                            <Linkedin className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
                         </a>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ export const Contacables = () => {
                             aria-label="Philippines"
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-[clamp(18px,5vw,25px)] leading-none"
+                            className="text-[clamp(18px,5cqw,25px)] leading-none"
                         >
                             🇵🇭
                         </a>
