@@ -40,12 +40,13 @@ export const Contacables = () => {
                 <div className="flex flex-col gap-1">
                     <div className="flex flex-row gap-1 justify-center items-center">
                         <a 
-                            href=""
+                            href="https://www.google.com/search?q=Philippines"
                             aria-label="Philippines"
                             target="_blank" 
                             rel="noopener noreferrer"
+                            className="text-[clamp(18px,5vw,25px)] leading-none"
                         >
-                            <MapPin className="!w-[clamp(18px,5vw,25px)] !h-[clamp(18px,5vw,25px)] text-white"/>
+                            🇵🇭
                         </a>
                     </div>
                 </div>
