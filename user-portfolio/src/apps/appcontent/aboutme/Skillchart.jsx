@@ -25,7 +25,7 @@ export const Skillchart = ()=>{
     const maxRating = 10
 
     return(
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center @container">
             <div className="w-full max-w-4xl px-4 flex flex-col items-center">       
                 <div className="text-center">
                     <h2 className="font-semibold text-xl text-white text-start">Skills</h2>
