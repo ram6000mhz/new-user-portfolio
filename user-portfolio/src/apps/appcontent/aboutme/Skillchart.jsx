@@ -83,7 +83,7 @@ export const Skillchart = ()=>{
                                     {[...Array(maxRating)].map((_, i) => (
                                         <div
                                             key={i + 1}
-                                            className={` overflow-hidden rounded-md ${i + 1 <= rating ? 'bg-background-muted' : 'bg-white'}`}
+                                            className={` overflow-hidden rounded-md border-3 border-zinc-700 ${i + 1 <= rating ? 'bg-zinc-400' : 'bg-white'}`}
                                             style={{
                                                 width: 'clamp(20px, 4cqw, 40px)',
                                                 height: 'clamp(20px, 4cqw, 40px)'
@@ -126,7 +126,7 @@ export const Skillchart = ()=>{
                                 <div key={`row-${name}`} className="flex gap-1">
                                     {[...Array(maxRating)].map((_, i) => (
                                         <div key={i + 1} 
-                                            className={`rounded-xs ${i + 1 <= rating ? 'bg-background-muted' : 'bg-white'}`} 
+                                            className={`rounded-xs border-2 border-zinc-600 ${i + 1 <= rating ? 'bg-zinc-400' : 'bg-white'}`} 
                                             style={{
                                                 width: 'clamp(1px, 4cqw, 20px)',
                                                 height: 'clamp(1px, 4cqw, 20px)'
