@@ -1,106 +1,84 @@
 import { useRef, useEffect } from "react";
-import { 
-  WebGLRenderer, 
-  Scene, 
-  PerspectiveCamera, 
-  TorusGeometry, 
-  LineSegments, 
-  LineBasicMaterial, 
-  EdgesGeometry 
-} from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
+let globalWorker = null;
 
 export const Hero3d = () => {
-  const mountRef = useRef(null);
+  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const geo = new TorusGeometry(2, 1, 15, 15);
-    const edges = new EdgesGeometry(geo);
-    const lineMat = new LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 });
-    const wireframe = new LineSegments(edges, lineMat);
+    const container = containerRef.current;
+    const canvas = canvasRef.current;
+    if (!container || !canvas) return;
 
-    const container = mountRef.current;
-    if (!container) return;
+    const sendEventToWorker = (event) => {
+      const eventData = {
+        type: event.type,
+        clientX: event.clientX,
+        clientY: event.clientY,
+        pageX: event.pageX,
+        pageY: event.pageY,
+        button: event.button,
+        pointerId: event.pointerId,
+        deltaX: event.deltaX,
+        deltaY: event.deltaY,
+        touches: event.touches ? Array.from(event.touches).map(t => ({
+          pageX: t.pageX, pageY: t.pageY, clientX: t.clientX, clientY: t.clientY
+        })) : []
+      };
 
-    const renderer = new WebGLRenderer({ antialias: false, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.domElement.style.display = 'block';
-    renderer.domElement.style.position = 'absolute';
-    renderer.domElement.style.top = '0';
-    renderer.domElement.style.left = '0';
-    container.appendChild(renderer.domElement);
-
-    const scene = new Scene();
-    const camera = new PerspectiveCamera(75, 1, 0.1, 100);
-    camera.position.set(0, 3, 5);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    Object.assign(controls, {
-      enableZoom: false,
-      autoRotate: true,
-      autoRotateSpeed: 5.0,
-      enablePan: false,
-      enableDamping: true
-    });
-
-    controls.addEventListener('start', () => {
-      controls.autoRotate = false;
-    });
-
-    controls.addEventListener('end', () => {
-      controls.autoRotate = true;
-    });
-
-    scene.add(wireframe);
-
-    let isVisible = true;
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-    }, { threshold: 0.1 });
-    observer.observe(container);
-
-    const sizeToHost = () => {
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      renderer.setSize(w, h);
-      camera.aspect = w / (h || 1);
-      camera.updateProjectionMatrix();
+      globalWorker.postMessage({ type: 'event', data: eventData });
     };
 
-    window.addEventListener("resize", sizeToHost);
-    const resizeObserver = new ResizeObserver(sizeToHost);
+    window.addEventListener('pointerup', sendEventToWorker);
+    window.addEventListener('pointermove', sendEventToWorker);
+
+    const eventTypes = [
+      'pointerdown', 'pointermove', 'pointerup', 'touchstart', 'touchmove', 'touchend'
+    ];
+    eventTypes.forEach(type => {
+      container.addEventListener(type, sendEventToWorker, { passive: false });
+    });
+
+    const offscreen = canvas.transferControlToOffscreen();
+
+    if (!globalWorker){
+      globalWorker = new Worker(new URL('./Heroworker3d.js', import.meta.url), { type: 'module' });
+    }
+
+    globalWorker.postMessage({
+      type: 'init',
+      canvas: offscreen,
+      width: container.clientWidth,
+      height: container.clientHeight,
+      pixelRatio: Math.min(window.devicePixelRatio, 2)
+    }, [offscreen]);
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+        globalWorker.postMessage({
+            type: 'resize',
+            width: entry.contentRect.width,
+            height: entry.contentRect.height
+        });
+    });
+
     resizeObserver.observe(container);
-    sizeToHost();
-
-    let frameId;
-    const animate = () => {
-      frameId = requestAnimationFrame(animate);
-      if (!isVisible) return;
-      if (controls.autoRotate) {
-          wireframe.rotation.x += 0.005;
-          wireframe.rotation.z += 0.003;
-      }
-      controls.update();
-      renderer.render(scene, camera);
-    };
-    animate();
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", sizeToHost);
-      cancelAnimationFrame(frameId);
-      renderer.dispose();
-      geo.dispose();
-      edges.dispose();
-      lineMat.dispose();
-      controls.dispose();
-      scene.clear();
-      renderer.dispose();
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-      }
+      eventTypes.forEach(type => {
+        container.removeEventListener(type, sendEventToWorker);
+      });
+      window.removeEventListener('pointerup', sendEventToWorker);
+      window.removeEventListener('pointermove', sendEventToWorker);
+      globalWorker.postMessage({ type: 'stop' });
+      resizeObserver.disconnect();
     };
+
   }, []);
 
-  return <div ref={mountRef} className="h-full w-full relative" />;
+  return (
+    <div ref={containerRef} className="h-full w-full relative">
+      <canvas ref={canvasRef} className="w-full h-full" />
+    </div>
+  );
 };
