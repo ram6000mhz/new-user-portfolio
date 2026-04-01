@@ -4,35 +4,15 @@ import {
   AmbientLight, DirectionalLight, EventDispatcher
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { ElementProxyReceiver } from "../webworkerutil/ElementProxyReceiver";
 
-class ElementProxyReceiver extends EventDispatcher {
-    constructor() {
-        super();
-        this.style = {};
-        this.width = 0;
-        this.height = 0;
-        this.left = 0;
-        this.top = 0;
-    }
-    setPointerCapture() { }
-    releasePointerCapture() { }
-    getRootNode() { return this; }
-    get clientWidth() { return this.width; }
-    get clientHeight() { return this.height; }
-    getBoundingClientRect() {
-        return { left: this.left, top: this.top, width: this.width, height: this.height };
-    }
-    focus() {}
-    ownerDocument = this;
-    }
+const proxy = new ElementProxyReceiver();
+let renderer, scene, camera, controls, group, raycaster;
+let frameId;
+let isInteracting = false;
+const mouse = new Vector2();
 
-    const proxy = new ElementProxyReceiver();
-    let renderer, scene, camera, controls, group, raycaster;
-    let frameId;
-    let isInteracting = false;
-    const mouse = new Vector2();
-
-    self.onmessage = (e) => {
+self.onmessage = (e) => {
     const { type, data, canvas, width, height, pixelRatio, projects } = e.data;
 
     if (type === 'init') {
