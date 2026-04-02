@@ -2,53 +2,45 @@ import {Power, Linkedin, Mail, Github, MapPin} from "lucide-preact";
 export const Contacables = () => {
     return(
         <div className="w-full">
-            <div class="flex flex-row items-start w-full gap-5 pt-2">
-                <div className="flex flex-col gap-1">
-                    <div className="flex flex-row gap-1 justify-center items-center">
-                        <a 
-                            href="mailto:esyworkpro@gmail.com"
-                            aria-label="Email"
-                        >
-                            <Mail className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
-                        </a>
-                    </div>
+            <div class="flex flex-row items-end justify-start w-full gap-5 pt-2">
+                <div className="flex flex-row gap-1 justify-center items-center">
+                    <a 
+                        href="mailto:esyworkpro@gmail.com"
+                        aria-label="Email"
+                    >
+                        <Mail className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
+                    </a>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <div className="flex flex-row gap-1 justify-center items-center">
-                        <a 
-                            href="https://github.com/ram6000mhz"
-                            aria-label="Github"
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                        >
-                            <Github className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
-                        </a>
-                    </div>
+                <div className="flex flex-row gap-1 justify-center items-center">
+                    <a 
+                        href="https://github.com/ram6000mhz"
+                        aria-label="Github"
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                    >
+                        <Github className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
+                    </a>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <div className="flex flex-row gap-1 justify-center items-center">
-                        <a 
-                            href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
-                            aria-label="LinkedIn"
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                        >
-                            <Linkedin className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
-                        </a>
-                    </div>
+                <div className="flex flex-row gap-1 justify-center items-center">
+                    <a 
+                        href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
+                        aria-label="LinkedIn"
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                    >
+                        <Linkedin className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
+                    </a>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <div className="flex flex-row gap-1 justify-center items-center">
-                        <a 
-                            href="https://www.google.com/search?q=Philippines"
-                            aria-label="Philippines"
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-[clamp(18px,5cqw,25px)] leading-none"
-                        >
-                            🇵🇭
-                        </a>
-                    </div>
+                <div className="flex flex-row justify-center items-center">
+                    <a 
+                        href="https://www.google.com/search?q=Philippines"
+                        aria-label="Philippines"
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex justify-center items-center p-0.5"
+                    >
+                        <span class="fi fi-ph !text-[clamp(18px,5cqw,25px)] rounded-[4px]"></span>
+                    </a>
                 </div>
             </div>
         </div>
