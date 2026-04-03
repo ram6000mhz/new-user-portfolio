@@ -1,4 +1,6 @@
 import {Power, Linkedin, Mail, Github, MapPin} from "lucide-preact";
+import phFlag from 'flag-icons/flags/4x3/ph.svg';
+
 export const Contacables = () => {
     return(
         <div className="w-full">
@@ -39,7 +41,11 @@ export const Contacables = () => {
                         rel="noopener noreferrer"
                         className="flex justify-center items-center p-0.5"
                     >
-                        <span class="fi fi-ph !text-[clamp(18px,5cqw,25px)] rounded-[4px]"></span>
+                        <img 
+                            src={phFlag} 
+                            className="w-[clamp(18px,5cqw,25px)] rounded-[4px]" 
+                            alt="Philippines Flag" 
+                        />
                     </a>
                 </div>
             </div>
