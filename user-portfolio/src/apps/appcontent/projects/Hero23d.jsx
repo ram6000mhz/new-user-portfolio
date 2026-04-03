@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import { Projectlist } from "./Projectlist";
 import { useProjectStore } from "./Projectstore";
+import { createIconBitmap } from "../webworkerutil/Bitmaputil";
 
 let globalWorker = null;
 
@@ -14,44 +15,57 @@ export const Hero23d = () => {
       const canvas = canvasRef.current;
       if (!container || !canvas) return;
 
-      const sendEventToWorker = (event) => {
-        const rect = canvas.getBoundingClientRect();
-        const eventData = {
-          type: event.type,
-          clientX: event.clientX - rect.left,
-          clientY: event.clientY - rect.top,
-          button: event.button,
-          pointerId: event.pointerId,
-          deltaY: event.deltaY,
-        };
-        globalWorker.postMessage({ type: 'event', data: eventData });
-      };
-
-      window.addEventListener('pointerup', sendEventToWorker);
-      window.addEventListener('pointermove', sendEventToWorker);
-
-      const eventTypes = ['pointerdown', 'pointermove', 'pointerup', 'wheel'];
-      eventTypes.forEach(type => container.addEventListener(type, sendEventToWorker, { passive: false }));
-
-      const offscreen = canvas.transferControlToOffscreen();
-
       if (!globalWorker) {
         globalWorker = new Worker(new URL('./Heroworker23d.js', import.meta.url), { type: 'module' });
       }
+
+      const offscreen = canvas.transferControlToOffscreen();
+
+      const initWorker = async () => {
+        const projectData = await Promise.all(
+          Projectlist.map(async (p) => {
+            const bitmap = await createIconBitmap(p.icon, p.boxcolor);
+            return { appid: p.appid, boxcolor: p.boxcolor, iconBitmap: bitmap };
+          })
+        );
+
+        const bitmaps = projectData.map(p => p.iconBitmap);
+
+        globalWorker.postMessage({
+          type: 'init',
+          canvas: offscreen,
+          width: container.clientWidth,
+          height: container.clientHeight,
+          pixelRatio: Math.min(window.devicePixelRatio, 2),
+          projects: projectData
+        }, [offscreen, ...bitmaps]);
+      };
+
+      initWorker();
+
+      const sendEventToWorker = (event) => {
+        const rect = canvas.getBoundingClientRect();
+        globalWorker.postMessage({
+          type: 'event',
+          data: {
+            type: event.type,
+            clientX: event.clientX - rect.left,
+            clientY: event.clientY - rect.top,
+            button: event.button,
+            pointerId: event.pointerId,
+            deltaY: event.deltaY,
+          }
+        });
+      };
 
       globalWorker.onmessage = (e) => {
         if (e.data.type === 'PROJECT_SELECTED') setSelectedProject(e.data.id);
       };
 
-      globalWorker.postMessage({
-        type: 'init',
-        canvas: offscreen,
-        width: container.clientWidth,
-        height: container.clientHeight,
-        pixelRatio: Math.min(window.devicePixelRatio, 2),
-        projects: Projectlist.map(p => ({ appid: p.appid, boxcolor: p.boxcolor }))
-      }, [offscreen]);
-
+      const eventTypes = ['pointerdown', 'pointermove', 'pointerup'];
+      eventTypes.forEach(type => container.addEventListener(type, sendEventToWorker, { passive: false }));
+      window.addEventListener('pointerup', sendEventToWorker);
+      window.addEventListener('pointermove', sendEventToWorker);
       const resizeObserver = new ResizeObserver(([entry]) => {
         globalWorker.postMessage({
           type: 'resize',
