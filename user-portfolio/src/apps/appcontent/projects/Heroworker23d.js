@@ -39,7 +39,6 @@ self.onmessage = (e) => {
     const lineMat = new LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.5 });
 
     projects.forEach((app, i) => {
-      // Create texture from transferred ImageBitmap
       const texture = new CanvasTexture(app.iconBitmap);
       
       const material = new MeshStandardMaterial({ 
@@ -53,7 +52,6 @@ self.onmessage = (e) => {
       wireframe.raycast = () => null; 
       hitBox.add(wireframe);
 
-      // Grid positioning
       const x = i % 2, y = Math.floor(i / 2) % 2, z = Math.floor(i / 4) % 2;
       hitBox.position.set((x - 0.5), (y - 0.5), (z - 0.5));
       hitBox.userData = { id: app.appid };
