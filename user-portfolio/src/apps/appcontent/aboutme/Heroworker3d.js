@@ -1,6 +1,6 @@
 import { 
   WebGLRenderer, Scene, PerspectiveCamera, TorusGeometry, 
-  LineSegments, LineBasicMaterial, EdgesGeometry , EventDispatcher
+  LineSegments, LineBasicMaterial, EdgesGeometry 
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { ElementProxyReceiver } from "../webworkerutil/ElementProxyReceiver";
