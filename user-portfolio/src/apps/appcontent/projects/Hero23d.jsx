@@ -62,6 +62,9 @@ export const Hero23d = () => {
         if (e.data.type === 'PROJECT_SELECTED') setSelectedProject(e.data.id);
       };
 
+      window.addEventListener('pointerup', sendEventToWorker);
+      window.addEventListener('pointermove', sendEventToWorker);
+
       const eventTypes = [
         'pointerdown', 'pointermove', 'pointerup', 'touchstart', 'touchmove', 'touchend'
       ];
@@ -82,6 +85,8 @@ export const Hero23d = () => {
         eventTypes.forEach(type => {
           container.removeEventListener(type, sendEventToWorker);
         });
+        window.removeEventListener('pointerup', sendEventToWorker);
+        window.removeEventListener('pointermove', sendEventToWorker);
         globalWorker.postMessage({ type: 'stop' });
         resizeObserver.disconnect();
       };

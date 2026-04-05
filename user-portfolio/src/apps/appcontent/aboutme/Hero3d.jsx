@@ -69,6 +69,8 @@ export const Hero3d = () => {
       eventTypes.forEach(type => {
         container.removeEventListener(type, sendEventToWorker);
       });
+      window.removeEventListener('pointerup', sendEventToWorker);
+      window.removeEventListener('pointermove', sendEventToWorker);
       globalWorker.postMessage({ type: 'stop' });
       resizeObserver.disconnect();
     };
