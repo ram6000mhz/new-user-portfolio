@@ -59,18 +59,32 @@ self.onmessage = (e) => {
     }
 
     if (type === 'stop') {
-      cancelAnimationFrame(frameId);
-      scene.traverse((object) => {
-      if (object.geometry) object.geometry.dispose();
-        if (object.material) {
-          if (Array.isArray(object.material)) {
-            object.material.forEach(mat => mat.dispose());
-          } else {
-            object.material.dispose();
-          }
+        cancelAnimationFrame(frameId);
+        if (scene) {
+            scene.traverse((object) => {
+                if (object.geometry) {
+                    object.geometry.dispose();
+                }
+                if (object.material) {
+                    const materials = Array.isArray(object.material) 
+                        ? object.material 
+                        : [object.material];
+
+                    materials.forEach((mat) => {
+                        if (mat.map) mat.map.dispose();
+                        
+                        mat.dispose();
+                    });
+                }
+            });
         }
-      });
-      renderer.dispose();
+        if (renderer) {
+            renderer.dispose();
+        }
+        scene = null;
+        camera = null;
+        renderer = null;
+        controls = null;
     }
 };
 
