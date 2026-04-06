@@ -71,7 +71,6 @@ self.onmessage = (e) => {
   if (type === 'event') {
     proxy.dispatchEvent(data);
     
-    // Custom raycasting for selection
     if (data.type === 'pointerdown') {
       mouse.x = (data.clientX / proxy.width) * 2 - 1;
       mouse.y = -(data.clientY / proxy.height) * 2 + 1;
@@ -85,11 +84,14 @@ self.onmessage = (e) => {
   }
 
   if (type === 'resize') {
-    proxy.width = e.data.width;
-    proxy.height = e.data.height;
-    camera.aspect = proxy.width / proxy.height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(proxy.width, proxy.height, false);
+    if (!renderer) return;
+    if (renderer.domElement.width !== width || renderer.domElement.height !== height) {  
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(width, height, false);
+      renderer.render(scene, camera);
+    }
   }
 
   if (type === 'stop') {

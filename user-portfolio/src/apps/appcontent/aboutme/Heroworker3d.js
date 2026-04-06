@@ -48,6 +48,7 @@ self.onmessage = (e) => {
     }
 
     if (type === 'resize') {
+      if (!renderer) return;
       if (renderer.domElement.width !== width || renderer.domElement.height !== height) {  
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
