@@ -1,7 +1,7 @@
 import { Rnd } from "react-rnd";
 import { IconComponent } from "../apps/IconComponent";
 import { apps } from "../apps/Applist";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "preact/hooks";
 import DesktopBg from "../assets/img/rice.webp"
 import { IconFun } from "../apps/IconFun";
 
