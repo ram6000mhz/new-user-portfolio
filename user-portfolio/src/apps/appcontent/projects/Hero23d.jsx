@@ -45,12 +45,19 @@ export const Hero23d = () => {
 
       const sendEventToWorker = (event) => {
         const rect = canvas.getBoundingClientRect();
+
+        const touch = event.touches ? event.touches[0] : event;
+        
+        const finalTouch = touch || (event.changedTouches ? event.changedTouches[0] : null);
+        
+        if (!finalTouch && event.type !== 'touchend') return;
+
         globalWorker.postMessage({
           type: 'event',
           data: {
             type: event.type,
-            clientX: event.clientX - rect.left,
-            clientY: event.clientY - rect.top,
+            clientX: finalTouch ? finalTouch.clientX - rect.left : 0,
+            clientY: finalTouch ? finalTouch.clientY - rect.top : 0,
             button: event.button,
             pointerId: event.pointerId,
             deltaY: event.deltaY,
@@ -93,7 +100,7 @@ export const Hero23d = () => {
     }, [setSelectedProject]);
 
     return (
-      <div ref={containerRef} className="h-full w-full relative">
+      <div ref={containerRef} className="h-full w-full relative" style={{ touchAction: 'none' }}>
         <canvas ref={canvasRef} className="w-full h-full block" />
       </div>
     );
