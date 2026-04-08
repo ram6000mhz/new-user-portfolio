@@ -58,6 +58,8 @@ export const Hero23d = () => {
             type: event.type,
             clientX: finalTouch ? finalTouch.clientX - rect.left : 0,
             clientY: finalTouch ? finalTouch.clientY - rect.top : 0,
+            rectWidth: rect.width,
+            rectHeight: rect.height,
             button: event.button,
             pointerId: event.pointerId,
             deltaY: event.deltaY,

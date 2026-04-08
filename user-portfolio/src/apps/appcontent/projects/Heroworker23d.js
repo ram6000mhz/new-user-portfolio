@@ -72,8 +72,8 @@ self.onmessage = (e) => {
       proxy.dispatchEvent(data);
       
       if (data.type === 'pointerdown' || data.type === 'touchstart') {
-        mouse.x = (data.clientX / proxy.width) * 2 - 1;
-        mouse.y = -(data.clientY / proxy.height) * 2 + 1;
+        mouse.x = (data.clientX / data.rectWidth) * 2 - 1;
+        mouse.y = -(data.clientY / data.rectWidth) * 2 + 1;
         
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(group.children, false);
