@@ -71,7 +71,7 @@ self.onmessage = (e) => {
     if (type === 'event') {
       proxy.dispatchEvent(data);
       
-      if (data.type === 'pointerdown') {
+      if (data.type === 'pointerdown' || data.type === 'touchstart') {
         mouse.x = (data.clientX / proxy.width) * 2 - 1;
         mouse.y = -(data.clientY / proxy.height) * 2 + 1;
         
