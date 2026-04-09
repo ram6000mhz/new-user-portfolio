@@ -71,7 +71,7 @@ self.onmessage = (e) => {
     if (type === 'event') {
       proxy.dispatchEvent(data);
       
-      if (data.type === 'pointerdown') {
+      if (data.type === 'pointerdown' || data.type === 'touchend') {
         mouse.x = (data.clientX / data.rectWidth) * 2 - 1;
         mouse.y = -(data.clientY / data.rectHeight) * 2 + 1;
         raycaster.setFromCamera(mouse, camera);
