@@ -3,9 +3,21 @@ import { X } from "lucide-preact"
 
 export const PopupSidebar = () => {
   const { project, closeSidebar } = useProjectStore();
+
+  const handleClose = (e) => {
+    e.stopPropagation(); 
+    closeSidebar();
+  };
+
   return (
       <>
-        <button onClick={closeSidebar} className="self-end p-2 hover:bg-muted rounded-full cursor-pointer">
+        <button 
+          onClick={handleClose}
+          onTouchEnd={(e) => {
+            e.stopPropagation();
+            closeSidebar();
+          }}
+          className="self-end p-2 hover:bg-muted rounded-full cursor-pointer">
           <X className="text-white" size={24} />
         </button>
         
