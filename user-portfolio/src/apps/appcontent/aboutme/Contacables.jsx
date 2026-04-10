@@ -25,7 +25,7 @@ export const Contacables = () => {
                 </div>
                 <div className="flex flex-row gap-1 justify-center items-center">
                     <a 
-                        href="http://linkedin.com/in/ethan-sancho-yap-2439a2297/"
+                        href="https://linkedin.com/in/ethan-sancho-yap-2439a2297/"
                         aria-label="LinkedIn"
                         target="_blank" 
                         rel="noopener noreferrer"
