@@ -48,14 +48,11 @@ self.onmessage = (e) => {
     }
 
     if (type === 'resize') {
-      if (!renderer) return;
-      if (renderer.domElement.width !== width || renderer.domElement.height !== height) {  
+        if (!renderer) return;
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
-
         renderer.setSize(width, height, false);
         renderer.render(scene, camera);
-      }
     }
 
     if (type === 'stop') {
