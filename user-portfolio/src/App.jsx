@@ -11,7 +11,7 @@ function HomePage() {
 
 export function App() {
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-screen h-dvh pb-[env(safe-area-inset-bottom)]'>
       <LocationProvider>
           <HomePage path="/" />
       </LocationProvider>
