@@ -1,19 +1,25 @@
 import {StartComponent} from "../components/StartComponent"
 import { useState } from "preact/hooks";
 import { Monitor } from "lucide-preact";
+import { createPortal } from "preact/compat";
+import { useRef } from "preact/hooks";
 export const BuildStartWindow = ()=>{
     const [isVisible, setIsVisible] = useState(false);
-
+    const monitorRef = useRef(null);
     return(
         <div className="relative">
-            <div className="flex justify-center items-center 
+            <div ref={monitorRef} className="flex justify-center items-center 
                 h-[35px] w-[35px] bg-foreground hover:bg-foreground-highlight rounded cursor-pointer"
-                onClick={() => setIsVisible(!isVisible)}
+                onClick={(e) => {
+                    setIsVisible(!isVisible);
+                    console.log("see");
+                }}
             >
                 <Monitor className="text-accent-icon"/>
             </div>
-            {isVisible && (
+            {isVisible && createPortal(
                 <div
+                    onClick={(e) => e.stopPropagation()}
                     className={`h-auto w-[180px] sm:w-[230px] 
                     md:w-[260px] transition-all duration-300 ease-in-out 
                     absolute bottom-[55px] left-0 rounded-lg bg-background 
@@ -25,7 +31,7 @@ export const BuildStartWindow = ()=>{
                 >
                     <StartComponent/>
                 </div>
-            )}
+            ,monitorRef.current)}
         </div>
     )
 }
