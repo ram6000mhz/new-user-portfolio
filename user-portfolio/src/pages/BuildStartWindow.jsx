@@ -12,7 +12,6 @@ export const BuildStartWindow = ()=>{
                 h-[35px] w-[35px] bg-foreground hover:bg-foreground-highlight rounded cursor-pointer"
                 onClick={(e) => {
                     setIsVisible(!isVisible);
-                    console.log("see");
                 }}
             >
                 <Monitor className="text-accent-icon"/>
