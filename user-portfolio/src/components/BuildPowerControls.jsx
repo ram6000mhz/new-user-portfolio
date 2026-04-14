@@ -16,15 +16,15 @@ export const BuildPowerControls = () => {
                 <div
                     className={`h-auto flex flex-col
                     absolute bottom-full rounded-md bg-foreground
-                    overflow-hidden border border-muted-border p-1 gap-1`}
+                    overflow-hidden border border-muted-border p-2 gap-1`}
                 >
-                    <div onClick={toggleHrMode} className="flex flex-row w-full h-full items-center gap-1">
+                    <div onClick={toggleHrMode} className="flex flex-row w-full h-full items-center gap-1 hover:bg-foreground-highlight rounded-sm">
                         <Power className="!w-[12px] !h-[12px] text-accent-icon"/>
-                        <p className="text-[8px] text-white">Shutdown</p>
+                        <p className="text-[9px] text-white">Shutdown</p>
                     </div>
-                    <div onClick={toggleHrMode} className="flex flex-row w-full h-full items-center gap-1">
+                    <div onClick={toggleHrMode} className="flex flex-row w-full h-full items-center gap-1 hover:bg-foreground-highlight rounded-sm">
                         <RotateCcw className="!w-[12px] !h-[12px] text-accent-icon"/>
-                        <p className="text-[8px] text-white">Restart</p>
+                        <p className="text-[9px] text-white">Restart</p>
                     </div>
                 </div>
             ,powerRef.current)}
