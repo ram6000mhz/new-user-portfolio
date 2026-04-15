@@ -19,13 +19,9 @@ export const BuildStartWindow = ()=>{
             {isVisible && createPortal(
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className={`h-auto w-[clamp(180px,25vw,260px)] transition-all
+                    className={`h-auto w-[clamp(180px,25vw,500px)] transition-all
                     duration-300 ease-in-out absolute bottom-[55px] left-0 rounded-lg bg-background 
-                    overflow-hidden border border-muted-border 
-                    ${isVisible ? 'animate-rise-up' : 'animate-go-down'}`}
-                    onAnimationEnd={() => {
-                    if (!isVisible) setIsVisible(false);
-                    }}
+                    overflow-hidden border border-muted-border`}
                 >
                     <StartComponent/>
                 </div>
