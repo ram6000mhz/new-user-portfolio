@@ -35,7 +35,7 @@ export const StartComponent=()=>{
                     <p className="text-xs mt-1 text-center text-accent-text">LinkedIn</p>
                 </div>
             </div>
-            <div className="w-full h-[50px] bg-foreground flex flex-row items-center border-t border-muted-border pl-4 pr-6 gap-2">
+            <div className="w-full h-[50px] bg-foreground flex flex-row items-center border-t border-muted-border pl-4 pr-10 gap-2">
                 <div className="w-[35px] h-[35px] rounded-3xl bg-background border border-muted-border overflow-hidden">
                     <img src={ProfilePic}/>
                 </div>
