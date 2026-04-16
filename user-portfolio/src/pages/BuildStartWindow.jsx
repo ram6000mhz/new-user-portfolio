@@ -24,7 +24,8 @@ export const BuildStartWindow = ()=>{
                     onClick={(e) => e.stopPropagation()}
                     className={`h-auto w-[clamp(180px,25vw,400px)]
                     bottom-[55px] left-0 rounded-lg bg-background 
-                    overflow-hidden border border-muted-border absolute`}
+                    overflow-hidden border border-muted-border absolute
+                    ${isVisible ? "animate-window-in" : "animate-window-out"}`}      
                 >
                     <StartComponent/>
                 </div>
