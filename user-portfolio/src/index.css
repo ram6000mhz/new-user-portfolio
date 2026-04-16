@@ -38,4 +38,29 @@
     --color-muted-border: var(--muted-border);
     --color-muted-border-2: var(--muted-border-2);
     --color-background-muted: var(--background-muted);
+
+    @keyframes window-appear-from-bottom {
+      0% { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.95); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+      }
+    }
+
+    @keyframes window-disappear-from-top {
+      0% { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+      100% { 
+        opacity: 0; 
+        transform: translateY(-20px) scale(0.95); 
+      }
+    }
+
+    --animate-window-in: window-appear-from-bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-window-out: window-disappear-from-top 0.3s ease-in forwards;
 }
