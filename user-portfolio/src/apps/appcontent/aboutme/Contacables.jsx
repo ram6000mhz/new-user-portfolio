@@ -10,7 +10,7 @@ export const Contacables = () => {
                         href="mailto:esyworkpro@gmail.com"
                         aria-label="Email"
                     >
-                        <Mail className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
+                        <Mail className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white duration-100 transition-transform hover:scale-115 active:scale-100"/>
                     </a>
                 </div>
                 <div className="flex flex-row gap-1 justify-center items-center">
@@ -20,7 +20,7 @@ export const Contacables = () => {
                         target="_blank" 
                         rel="noopener noreferrer"
                     >
-                        <Github className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
+                        <Github className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white duration-100 transition-transform hover:scale-115 active:scale-100"/>
                     </a>
                 </div>
                 <div className="flex flex-row gap-1 justify-center items-center">
@@ -30,7 +30,7 @@ export const Contacables = () => {
                         target="_blank" 
                         rel="noopener noreferrer"
                     >
-                        <Linkedin className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white"/>
+                        <Linkedin className="!w-[clamp(18px,5cqw,25px)] !h-[clamp(18px,5cqw,25px)] text-white duration-100 transition-transform hover:scale-115 active:scale-100"/>
                     </a>
                 </div>
                 <div className="flex flex-row justify-center items-center">
@@ -43,7 +43,7 @@ export const Contacables = () => {
                     >
                         <img 
                             src={phFlag} 
-                            className="w-[clamp(18px,5cqw,25px)] rounded-[4px]" 
+                            className="w-[clamp(18px,5cqw,25px)] rounded-[4px] duration-100 transition-transform hover:scale-115 active:scale-100" 
                             alt="Philippines Flag" 
                         />
                     </a>
