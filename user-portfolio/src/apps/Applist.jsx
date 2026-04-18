@@ -8,13 +8,13 @@ const Project = lazy(loadproject);
 export const apps = [
     { 
         appid: 0,
-        icon: <User className="!h-[25px] !w-[25px] text-accent-icon"/>, 
+        icon: <User className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "About Me" ,
         content: <Aboutme/>
     },
     { 
         appid: 1,
-        icon: <Folder className="!h-[25px] !w-[25px] text-accent-icon"/>, 
+        icon: <Folder className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "My Projects" ,
         content: <Project/>
     },

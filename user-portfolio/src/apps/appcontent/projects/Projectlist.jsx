@@ -7,7 +7,7 @@ import MagicC from "../../../assets/data/bus.webp"
 export const Projectlist = [
     { 
         appid: 0,
-        icon: <ScanFace className="!h-[25px] !w-[25px] text-accent-icon"/>, 
+        icon: <ScanFace className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "Opti-Face" ,
         preview:Optiface,
         boxcolor:"#00FF00",
@@ -18,7 +18,7 @@ export const Projectlist = [
     },
     { 
         appid: 1,
-        icon: <Soup className="!h-[25px] !w-[25px] text-accent-icon"/>, 
+        icon: <Soup className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "Bake, Brew and Cook" ,
         preview:BakeBrewCook,
         boxcolor:"#FF0000",
@@ -29,7 +29,7 @@ export const Projectlist = [
     },
     { 
         appid: 2,
-        icon: <Gamepad2 className="!h-[25px] !w-[25px] text-accent-icon"/>, 
+        icon: <Gamepad2 className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "Math Solve" ,
         preview:MathSolve,
         boxcolor:"#0000FF",
@@ -40,7 +40,7 @@ export const Projectlist = [
     },
     { 
         appid: 3,
-        icon: <BusFront className="!h-[25px] !w-[25px] text-accent-icon"/>, 
+        icon: <BusFront className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "Magic C Transport" ,
         preview:MagicC,
         boxcolor:"#FA5902",
@@ -51,7 +51,7 @@ export const Projectlist = [
     },
     { 
         appid: 4,
-        icon: <BotMessageSquare className="!h-[25px] !w-[25px] text-accent-icon"/>, 
+        icon: <BotMessageSquare className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "T.I.P.A.I" ,
         preview:Tipai,
         boxcolor:"#FFFF00",

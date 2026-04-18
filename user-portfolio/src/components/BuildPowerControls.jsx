@@ -39,14 +39,14 @@ export const BuildPowerControls = () => {
                     className={`h-auto flex flex-col
                     absolute bottom-full rounded-md bg-foreground
                     overflow-hidden border border-muted-border p-2 gap-1
-                    mb-[10px] ${isMenuOpen ? "animate-window-in" : "animate-window-out"}`}
+                    mb-2.5 ${isMenuOpen ? "animate-window-in" : "animate-window-out"}`}
                 >
                     <div onClick={toggleHrMode} className="flex flex-row items-center gap-1 px-1 hover:bg-foreground-highlight rounded-sm cursor-pointer">
-                        <Power className="!w-[15px] !h-[15px] text-accent-icon"/>
+                        <Power className="w-[15px]! h-[15px]! text-accent-icon"/>
                         <p className="text-[12px] text-white">Shutdown</p>
                     </div>
                     <div onClick={toggleHrMode} className="flex flex-row items-center gap-1 px-1 hover:bg-foreground-highlight rounded-sm cursor-pointer">
-                        <RotateCcw className="!w-[15px] !h-[15px] text-accent-icon"/>
+                        <RotateCcw className="w-[15px]! h-[15px]! text-accent-icon"/>
                         <p className="text-[12px] text-white">Restart</p>
                     </div>
                 </div>
