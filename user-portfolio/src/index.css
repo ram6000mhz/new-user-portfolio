@@ -62,5 +62,5 @@
     }
 
     --animate-window-in: window-appear-from-bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    --animate-window-out: window-disappear-from-top 0.3s ease-in forwards;
+    --animate-window-out: window-disappear-from-top 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
