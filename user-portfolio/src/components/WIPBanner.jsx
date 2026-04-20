@@ -1,7 +1,7 @@
 import { createPortal } from 'preact/compat';
 import { useState, useEffect } from 'preact/hooks';
 
-export const WIPBanner = ({ duration = 3000 }) => {
+export const WIPBanner = ({ duration = {duration} }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -12,8 +12,8 @@ export const WIPBanner = ({ duration = 3000 }) => {
   if (!visible) return null;
 
   return createPortal(
-    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-1 animate-bounce">
-      <div className="bg-white text-black px-1 py-2 rounded-2xl shadow-lg font-bold text-sm border-2 border-black">
+    <div className="fixed top-22 left-1/2 -translate-x-1/2 z-1 animate-bounce">
+      <div className="bg-white text-black text-[clamp(0.2rem,4cqw,0.75rem)] px-1 py-2 rounded-lg font-bold">
         Hello, This site is still work in progress.
       </div>
     </div>,
