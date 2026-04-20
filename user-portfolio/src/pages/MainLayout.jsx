@@ -5,6 +5,7 @@ import { Aboutme } from "../apps/appcontent/aboutme/Aboutme";
 import { DesktopFooter } from './DesktopFooter';
 import {Navbar} from './Navbar'
 import DesktopBg from "../assets/img/rice.webp"
+import { WIPBanner } from '../components/WIPBanner';
 // text-xs sm:text-sm md:text-base lg:text-lg
 
 const loaddesktop = () => import('./Machineviewport').then(m => m.Machineviewport)
@@ -34,6 +35,7 @@ export const MainLayout = () => {
         <Navbar />
       )}
       <main className="flex-1 min-h-0">
+        <WIPBanner duration={4000} />
         <ErrorBoundary>
           {hr_mode ? 
             isHome ? 
