@@ -1,10 +1,11 @@
 import { Rnd } from "react-rnd";
 import { IconComponent } from "../apps/IconComponent";
 import { apps } from "../apps/Applist";
-import { useEffect, useRef } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import DesktopBg from "../assets/img/rice.webp"
 import { IconFun } from "../apps/IconFun";
-
+import { createPortal } from "preact/compat";
+import { RightClickContextMenu } from "../components/RightClickContextMenu";
 export const Machineviewport = () => {
     const viewportRef = useRef(null);
 
@@ -40,11 +41,33 @@ export const Machineviewport = () => {
         lastTap.current = { time: now, id: appid };
     };
 
+    const [menu, setMenu] = useState({ visible: false, x: 0, y: 0 });
+
+    const handleContextMenu = (e) => {
+        e.preventDefault();
+        
+        const rect = viewportRef.current.getBoundingClientRect();
+        
+        setMenu({
+            visible: true,
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        });
+    };
+
+    const closeContextMenu = (e) =>{
+        if(menu){
+            setMenu({
+                visible: false,
+            });
+        }
+    }
+
     return (
         <div 
+            onClick={(e)=>closeContextMenu(e)}
             onContextMenu={(e) => {
-                e.preventDefault();
-                console.log("Right-click intercepted at:", e.pageX, e.pageY);
+                handleContextMenu(e);
             }}
             ref={viewportRef}
             className="w-full h-full bg-cover bg-center flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
@@ -89,6 +112,11 @@ export const Machineviewport = () => {
                         <IconComponent AppIcon={app.icon} Title={app.title} appContent={app.content} appId={app.appid} viewportRef={viewportRef}/>
                     </Rnd>
             )})}
+
+            {menu.visible && createPortal(
+                <RightClickContextMenu x={menu.x} y={menu.y}/>,
+                viewportRef.current
+            )}
         </div>
     )
 }
