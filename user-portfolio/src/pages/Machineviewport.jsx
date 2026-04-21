@@ -42,6 +42,10 @@ export const Machineviewport = () => {
 
     return (
         <div 
+            onContextMenu={(e) => {
+                e.preventDefault();
+                console.log("Right-click intercepted at:", e.pageX, e.pageY);
+            }}
             ref={viewportRef}
             className="w-full h-full bg-cover bg-center flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
             {apps.map((app, index) => {
