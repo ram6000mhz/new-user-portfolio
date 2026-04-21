@@ -1,6 +1,6 @@
 import { WindowCreationLogic } from "./WindowCreationLogic";
 import { IconFun } from "./IconFun";
-import { createPortal } from "react-dom";
+import { createPortal } from "preact/compat";
 import { AnimatePresence } from "motion/react";
 export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) => {
     const isDragging = IconFun(s => s.appStates[appId]?.isDragging || false);
