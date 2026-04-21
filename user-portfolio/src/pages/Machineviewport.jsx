@@ -8,6 +8,7 @@ import { createPortal } from "preact/compat";
 import { RightClickContextMenu } from "../components/RightClickContextMenu";
 export const Machineviewport = () => {
     const viewportRef = useRef(null);
+    const menuLayerRef = useRef(null);
 
     const lastTap = useRef({ time: 0, id: null });
 
@@ -45,8 +46,7 @@ export const Machineviewport = () => {
 
     const handleContextMenu = (e) => {
         e.preventDefault();
-        
-        const rect = viewportRef.current.getBoundingClientRect();
+        const rect = menuLayerRef.current.getBoundingClientRect();
         
         setMenu({
             visible: true,
@@ -65,12 +65,16 @@ export const Machineviewport = () => {
 
     return (
         <div 
-            onClick={(e)=>closeContextMenu(e)}
-            onContextMenu={(e) => {
-                handleContextMenu(e);
-            }}
             ref={viewportRef}
             className="w-full h-full bg-cover bg-center flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
+            <div 
+                ref={menuLayerRef} 
+                onClick={(e)=>closeContextMenu(e)}
+                onContextMenu={(e) => {
+                    handleContextMenu(e);
+                }}
+                className="w-full h-full" 
+            />
             {apps.map((app, index) => {
                 return (
                     <Rnd 
@@ -115,7 +119,7 @@ export const Machineviewport = () => {
 
             {menu.visible && createPortal(
                 <RightClickContextMenu x={menu.x} y={menu.y}/>,
-                viewportRef.current
+                menuLayerRef.current
             )}
         </div>
     )
