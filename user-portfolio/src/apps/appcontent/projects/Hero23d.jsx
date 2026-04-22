@@ -44,6 +44,7 @@ export const Hero23d = () => {
       initWorker();
 
       const sendEventToWorker = (event) => {
+        if (event.button === 2) return;
         const rect = canvas.getBoundingClientRect();
         globalWorker.postMessage({
           type: 'event',

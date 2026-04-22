@@ -12,6 +12,7 @@ export const Hero3d = () => {
     if (!container || !canvas) return;
 
     const sendEventToWorker = (event) => {
+      if (event.button === 2 ) return;
       const eventData = {
         type: event.type,
         clientX: event.clientX,
