@@ -9,6 +9,7 @@ export const Projectlist = [
         appid: 0,
         icon: <ScanFace className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "Opti-Face" ,
+        date: "2024 - 2025",
         preview:Optiface,
         boxcolor:"#00FF00",
         content: 
@@ -20,6 +21,7 @@ export const Projectlist = [
         appid: 1,
         icon: <Soup className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "Bake, Brew and Cook" ,
+        date: "2024",
         preview:BakeBrewCook,
         boxcolor:"#FF0000",
         content: 
@@ -31,6 +33,7 @@ export const Projectlist = [
         appid: 2,
         icon: <Gamepad2 className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "Math Solve" ,
+        date: "2024",
         preview:MathSolve,
         boxcolor:"#0000FF",
         content: 
@@ -42,6 +45,7 @@ export const Projectlist = [
         appid: 3,
         icon: <BusFront className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "Magic C Transport" ,
+        date: "2024 - 2025",
         preview:MagicC,
         boxcolor:"#FA5902",
         content: 
@@ -53,6 +57,7 @@ export const Projectlist = [
         appid: 4,
         icon: <BotMessageSquare className="h-[25px]! w-[25px]! text-accent-icon"/>, 
         title: "T.I.P.A.I" ,
+        date: "2024",
         preview:Tipai,
         boxcolor:"#FFFF00",
         content: 
