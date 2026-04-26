@@ -1,3 +1,5 @@
 name = "user-portfolio"
 compatibility_date = "2026-1-31"
-assets = {directory = "dist"}
+[assets]
+directory = "dist"
+not_found_handling = "single-page-application"
