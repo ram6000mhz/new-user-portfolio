@@ -30,7 +30,7 @@ export const BuildPowerControls = () => {
                 className="w-full h-full hover:bg-foreground-highlight flex 
                 items-center justify-center rounded-sm cursor-pointer p-0.5
                 ">
-                    <Power size={20} className="text-accent-icon"/>
+                    <Power size={20} className="text-accent-icon transition-all duration-100 active:scale-80"/>
                 </div>
             </div>
             {isRendered && createPortal(
@@ -41,11 +41,11 @@ export const BuildPowerControls = () => {
                     overflow-hidden border border-muted-border p-2 gap-1
                     mb-2.5 ${isMenuOpen ? "animate-window-in" : "animate-window-out"}`}
                 >
-                    <div onClick={toggleHrMode} className="flex flex-row items-center gap-1 px-1 hover:bg-foreground-highlight rounded-sm cursor-pointer">
+                    <div onClick={toggleHrMode} className="flex flex-row items-center gap-1 px-1 hover:bg-foreground-highlight rounded-sm cursor-pointer transition-all duration-100 active:scale-90">
                         <Power className="w-[15px]! h-[15px]! text-accent-icon"/>
                         <p className="text-[12px] text-white">Shutdown</p>
                     </div>
-                    <div onClick={toggleHrMode} className="flex flex-row items-center gap-1 px-1 hover:bg-foreground-highlight rounded-sm cursor-pointer">
+                    <div onClick={toggleHrMode} className="flex flex-row items-center gap-1 px-1 hover:bg-foreground-highlight rounded-sm cursor-pointer transition-all duration-100 active:scale-90">
                         <RotateCcw className="w-[15px]! h-[15px]! text-accent-icon"/>
                         <p className="text-[12px] text-white">Restart</p>
                     </div>

@@ -29,7 +29,7 @@ export const BuildStartWindow = ()=>{
                 <div className="flex justify-center items-center rounded w-full h-full hover:bg-foreground-highlight cursor-pointer"
                     onClick={handleToggle}
                 >
-                    <Monitor className="text-accent-icon"/>
+                    <Monitor className="text-accent-icon transition-all duration-100 active:scale-80"/>
                 </div>
             </div>
             {isRendered && createPortal(

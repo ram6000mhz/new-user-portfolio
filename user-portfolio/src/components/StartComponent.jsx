@@ -13,7 +13,7 @@ export const StartComponent=()=>{
                 <div className="flex flex-col justify-center items-center">
                     <a href="https://github.com/ram6000mhz">
                         <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
-                            <Github className="w-[35px] h-[35px]! text-accent-text"/>
+                            <Github className="w-[35px] h-[35px]! text-accent-text transition-all duration-100 active:scale-90"/>
                         </div>
                     </a>
                     <p className="text-xs mt-1 text-center text-accent-text">Github</p>
@@ -21,7 +21,7 @@ export const StartComponent=()=>{
                 <div className="flex flex-col justify-center items-center">
                     <a href="mailto:esyworkpro@gmail.com">
                         <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
-                            <Mail className="w-[35px] h-[35px]!  text-accent-text"/>
+                            <Mail className="w-[35px] h-[35px]! text-accent-text transition-all duration-100 active:scale-90"/>
                         </div>
                     </a>
                     <p className="text-xs mt-1 text-center text-accent-text">Email</p>
@@ -29,7 +29,7 @@ export const StartComponent=()=>{
                 <div className="flex flex-col justify-center items-center">
                     <a href="https://www.linkedin.com/in/ethan-sancho-yap-2439a2297/">
                         <div className="w-[35px] h-[35px] bg-foreground flex justify-center items-center p-2 border border-muted-border rounded-md hover:bg-foreground-highlight cursor-pointer">
-                            <Linkedin className="w-[35px] h-[35px]! text-accent-text"/>
+                            <Linkedin className="w-[35px] h-[35px]! text-accent-text transition-all duration-100 active:scale-90"/>
                         </div>
                     </a>
                     <p className="text-xs mt-1 text-center text-accent-text">LinkedIn</p>
