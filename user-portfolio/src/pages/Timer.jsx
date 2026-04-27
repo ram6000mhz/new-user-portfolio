@@ -14,7 +14,7 @@ export const Timer = ()=>{
     const date = time.toLocaleDateString();
 
     return(
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center h-full px-1 hover:bg-foreground-highlight cursor-pointer rounded-sm">
             <time className="text-xs sm:text-sm text-accent-text">{now}</time>
             <time className="text-xs sm:text-sm text-accent-text">{date}</time>
         </div>
