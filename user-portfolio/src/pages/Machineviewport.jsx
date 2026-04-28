@@ -6,6 +6,8 @@ import DesktopBg from "../assets/img/rice.webp"
 import { IconFun } from "../apps/IconFun";
 import { createPortal } from "preact/compat";
 import { RightClickContextMenu } from "../components/RightClickContextMenu";
+import { CalendarHandler } from "../providers/CalendarHandler";
+import { PopupCalendar } from "./PopupCalendar";
 export const Machineviewport = () => {
     const viewportRef = useRef(null);
     const menuLayerRef = useRef(null);
@@ -13,6 +15,8 @@ export const Machineviewport = () => {
     const lastTap = useRef({ time: 0, id: null });
 
     const {setDragging, initializeApp, open} = IconFun.getState();
+    const enableCalendar = CalendarHandler((state)=> state.enableCalendar)
+    console.log(enableCalendar)
     useEffect(() => {
         apps.forEach(app => {
             initializeApp(app.appid);
@@ -64,8 +68,7 @@ export const Machineviewport = () => {
     }
 
     return (
-        <div 
-            ref={viewportRef}
+        <div ref={viewportRef}
             className="w-full h-full bg-cover bg-center flex flex-col relative" style={{ backgroundImage: `url(${DesktopBg})` }}>
             <div 
                 ref={menuLayerRef} 
@@ -119,6 +122,10 @@ export const Machineviewport = () => {
 
             {menu.visible && createPortal(
                 <RightClickContextMenu x={menu.x} y={menu.y}/>,
+                menuLayerRef.current
+            )}
+            {enableCalendar && createPortal(
+                <PopupCalendar/>,
                 menuLayerRef.current
             )}
         </div>
