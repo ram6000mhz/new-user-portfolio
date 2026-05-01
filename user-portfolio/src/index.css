@@ -61,6 +61,25 @@
       }
     }
 
+    @keyframes window-appear-from-right {
+      0% {
+        transform: translateX(100%);
+      }
+      100% { 
+        transform: translateX(0); 
+      }
+    }
+
+    @keyframes window-disappear-to-right {
+      0% { 
+        transform: translateX(0); 
+      }
+      100% { 
+        transform: translateX(110%); 
+      }
+    }
     --animate-window-in: window-appear-from-bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     --animate-window-out: window-disappear-from-top 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-window-in-from-right: window-appear-from-right 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-window-out-to-right: window-disappear-to-right 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
