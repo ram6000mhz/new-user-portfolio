@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
 export const CalendarHandler = create((set,get)=>({
-    enableCalendar: false,
+    isCalendarVisible: false,
     toggleCalendar(){
-        set((state) => ({ enableCalendar: !state.enableCalendar}));
+        set((state) => ({ isCalendarVisible: !state.isCalendarVisible}));
     },
     shutdownCalendar(){
-        if(get().enableCalendar){
-            set({enableCalendar:false});
+        if(get().isCalendarVisible){
+            set({isCalendarVisible:false});
         }
     }
 }))

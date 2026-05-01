@@ -15,8 +15,7 @@ export const Machineviewport = () => {
     const lastTap = useRef({ time: 0, id: null });
 
     const {setDragging, initializeApp, open} = IconFun.getState();
-    const enableCalendar = CalendarHandler((state)=> state.enableCalendar)
-    console.log(enableCalendar)
+    const isCalendarVisible = CalendarHandler((state)=> state.isCalendarVisible)
     useEffect(() => {
         apps.forEach(app => {
             initializeApp(app.appid);
@@ -124,7 +123,7 @@ export const Machineviewport = () => {
                 <RightClickContextMenu x={menu.x} y={menu.y}/>,
                 menuLayerRef.current
             )}
-            {enableCalendar && createPortal(
+            {isCalendarVisible && createPortal(
                 <PopupCalendar/>,
                 menuLayerRef.current
             )}
