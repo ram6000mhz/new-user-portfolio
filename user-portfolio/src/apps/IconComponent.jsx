@@ -12,7 +12,7 @@ export const IconComponent = ({AppIcon, Title, appId, appContent, viewportRef}) 
                 <div className="flex w-full h-full cursor-pointer items-center justify-center">
                     {AppIcon}
                 </div>  
-                <p className="text-center text-xs text-accent-text cursor-pointer">{Title}</p>
+                <p className="text-center text-xs text-accent-text cursor-pointer select-none">{Title}</p>
             </div>
             <AnimatePresence>
                 {isOpen && createPortal(

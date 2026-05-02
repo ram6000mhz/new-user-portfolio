@@ -3,7 +3,7 @@ import phFlag from 'flag-icons/flags/4x3/ph.svg';
 
 export const Contacables = () => {
     return(
-        <div className="w-full">
+        <div className="w-full select-none">
             <div class="flex flex-row items-end justify-start w-full gap-5 pt-2">
                 <div className="flex flex-row gap-1 justify-center items-center">
                     <a 
