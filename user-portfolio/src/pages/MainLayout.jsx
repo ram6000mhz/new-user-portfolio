@@ -35,7 +35,7 @@ export const MainLayout = () => {
         <Navbar />
       )}
       <main className="flex-1 min-h-0">
-        <WIPBanner duration={4000} />
+        <WIPBanner duration={3000} />
         <ErrorBoundary>
           {hr_mode ? 
             isHome ? 
