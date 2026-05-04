@@ -75,7 +75,7 @@ export const Machineviewport = () => {
                 onContextMenu={(e) => {
                     handleContextMenu(e);
                 }}
-                className="absolute inset-0 overflow-hidden" 
+                className="absolute inset-0 overflow-hidden @container" 
             />
             {apps.map((app, index) => {
                 return (
