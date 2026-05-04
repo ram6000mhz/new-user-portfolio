@@ -31,7 +31,7 @@ export const PopupCalendar = () => {
     return(
         <div 
             onAnimationEnd={handleAnimationEnd}
-            className={`flex flex-col w-[250px] h-[300px] bg-foreground 
+            className={`flex flex-col w-[clamp(150px,90cqw,250px)] h-[clamp(200px,80cqh,300px)] bg-foreground 
             border-muted-border border-2 rounded-xl absolute bottom-0 
             right-0 z-50 m-2 overflow-hidden
             ${isCalendarVisible ? "animate-window-in-from-right" : "animate-window-out-to-right"}
