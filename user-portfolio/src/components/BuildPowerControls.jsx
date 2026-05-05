@@ -2,13 +2,13 @@ import { useState } from "preact/hooks";
 import {ViewHandler} from "../providers/ViewHandler"
 import {Power , RotateCcw} from "lucide-preact";
 import { createPortal } from "preact/compat";
-import { useRef } from "preact/hooks";
-export const BuildPowerControls = () => {
+import { useRef, useLayoutEffect } from "preact/hooks";
+
+export const BuildPowerControls = ({startRef}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleHrMode = ViewHandler((state) => state.toggleHrMode);
     const [isRendered, setIsRendered] = useState(false);
     const powerRef = useRef(null);
-
     const handleToggle = () => {
         if (!isMenuOpen) {
             setIsRendered(true);
@@ -21,7 +21,6 @@ export const BuildPowerControls = () => {
     const handleAnimationEnd = () => {
         if (!isMenuOpen) setIsRendered(false);
     };
-
 
     return(
         <>
