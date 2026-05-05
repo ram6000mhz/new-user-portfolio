@@ -1,11 +1,11 @@
 import {Linkedin, Mail, Github} from "lucide-preact";
 import ProfilePic from "../assets/img/profile-pic.webp";
 import { BuildPowerControls } from "./BuildPowerControls";
-
+import { useRef } from "preact/hooks";
 export const StartComponent=()=>{
-    
+    const startRef = useRef(null);
     return(
-        <div className="flex flex-col w-full h-full">
+        <div ref={startRef} className="flex flex-col w-full h-full @container">
             <h1 className="text-xs font-medium text-muted-text mb-2 px-4 pt-3 items-center flex justify-start">
                 Pinned Contacts
             </h1>
@@ -35,7 +35,7 @@ export const StartComponent=()=>{
                     <p className="text-xs mt-1 text-center text-accent-text">LinkedIn</p>
                 </div>
             </div>
-            <div className="w-full h-[50px] bg-foreground flex flex-row items-center border-t border-muted-border pl-4 pr-10 gap-2">
+            <div className="w-full h-[50px] bg-foreground flex flex-row items-center border-t border-muted-border pl-4 pr-[clamp(4px,10cqi,40px)] gap-2">
                 <div className="w-[35px] h-[35px] rounded-3xl bg-background border border-muted-border overflow-hidden">
                     <img src={ProfilePic}/>
                 </div>
@@ -43,7 +43,7 @@ export const StartComponent=()=>{
                     Ethan
                 </p>
                 <div className="grow"/>
-                <BuildPowerControls/>
+                <BuildPowerControls startRef={startRef}/>
             </div>
         </div>
     );
