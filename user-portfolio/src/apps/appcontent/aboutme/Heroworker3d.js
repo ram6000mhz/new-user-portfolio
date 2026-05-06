@@ -9,11 +9,12 @@ const proxy = new ElementProxyReceiver();
 
 let renderer, scene, camera, wireframe, frameId, controls;
 let isInteracting = false;
-
+let startTime
 self.onmessage = (e) => {
     const { type, data, canvas, width, height, pixelRatio } = e.data;
 
     if (type === 'init') {
+      startTime = performance.now();
       proxy.width = width;
       proxy.height = height;
 
@@ -41,6 +42,9 @@ self.onmessage = (e) => {
       scene.add(wireframe);
 
       render();
+      
+      const loadTime = performance.now() - startTime;
+      console.log(`Donut load time: ${loadTime.toFixed(2)} ms`); 
     }
 
     if (type === 'event') {

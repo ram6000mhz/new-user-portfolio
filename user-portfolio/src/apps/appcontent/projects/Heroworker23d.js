@@ -11,11 +11,12 @@ let renderer, scene, camera, controls, group, raycaster;
 let frameId;
 let isInteracting = false;
 const mouse = new Vector2();
-
+let startTime;
 self.onmessage = (e) => {
     const { type, data, canvas, width, height, pixelRatio, projects } = e.data;
 
     if (type === 'init') {
+      startTime = performance.now();
       proxy.width = width;
       proxy.height = height;
 
@@ -66,6 +67,9 @@ self.onmessage = (e) => {
 
       raycaster = new Raycaster();
       renderLoop();
+
+      const loadTime = performance.now() - startTime;
+      console.log(`Projects cube load time: ${loadTime.toFixed(2)} ms`); 
     }
 
     if (type === 'event') {
