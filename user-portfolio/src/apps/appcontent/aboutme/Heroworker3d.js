@@ -14,7 +14,7 @@ self.onmessage = (e) => {
     const { type, data, canvas, width, height, pixelRatio } = e.data;
 
     if (type === 'init') {
-      startTime = performance.now();
+    //   startTime = performance.now();
       proxy.width = width;
       proxy.height = height;
 
@@ -43,8 +43,8 @@ self.onmessage = (e) => {
 
       render();
       
-      const loadTime = performance.now() - startTime;
-      console.log(`Donut load time: ${loadTime.toFixed(2)} ms`); 
+    //   const loadTime = performance.now() - startTime;
+    //   console.log(`Donut load time: ${loadTime.toFixed(2)} ms`); 
     }
 
     if (type === 'event') {
