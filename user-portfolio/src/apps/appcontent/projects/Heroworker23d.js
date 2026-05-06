@@ -12,6 +12,12 @@ let frameId;
 let isInteracting = false;
 const mouse = new Vector2();
 let startTime;
+
+const boxGeo = new BoxGeometry(1, 1, 1);
+const edgeGeo = new EdgesGeometry(boxGeo);
+const lineMat = new LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.5 });
+
+
 self.onmessage = (e) => {
     const { type, data, canvas, width, height, pixelRatio, projects } = e.data;
 
@@ -35,27 +41,22 @@ self.onmessage = (e) => {
       controls.addEventListener('end', () => { isInteracting = false; controls.autoRotate = true; });
 
       group = new Group();
-      const boxGeo = new BoxGeometry(1, 1, 1);
-      const edgeGeo = new EdgesGeometry(boxGeo);
-      const lineMat = new LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.5 });
 
       projects.forEach((app, i) => {
         const texture = new CanvasTexture(app.iconBitmap);
-        
         const material = new MeshStandardMaterial({ 
-          map: texture, 
-          metalness: 0.4, 
-          roughness: 0.6 
+            map: texture, 
+            metalness: 0.4, 
+            roughness: 0.6 
         });
 
         const hitBox = new Mesh(boxGeo, material);
         const wireframe = new LineSegments(edgeGeo, lineMat);
-        wireframe.raycast = () => null; 
-        hitBox.add(wireframe);
-
+        
         const x = i % 2, y = Math.floor(i / 2) % 2, z = Math.floor(i / 4) % 2;
         hitBox.position.set((x - 0.5), (y - 0.5), (z - 0.5));
-        hitBox.userData = { id: app.appid };
+        
+        hitBox.add(wireframe);
         group.add(hitBox);
       });
 
