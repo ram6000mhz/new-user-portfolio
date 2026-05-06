@@ -1,13 +1,11 @@
 import { render } from "preact";
 
-export const createIconBitmap = async (iconComponent, objectColor) => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext("2d");
+const canvas = document.createElement("canvas");
+canvas.width = 512;
+canvas.height = 512;
+const ctx = canvas.getContext("2d");
 
-    ctx.fillStyle = objectColor;
-    ctx.fillRect(0, 0, 512, 512);
+export const createIconBitmap = async (iconComponent, objectColor) => {
 
     const container = document.createElement("div");
     render(iconComponent, container);
@@ -27,6 +25,8 @@ export const createIconBitmap = async (iconComponent, objectColor) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = async () => {
+        ctx.fillStyle = objectColor;
+        ctx.fillRect(0, 0, 512, 512);
         ctx.drawImage(img, 56, 56, 400, 400);
         URL.revokeObjectURL(url);
         const bitmap = await createImageBitmap(canvas);
