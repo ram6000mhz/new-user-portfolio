@@ -9,6 +9,9 @@ export const BuildPowerControls = ({startRef}) => {
     const toggleHrMode = ViewHandler((state) => state.toggleHrMode);
     const [isRendered, setIsRendered] = useState(false);
     const powerRef = useRef(null);
+    const [coords, setCoords] = useState({ left: 0 });
+    const menuRef = useRef(null);
+
     const handleToggle = () => {
         if (!isMenuOpen) {
             setIsRendered(true);
@@ -22,6 +25,32 @@ export const BuildPowerControls = ({startRef}) => {
         if (!isMenuOpen) setIsRendered(false);
     };
 
+    useLayoutEffect(() => {
+        if (!isRendered || !powerRef.current || !startRef.current || !menuRef.current) return;
+
+        let frameId;
+
+        const updatePosition = () => {
+            const btn = powerRef.current.getBoundingClientRect();
+            const container = startRef.current.getBoundingClientRect();
+            const menu = menuRef.current.getBoundingClientRect();
+            let idealLeft = (btn.left + btn.width / 2) - (menu.width / 2);
+            if (idealLeft < container.left) {
+                idealLeft = container.left;
+            } else if (idealLeft + menu.width > container.right) {
+                idealLeft = container.right - menu.width;
+            }
+
+            const finalOffset = idealLeft - btn.left;
+            
+            setCoords(prev => Math.abs(prev.left - finalOffset) > 0.1 ? { left: finalOffset } : prev);
+            frameId = requestAnimationFrame(updatePosition);
+        };
+
+        frameId = requestAnimationFrame(updatePosition);
+
+        return () => cancelAnimationFrame(frameId);
+    }, [isRendered, isMenuOpen]);
     return(
         <>
             <div ref={powerRef} className="w-[35px] h-[35px] relative flex items-center justify-center">
@@ -34,6 +63,8 @@ export const BuildPowerControls = ({startRef}) => {
             </div>
             {isRendered && createPortal(
                 <div
+                    ref={menuRef}
+                    style={{ left: `${coords.left}px`}}
                     onAnimationEnd={handleAnimationEnd}
                     className={`h-auto flex flex-col
                     absolute bottom-full rounded-md bg-foreground
