@@ -8,8 +8,8 @@ export const BuildPowerControls = ({startRef}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleHrMode = ViewHandler((state) => state.toggleHrMode);
     const [isRendered, setIsRendered] = useState(false);
+    const [style, setStyle] = useState();
     const powerRef = useRef(null);
-    const [coords, setCoords] = useState({ left: 0 });
     const menuRef = useRef(null);
 
     const handleToggle = () => {
@@ -26,31 +26,39 @@ export const BuildPowerControls = ({startRef}) => {
     };
 
     useLayoutEffect(() => {
-        if (!isRendered || !powerRef.current || !startRef.current || !menuRef.current) return;
+        if (!isMenuOpen || !menuRef.current || !startRef.current || !powerRef.current) return;
 
-        let frameId;
-
-        const updatePosition = () => {
+        const handlePosition = () => {
             const btn = powerRef.current.getBoundingClientRect();
             const container = startRef.current.getBoundingClientRect();
-            const menu = menuRef.current.getBoundingClientRect();
-            let idealLeft = (btn.left + btn.width / 2) - (menu.width / 2);
-            if (idealLeft < container.left) {
-                idealLeft = container.left;
-            } else if (idealLeft + menu.width > container.right) {
-                idealLeft = container.right - menu.width;
-            }
+            const menuWidth = menuRef.current.offsetWidth;
 
-            const finalOffset = idealLeft - btn.left;
+            const menuLeftForCentering = (btn.width / 2) - (menuWidth / 2);
             
-            setCoords(prev => Math.abs(prev.left - finalOffset) > 0.1 ? { left: finalOffset } : prev);
-            frameId = requestAnimationFrame(updatePosition);
+            const potentialMenuRight = btn.left + (btn.width / 2) + (menuWidth / 2);
+
+            if (potentialMenuRight > container.right) {
+                setStyle({ 
+                    left: 'auto', 
+                    right: '0', 
+                    transform: 'none',
+                    display: 'flex',
+                });
+            } else {
+                setStyle({ 
+                    left: `${menuLeftForCentering}px`, 
+                    right: 'auto', 
+                    transform: 'none',
+                    display: 'flex',
+                });
+            }
         };
 
-        frameId = requestAnimationFrame(updatePosition);
+        handlePosition();
+        window.addEventListener('resize', handlePosition);
+        return () => window.removeEventListener('resize', handlePosition);
+    }, [isMenuOpen]);
 
-        return () => cancelAnimationFrame(frameId);
-    }, [isRendered, isMenuOpen]);
     return(
         <>
             <div ref={powerRef} className="w-[35px] h-[35px] relative flex items-center justify-center">
@@ -64,7 +72,7 @@ export const BuildPowerControls = ({startRef}) => {
             {isRendered && createPortal(
                 <div
                     ref={menuRef}
-                    style={{ left: `${coords.left}px`}}
+                    style={style}
                     onAnimationEnd={handleAnimationEnd}
                     className={`h-auto flex flex-col
                     absolute bottom-full rounded-md bg-foreground
