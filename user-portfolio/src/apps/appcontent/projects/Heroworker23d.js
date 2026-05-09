@@ -51,6 +51,7 @@ self.onmessage = (e) => {
         });
 
         const hitBox = new Mesh(boxGeo, material);
+        hitBox.userData.id = app.appid;
         const wireframe = new LineSegments(edgeGeo, lineMat);
         
         const x = i % 2, y = Math.floor(i / 2) % 2, z = Math.floor(i / 4) % 2;
