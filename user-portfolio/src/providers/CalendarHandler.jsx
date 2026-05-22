@@ -18,9 +18,7 @@ export const CalendarHandler = create((set,get)=>({
     },
 
     shutdownCalendar(){
-        if(get().isCalendarVisible){
-            set({isCalendarVisible:false});
-            set({isCalendarRendered:false})
-        }
+        set({isCalendarVisible:false});
+        set({isCalendarRendered:false});
     }
 }))
