@@ -20,7 +20,7 @@ function Notfound404() {
 
 export function App() {
   return (
-    <div className='w-screen h-dvh pb-[env(safe-area-inset-bottom)]'>
+    <div className='w-screen h-dvh '>
       <LocationProvider>
         <Router>
           <HomePage path="/" />
