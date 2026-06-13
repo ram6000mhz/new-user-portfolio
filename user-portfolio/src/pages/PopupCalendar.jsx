@@ -3,7 +3,7 @@ import { CalendarHandler } from '../providers/CalendarHandler';
 
 export const PopupCalendar = () => {
     const isCalendarVisible = CalendarHandler((state)=> state.isCalendarVisible)
-    const isCalendarRendered = CalendarHandler((state)=> state.isCalendarRendered)
+    const setisCalendarPortalRendered = CalendarHandler((state) => state.setisCalendarPortalRendered)
     const formattedDate = useMemo(() => {
     return new Intl.DateTimeFormat('en-US', {
       weekday: 'long',
@@ -29,6 +29,7 @@ export const PopupCalendar = () => {
 
     return(
         <div 
+            onAnimationEnd={setisCalendarPortalRendered}
             className={`flex flex-col w-[clamp(150px,90cqw,250px)] h-[clamp(200px,80cqh,300px)] bg-foreground 
             border-muted-border border-2 rounded-xl absolute bottom-0 
             right-0 z-50 m-2 overflow-hidden
