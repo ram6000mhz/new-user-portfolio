@@ -2,23 +2,23 @@ import { create } from 'zustand';
 
 export const CalendarHandler = create((set,get)=>({
     isCalendarVisible: false,
-    isCalendarRendered: false,
+    isCalendarPortalRendered: false,
 
     toggleCalendar(){
         if(!get().isCalendarVisible){
-            set((state) => ({ isCalendarRendered: true}));
+            set((state) => ({ isCalendarPortalRendered: true}));
             set((state) => ({ isCalendarVisible: true}));
         }else{
             set((state) => ({ isCalendarVisible: false}));
         }
     },
 
-    setIsCalendarRendered(){
-        if(!get().isCalendarVisible) set((state) => ({ isCalendarRendered: false}));
+    setisCalendarPortalRendered(){
+        if(!get().isCalendarVisible) set((state) => ({ isCalendarPortalRendered: false}));
     },
 
     shutdownCalendar(){
         set({isCalendarVisible:false});
-        set({isCalendarRendered:false});
+        set({isCalendarPortalRendered:false});
     }
 }))
