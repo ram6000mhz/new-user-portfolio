@@ -1,4 +1,4 @@
-# Ethandev.me
+# Ethan-dev.me
 
 > A website to showcase my skills and creativity as a software developer along with useful links that leads to my other socials.
 
