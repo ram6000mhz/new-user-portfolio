@@ -1,0 +1,7 @@
+# Ethandev.me
+
+> A website to showcase my skills and creativity as a software developer along with useful links that leads to my other socials.
+
+## Socials
+- [Github](https://github.com/ram6000mhz): a Link that goes to my Github account.
+- [LinkedIn account](https://www.linkedin.com/in/ethan-sancho-yap-2439a2297/): a Link that goes to my LinkedIn account.
