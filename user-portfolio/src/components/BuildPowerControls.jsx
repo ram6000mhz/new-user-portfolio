@@ -83,10 +83,6 @@ export const BuildPowerControls = ({startRef}) => {
                         <Power className="w-[15px]! h-[15px]! text-accent-icon"/>
                         <p className="text-[12px] text-white">Shutdown</p>
                     </div>
-                    <div onClick={toggleHrMode} className="flex flex-row items-center gap-1 px-1 hover:bg-foreground-highlight rounded-sm cursor-pointer transition-all duration-100 active:scale-90">
-                        <RotateCcw className="w-[15px]! h-[15px]! text-accent-icon"/>
-                        <p className="text-[12px] text-white">Restart</p>
-                    </div>
                 </div>
             ,powerRef.current)}
         </>
