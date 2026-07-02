@@ -1,5 +1,6 @@
 import { lazy, ErrorBoundary } from 'preact-iso';
 import { Intro } from "./Intro";
+import { Experience } from './Experience';
 
 const Skillchart = lazy(() => import('./Skillchart').then(m => m.Skillchart));
 
@@ -11,6 +12,7 @@ export const Aboutme = ()=>{
                 <ErrorBoundary>
                     <Skillchart/>     
                 </ErrorBoundary>  
+                <Experience/>
             </div>    
         </div> 
     )
