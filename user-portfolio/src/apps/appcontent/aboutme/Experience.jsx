@@ -20,17 +20,17 @@ export const Experience = () => {
                     Contributing in improving frontier AI models.
                 </p>
             </div>
-            <div className="flex flex-col items-start w-full border">
-                <h1>
-                    Intern Web programmer
+            <div className="flex flex-col items-start w-full border border-zinc-400 rounded-2xl p-2">
+                <h1 className="font-semibold text-xl text-white text-start">
+                    Intern Web Programmer
                 </h1>
-                <h2>
+                <h2 className="text-md text-white text-start">
                     Moodlearning
                 </h2>
-                <h3>
+                <h3 className=" text-sm text-zinc-400 text-start">
                     2025
                 </h3>
-                <p>
+                <p className="text-sm text-white text-start pt-2">
                     Successfuly implemented new features for a nationwide spanning application.
                 </p>
             </div>
