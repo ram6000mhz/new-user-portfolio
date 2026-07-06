@@ -10,23 +10,38 @@ export const Experience = () => {
                 <h1 className="font-semibold text-xl text-white text-start">
                     Coding Expert Data Annotator
                 </h1>
-                <h2 className="text-md text-white text-start">
-                    DataAnnotationsTech
-                </h2>
-                <h3 className=" text-sm text-zinc-400 text-start">
+                <a 
+                    href="https://dataannotation.tech/coding"
+                    aria-label="DataAnnotationsTech"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                >
+                    <h2 className="text-md text-white text-start">
+                        DataAnnotationsTech
+                    </h2>
+                </a>
+                
+                <h3 className=" text-sm text-zinc-400 text-start cursor-pointer">
                     2026 - Current
                 </h3>
                 <p className="text-sm text-white text-start pt-2">
-                    Contributing in improving frontier AI models.
+                    Currently contributing in improving frontier AI models.
                 </p>
             </div>
             <div className="flex flex-col items-start w-full border border-zinc-400 rounded-2xl p-2">
                 <h1 className="font-semibold text-xl text-white text-start">
                     Intern Web Programmer
                 </h1>
-                <h2 className="text-md text-white text-start">
-                    Moodlearning
-                </h2>
+                <a 
+                        href="https://www.moodlearning.com/"
+                        aria-label="Moodlearning"
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                >
+                    <h2 className="text-md text-white text-start cursor-pointer">
+                        Moodlearning
+                    </h2>
+                </a>
                 <h3 className=" text-sm text-zinc-400 text-start">
                     2025
                 </h3>
