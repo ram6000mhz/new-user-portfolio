@@ -1,9 +1,10 @@
 import { lazy, ErrorBoundary } from 'preact-iso';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { ViewHandler } from "../providers/ViewHandler";
 import { Aboutme } from "../apps/appcontent/aboutme/Aboutme";
 import { DesktopFooter } from './DesktopFooter';
-import {Navbar} from './Navbar'
+import { Footer } from './Footer';
+import {Navbar} from './Navbar';
 import DesktopBg from "../assets/img/rice.webp"
 import { WIPBanner } from '../components/WIPBanner';
 // text-xs sm:text-sm md:text-base lg:text-lg
@@ -29,6 +30,19 @@ export const MainLayout = () => {
     }
   }, [hr_mode]);
 
+  const [isAtBottom, setIsAtBottom] = useState(false);
+  const scrollRef = useRef(null);
+  console.log("render")
+  
+  const handleScroll = (e) => {
+    const target = e.target;
+    const isBottom = target.scrollHeight - target.scrollTop <= target.clientHeight + 50;
+    setIsAtBottom((prev) => {
+      if (prev !== isBottom) return isBottom;
+      return prev;
+    });
+  };
+
   return (
     <div className="w-full h-full flex flex-col">
       {hr_mode &&(
@@ -39,7 +53,7 @@ export const MainLayout = () => {
         <ErrorBoundary>
           {hr_mode ? 
             isHome ? 
-              <Aboutme /> 
+              <Aboutme ref={scrollRef} onScroll={handleScroll} /> 
               : 
               <div className='pt-[70px] w-full h-full bg-black'>
                 <Project /> 
@@ -49,9 +63,18 @@ export const MainLayout = () => {
           }
         </ErrorBoundary>
       </main>
-      {!hr_mode &&(
-        <DesktopFooter/>
+
+      {hr_mode && (
+        <div 
+            className={`w-full overflow-hidden transition-all duration-100 ease-in-out ${
+            isAtBottom ? 'max-h-[500px] opacity-100' : 'max-h-0 pointer-events-none'
+          }`}
+        >  
+        <Footer />
+        </div>
       )}
+      
+      {!hr_mode && <DesktopFooter />}
     </div>
   );
 };

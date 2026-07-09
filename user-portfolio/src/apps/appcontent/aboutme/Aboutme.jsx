@@ -9,9 +9,9 @@ export const Aboutme = forwardRef(({ onScroll }, ref)=>{
         <div onScroll={onScroll} ref={ref} className="flex w-full h-full flex-row overflow-auto overscroll-none no-scrollbar select-none bg-black">
             <div className="flex-1 flex-col items-center h-full relative">
                 <Intro/>
-                <ErrorBoundary>
+                {/* <ErrorBoundary>
                     <Skillchart/>     
-                </ErrorBoundary>  
+                </ErrorBoundary>   */}
                 <Experience/>
             </div>    
         </div> 
