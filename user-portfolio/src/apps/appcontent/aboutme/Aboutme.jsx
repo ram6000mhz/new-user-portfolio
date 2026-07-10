@@ -1,19 +1,24 @@
 import { lazy, ErrorBoundary } from 'preact-iso';
 import { Intro } from "./Intro";
 import { Experience } from './Experience';
-import { forwardRef } from 'preact/compat';
+import { Footer } from '../../../pages/Footer';
+import { ViewHandler } from '../../../providers/ViewHandler';
 const Skillchart = lazy(() => import('./Skillchart').then(m => m.Skillchart));
 
-export const Aboutme = forwardRef(({ onScroll }, ref)=>{
+export const Aboutme = ()=>{
+    const hr_mode = ViewHandler((state) => state.hr_Mode);
     return(
-        <div onScroll={onScroll} ref={ref} className="flex w-full h-full flex-row overflow-auto overscroll-none no-scrollbar select-none bg-black">
+        <div className="flex w-full h-full flex-row overflow-auto overscroll-none no-scrollbar select-none bg-black">
             <div className="flex-1 flex-col items-center h-full relative">
                 <Intro/>
-                {/* <ErrorBoundary>
+                <ErrorBoundary>
                     <Skillchart/>     
-                </ErrorBoundary>   */}
+                </ErrorBoundary>  
                 <Experience/>
+                {hr_mode && (
+                    <Footer />
+                )}
             </div>    
         </div> 
     )
-})
+}
