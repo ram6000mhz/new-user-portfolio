@@ -1,7 +1,9 @@
 export const Footer = () => {
-    return(
-        <div className="bg-black border-t-zinc-400 border flex w-full h-[60px]">
-
+    return (
+        <div 
+            className='flex w-full h-[100px] bg-black text-white justify-center items-center'
+        >
+            footer
         </div>
-    )
-}
+    );
+};
