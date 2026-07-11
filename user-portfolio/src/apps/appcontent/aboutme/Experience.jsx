@@ -6,7 +6,7 @@ export const Experience = () => {
                     My Experiences
                 </h1>
             </div>
-            <div className="flex flex-col items-start w-full border border-zinc-400 rounded-2xl p-2">
+            <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
                 <h1 className="font-semibold text-xl text-white text-start">
                     Coding Expert Data Annotator
                 </h1>
@@ -28,7 +28,7 @@ export const Experience = () => {
                     Currently contributing in improving frontier AI models.
                 </p>
             </div>
-            <div className="flex flex-col items-start w-full border border-zinc-400 rounded-2xl p-2">
+            <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
                 <h1 className="font-semibold text-xl text-white text-start">
                     Intern Web Programmer
                 </h1>
