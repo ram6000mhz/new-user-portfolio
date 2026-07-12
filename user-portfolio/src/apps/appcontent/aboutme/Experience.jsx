@@ -1,3 +1,5 @@
+import {SquareArrowOutUpRight} from 'lucide-preact';
+
 export const Experience = () => {
     return(
         <div className="w-full items-center flex flex-col gap-2 px-4 max-w-4xl bg-black mx-auto pb-4">
@@ -16,14 +18,18 @@ export const Experience = () => {
                     target="_blank" 
                     rel="noopener noreferrer"
                 >
-                    <h2 className="text-md text-white text-start">
-                        DataAnnotationsTech
-                    </h2>
+                    <div className='flex flex-row text-white gap-1.5 items-center justify-center'>
+                        <h2 className="text-md text-start w-full">
+                            DataAnnotationsTech
+                        </h2>
+                        <SquareArrowOutUpRight size={18}/>
+                    </div>
                 </a>
                 
                 <h3 className=" text-sm text-zinc-400 text-start cursor-pointer">
                     2026 - Current
                 </h3>
+
                 <p className="text-sm text-white text-start pt-2">
                     Currently contributing in improving frontier AI models.
                 </p>
@@ -38,9 +44,12 @@ export const Experience = () => {
                         target="_blank" 
                         rel="noopener noreferrer"
                 >
-                    <h2 className="text-md text-white text-start cursor-pointer">
-                        Moodlearning
-                    </h2>
+                    <div className='flex flex-row text-white gap-1.5 items-center justify-center'>
+                        <h2 className="text-md text-start">
+                            MoodLearning
+                        </h2>
+                        <SquareArrowOutUpRight  size={18}/>
+                    </div>
                 </a>
                 <h3 className=" text-sm text-zinc-400 text-start">
                     2025
