@@ -7,7 +7,7 @@ export const Footer = () => {
     }, []);
     return (
         <div 
-            className='flex flex-col w-full h-[100px] bg-black text-white justify-center items-center py-4 gap-4 border-t border-zinc-900'
+            className='flex flex-col w-full h-[100px] bg-black text-white justify-center items-center py-4 mt-6 gap-4 border-t border-zinc-900'
         >
             <div className="flex flex-row text-white">
                 © {year} Ethan-dev.me. All rights reserved.
