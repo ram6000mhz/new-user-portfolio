@@ -34,6 +34,32 @@ export const Experience = () => {
                     Currently contributing in improving frontier AI models.
                 </p>
             </div>
+                        <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
+                <h1 className="font-semibold text-xl text-white text-start">
+                    Data Annotator Coding domain
+                </h1>
+                <a 
+                    href="https://outlier.ai"
+                    aria-label="DataAnnotationsTech"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                >
+                    <div className='flex flex-row text-white gap-1.5 items-center justify-center'>
+                        <h2 className="text-md text-start w-full">
+                            Outlier.AI
+                        </h2>
+                        <SquareArrowOutUpRight size={18}/>
+                    </div>
+                </a>
+                
+                <h3 className=" text-sm text-zinc-400 text-start cursor-pointer">
+                    2026 - Current
+                </h3>
+
+                <p className="text-sm text-white text-start pt-2">
+                    Currently contributing in improving frontier AI models.
+                </p>
+            </div>
             <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
                 <h1 className="font-semibold text-xl text-white text-start">
                     Intern Web Programmer
