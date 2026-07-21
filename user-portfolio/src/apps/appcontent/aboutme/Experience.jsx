@@ -26,7 +26,7 @@ export const Experience = () => {
                     </div>
                 </a>
                 
-                <h3 className=" text-sm text-zinc-400 text-start cursor-pointer">
+                <h3 className=" text-sm text-zinc-400 text-start">
                     2026 - Current
                 </h3>
 
@@ -52,7 +52,7 @@ export const Experience = () => {
                     </div>
                 </a>
                 
-                <h3 className=" text-sm text-zinc-400 text-start cursor-pointer">
+                <h3 className=" text-sm text-zinc-400 text-start">
                     2026 - Current
                 </h3>
 
