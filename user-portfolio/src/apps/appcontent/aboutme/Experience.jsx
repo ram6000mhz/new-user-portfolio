@@ -34,7 +34,7 @@ export const Experience = () => {
                     Currently contributing in improving frontier AI models.
                 </p>
             </div>
-                        <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
+            {/* <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
                 <h1 className="font-semibold text-xl text-white text-start">
                     Data Annotator Coding domain
                 </h1>
@@ -59,7 +59,7 @@ export const Experience = () => {
                 <p className="text-sm text-white text-start pt-2">
                     Currently contributing in improving frontier AI models.
                 </p>
-            </div>
+            </div> */}
             <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
                 <h1 className="font-semibold text-xl text-white text-start">
                     Intern Web Programmer
