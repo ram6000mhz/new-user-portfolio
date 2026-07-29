@@ -1,13 +1,21 @@
 import { useProjectStore } from "./Projectstore";
 import { X } from "lucide-preact"
+import { useEffect } from "preact/hooks";
 
 export const PopupSidebar = () => {
-  const { project, closeSidebar } = useProjectStore();
+  const { project, closeSidebar, isOpen } = useProjectStore();
+
   const handleClose = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     closeSidebar();
   };
-
+  useEffect(() => {
+    return () => {
+      if(useProjectStore.getState().isOpen){
+        closeSidebar();
+      }
+    };
+  }, []);
   return (
       <>
         <button 
