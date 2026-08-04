@@ -10,6 +10,31 @@ export const Experience = () => {
             </div>
             <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
                 <h1 className="font-semibold text-xl text-white text-start">
+                    Agentic Coding Benchmark Author
+                </h1>
+                <a 
+                    href="https://surgehq.ai/"
+                    aria-label="SurgeAI"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                >
+                    <div className='flex flex-row text-white gap-1.5 items-center justify-center'>
+                        <h2 className="text-md text-start w-full underline">
+                            Surge.AI
+                        </h2>
+                    </div>
+                </a>
+                
+                <h3 className=" text-sm text-zinc-400 text-start">
+                    2026 - Current
+                </h3>
+
+                <p className="text-sm text-white text-start pt-2">
+                    Building an SDLC benchmark.
+                </p>
+            </div>
+            <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
+                <h1 className="font-semibold text-xl text-white text-start">
                     Coding Expert Domain
                 </h1>
                 <a 
