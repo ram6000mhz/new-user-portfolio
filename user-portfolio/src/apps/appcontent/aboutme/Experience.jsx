@@ -5,7 +5,7 @@ export const Experience = () => {
         <div className="w-full items-center flex flex-col gap-2 px-4 max-w-4xl bg-black mx-auto pb-4">
             <div className="w-full flex  items-start">
                 <h1 className="font-semibold text-xl text-white text-start">
-                    My Experiences
+                    Experience
                 </h1>
             </div>
             <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
