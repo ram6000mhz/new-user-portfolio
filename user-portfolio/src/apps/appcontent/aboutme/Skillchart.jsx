@@ -45,7 +45,7 @@ export const Skillchart = ()=>{
                         </h3>
                 </div>
                 <div className="flex items-center w-full justify-center">
-                    <div className="hidden @2xl:grid py-15" 
+                    <div className="hidden @2xl:grid pt-15" 
                         style={{ gridTemplateColumns: `auto auto` }}>
                         <div></div>
                         <div className="flex items-center gap-2">
