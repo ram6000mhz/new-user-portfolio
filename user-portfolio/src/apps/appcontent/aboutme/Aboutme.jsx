@@ -11,10 +11,10 @@ export const Aboutme = ()=>{
         <div className="flex w-full h-full flex-row overflow-auto overscroll-none no-scrollbar select-none bg-black">
             <div className="flex-1 flex-col items-center h-full relative">
                 <Intro/>
+                <Experience/>
                 <ErrorBoundary>
                     <Skillchart/>     
                 </ErrorBoundary>  
-                <Experience/>
                 {hr_mode && (
                     <Footer />
                 )}
