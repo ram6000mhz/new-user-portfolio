@@ -55,7 +55,7 @@ export const Experience = () => {
                 </h3>
 
                 <p className="text-sm text-white text-start pt-2">
-                    Currently contributing in improving frontier AI models.
+                    Contributing in improving frontier AI models.
                 </p>
             </div>
             {/* <div className="flex flex-col items-start w-full border border-zinc-900 rounded-2xl p-2">
